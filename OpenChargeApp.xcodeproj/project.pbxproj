@@ -1,0 +1,585 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8E9E73BC26E0B66300CFEC24 /* OpenChargeAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73BB26E0B66300CFEC24 /* OpenChargeAppApp.swift */; };
+		8E9E73BE26E0B66400CFEC24 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73BD26E0B66400CFEC24 /* ContentView.swift */; };
+		8E9E73C026E0B66500CFEC24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9E73BF26E0B66500CFEC24 /* Assets.xcassets */; };
+		8E9E73C326E0B66600CFEC24 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9E73C226E0B66600CFEC24 /* Preview Assets.xcassets */; };
+		8E9E73CE26E0B66600CFEC24 /* OpenChargeAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73CD26E0B66600CFEC24 /* OpenChargeAppTests.swift */; };
+		8E9E73D926E0B66600CFEC24 /* OpenChargeAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73D826E0B66600CFEC24 /* OpenChargeAppUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8E9E73CA26E0B66600CFEC24 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8E9E73B026E0B66300CFEC24 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E9E73B726E0B66300CFEC24;
+			remoteInfo = OpenChargeApp;
+		};
+		8E9E73D526E0B66600CFEC24 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8E9E73B026E0B66300CFEC24 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E9E73B726E0B66300CFEC24;
+			remoteInfo = OpenChargeApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8E9E73B826E0B66300CFEC24 /* OpenChargeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenChargeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E9E73BB26E0B66300CFEC24 /* OpenChargeAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChargeAppApp.swift; sourceTree = "<group>"; };
+		8E9E73BD26E0B66400CFEC24 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8E9E73BF26E0B66500CFEC24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8E9E73C226E0B66600CFEC24 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8E9E73C426E0B66600CFEC24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8E9E73C926E0B66600CFEC24 /* OpenChargeAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenChargeAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E9E73CD26E0B66600CFEC24 /* OpenChargeAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChargeAppTests.swift; sourceTree = "<group>"; };
+		8E9E73CF26E0B66600CFEC24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8E9E73D426E0B66600CFEC24 /* OpenChargeAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenChargeAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E9E73D826E0B66600CFEC24 /* OpenChargeAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChargeAppUITests.swift; sourceTree = "<group>"; };
+		8E9E73DA26E0B66600CFEC24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8E9E73B526E0B66300CFEC24 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E9E73C626E0B66600CFEC24 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E9E73D126E0B66600CFEC24 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8E9E73AF26E0B66300CFEC24 = {
+			isa = PBXGroup;
+			children = (
+				8E9E73BA26E0B66300CFEC24 /* OpenChargeApp */,
+				8E9E73CC26E0B66600CFEC24 /* OpenChargeAppTests */,
+				8E9E73D726E0B66600CFEC24 /* OpenChargeAppUITests */,
+				8E9E73B926E0B66300CFEC24 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8E9E73B926E0B66300CFEC24 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8E9E73B826E0B66300CFEC24 /* OpenChargeApp.app */,
+				8E9E73C926E0B66600CFEC24 /* OpenChargeAppTests.xctest */,
+				8E9E73D426E0B66600CFEC24 /* OpenChargeAppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8E9E73BA26E0B66300CFEC24 /* OpenChargeApp */ = {
+			isa = PBXGroup;
+			children = (
+				8E9E73BB26E0B66300CFEC24 /* OpenChargeAppApp.swift */,
+				8E9E73BD26E0B66400CFEC24 /* ContentView.swift */,
+				8E9E73BF26E0B66500CFEC24 /* Assets.xcassets */,
+				8E9E73C426E0B66600CFEC24 /* Info.plist */,
+				8E9E73C126E0B66600CFEC24 /* Preview Content */,
+			);
+			path = OpenChargeApp;
+			sourceTree = "<group>";
+		};
+		8E9E73C126E0B66600CFEC24 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				8E9E73C226E0B66600CFEC24 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8E9E73CC26E0B66600CFEC24 /* OpenChargeAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				8E9E73CD26E0B66600CFEC24 /* OpenChargeAppTests.swift */,
+				8E9E73CF26E0B66600CFEC24 /* Info.plist */,
+			);
+			path = OpenChargeAppTests;
+			sourceTree = "<group>";
+		};
+		8E9E73D726E0B66600CFEC24 /* OpenChargeAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8E9E73D826E0B66600CFEC24 /* OpenChargeAppUITests.swift */,
+				8E9E73DA26E0B66600CFEC24 /* Info.plist */,
+			);
+			path = OpenChargeAppUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8E9E73B726E0B66300CFEC24 /* OpenChargeApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E9E73DD26E0B66600CFEC24 /* Build configuration list for PBXNativeTarget "OpenChargeApp" */;
+			buildPhases = (
+				8E9E73B426E0B66300CFEC24 /* Sources */,
+				8E9E73B526E0B66300CFEC24 /* Frameworks */,
+				8E9E73B626E0B66300CFEC24 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OpenChargeApp;
+			productName = OpenChargeApp;
+			productReference = 8E9E73B826E0B66300CFEC24 /* OpenChargeApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8E9E73C826E0B66600CFEC24 /* OpenChargeAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E9E73E026E0B66600CFEC24 /* Build configuration list for PBXNativeTarget "OpenChargeAppTests" */;
+			buildPhases = (
+				8E9E73C526E0B66600CFEC24 /* Sources */,
+				8E9E73C626E0B66600CFEC24 /* Frameworks */,
+				8E9E73C726E0B66600CFEC24 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8E9E73CB26E0B66600CFEC24 /* PBXTargetDependency */,
+			);
+			name = OpenChargeAppTests;
+			productName = OpenChargeAppTests;
+			productReference = 8E9E73C926E0B66600CFEC24 /* OpenChargeAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		8E9E73D326E0B66600CFEC24 /* OpenChargeAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E9E73E326E0B66600CFEC24 /* Build configuration list for PBXNativeTarget "OpenChargeAppUITests" */;
+			buildPhases = (
+				8E9E73D026E0B66600CFEC24 /* Sources */,
+				8E9E73D126E0B66600CFEC24 /* Frameworks */,
+				8E9E73D226E0B66600CFEC24 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8E9E73D626E0B66600CFEC24 /* PBXTargetDependency */,
+			);
+			name = OpenChargeAppUITests;
+			productName = OpenChargeAppUITests;
+			productReference = 8E9E73D426E0B66600CFEC24 /* OpenChargeAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8E9E73B026E0B66300CFEC24 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					8E9E73B726E0B66300CFEC24 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
+					8E9E73C826E0B66600CFEC24 = {
+						CreatedOnToolsVersion = 12.5.1;
+						TestTargetID = 8E9E73B726E0B66300CFEC24;
+					};
+					8E9E73D326E0B66600CFEC24 = {
+						CreatedOnToolsVersion = 12.5.1;
+						TestTargetID = 8E9E73B726E0B66300CFEC24;
+					};
+				};
+			};
+			buildConfigurationList = 8E9E73B326E0B66300CFEC24 /* Build configuration list for PBXProject "OpenChargeApp" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8E9E73AF26E0B66300CFEC24;
+			productRefGroup = 8E9E73B926E0B66300CFEC24 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8E9E73B726E0B66300CFEC24 /* OpenChargeApp */,
+				8E9E73C826E0B66600CFEC24 /* OpenChargeAppTests */,
+				8E9E73D326E0B66600CFEC24 /* OpenChargeAppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8E9E73B626E0B66300CFEC24 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E9E73C326E0B66600CFEC24 /* Preview Assets.xcassets in Resources */,
+				8E9E73C026E0B66500CFEC24 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E9E73C726E0B66600CFEC24 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E9E73D226E0B66600CFEC24 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8E9E73B426E0B66300CFEC24 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E9E73BE26E0B66400CFEC24 /* ContentView.swift in Sources */,
+				8E9E73BC26E0B66300CFEC24 /* OpenChargeAppApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E9E73C526E0B66600CFEC24 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E9E73CE26E0B66600CFEC24 /* OpenChargeAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E9E73D026E0B66600CFEC24 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E9E73D926E0B66600CFEC24 /* OpenChargeAppUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8E9E73CB26E0B66600CFEC24 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E9E73B726E0B66300CFEC24 /* OpenChargeApp */;
+			targetProxy = 8E9E73CA26E0B66600CFEC24 /* PBXContainerItemProxy */;
+		};
+		8E9E73D626E0B66600CFEC24 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E9E73B726E0B66300CFEC24 /* OpenChargeApp */;
+			targetProxy = 8E9E73D526E0B66600CFEC24 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		8E9E73DB26E0B66600CFEC24 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		8E9E73DC26E0B66600CFEC24 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8E9E73DE26E0B66600CFEC24 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"OpenChargeApp/Preview Content\"";
+				DEVELOPMENT_TEAM = P9CD4D4F5T;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = OpenChargeApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nchatharoo.OpenChargeApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8E9E73DF26E0B66600CFEC24 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"OpenChargeApp/Preview Content\"";
+				DEVELOPMENT_TEAM = P9CD4D4F5T;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = OpenChargeApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nchatharoo.OpenChargeApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		8E9E73E126E0B66600CFEC24 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P9CD4D4F5T;
+				INFOPLIST_FILE = OpenChargeAppTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nchatharoo.OpenChargeAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenChargeApp.app/OpenChargeApp";
+			};
+			name = Debug;
+		};
+		8E9E73E226E0B66600CFEC24 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P9CD4D4F5T;
+				INFOPLIST_FILE = OpenChargeAppTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nchatharoo.OpenChargeAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenChargeApp.app/OpenChargeApp";
+			};
+			name = Release;
+		};
+		8E9E73E426E0B66600CFEC24 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P9CD4D4F5T;
+				INFOPLIST_FILE = OpenChargeAppUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nchatharoo.OpenChargeAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = OpenChargeApp;
+			};
+			name = Debug;
+		};
+		8E9E73E526E0B66600CFEC24 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P9CD4D4F5T;
+				INFOPLIST_FILE = OpenChargeAppUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nchatharoo.OpenChargeAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = OpenChargeApp;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8E9E73B326E0B66300CFEC24 /* Build configuration list for PBXProject "OpenChargeApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E9E73DB26E0B66600CFEC24 /* Debug */,
+				8E9E73DC26E0B66600CFEC24 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8E9E73DD26E0B66600CFEC24 /* Build configuration list for PBXNativeTarget "OpenChargeApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E9E73DE26E0B66600CFEC24 /* Debug */,
+				8E9E73DF26E0B66600CFEC24 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8E9E73E026E0B66600CFEC24 /* Build configuration list for PBXNativeTarget "OpenChargeAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E9E73E126E0B66600CFEC24 /* Debug */,
+				8E9E73E226E0B66600CFEC24 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8E9E73E326E0B66600CFEC24 /* Build configuration list for PBXNativeTarget "OpenChargeAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E9E73E426E0B66600CFEC24 /* Debug */,
+				8E9E73E526E0B66600CFEC24 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8E9E73B026E0B66300CFEC24 /* Project object */;
+}
