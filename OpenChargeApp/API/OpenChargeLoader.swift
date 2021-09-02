@@ -13,11 +13,17 @@ public class OpenChargeLoader {
 
     let client: HTTPClient
     
+    public enum Error: Swift.Error {
+        case connectivity
+    }
+    
     init(client: HTTPClient) {
         self.client = client
     }
     
-    func load() {
-        client.get(from: URL(string: "\(baseAPIURL)")!)
+    func load(completion: @escaping (Error) -> Void = { _ in }) {
+        client.get(from: URL(string: "\(baseAPIURL)")!) { error in
+            completion(.connectivity)
+        }
     }
 }
