@@ -19,18 +19,24 @@ class HTTPClientSpy: HTTPClient {
 class OpenChargeAppTests: XCTestCase {
 
     func test_doesNotRequestDataOnCreation() {
-        let client = HTTPClientSpy()
-        let _ = OpenChargeLoader(client: client)
-        
+        let (_, client) = makeSUT()
+
         XCTAssertNil(client.requestedURL)
     }
     
     func test_load_requestDataFromURL() {
-        let client = HTTPClientSpy()
-        let sut = OpenChargeLoader(client: client)
-        
+        let (sut, client) = makeSUT()
+
         sut.load()
         
         XCTAssertNotNil(client.requestedURL)
+    }
+    
+    // MARK: - Helpers
+    
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: OpenChargeLoader, client: HTTPClientSpy) {
+        let client = HTTPClientSpy()
+        let sut = OpenChargeLoader(client: client)
+        return (sut, client)
     }
 }
