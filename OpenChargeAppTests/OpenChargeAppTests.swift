@@ -8,23 +8,26 @@
 import XCTest
 @testable import OpenChargeApp
 
-class HTTPClient {
-    static var shared = HTTPClient()
-
-    func get(from url: URL) { }
+protocol HTTPClient {
+    func get(from url: URL)
 }
 
 class OpenChargeLoader {
+    let client: HTTPClient
+    
+    init(client: HTTPClient) {
+        self.client = client
+    }
     
     func load() {
-        HTTPClient.shared.get(from: URL(string: "https://a-url.com")!)
+        client.get(from: URL(string: "https://a-url.com")!)
     }
 }
 
 class HTTPClientSpy: HTTPClient {
     var requestedURL: URL?
 
-    override func get(from url: URL) {
+    func get(from url: URL) {
         requestedURL = url
     }
 }
@@ -36,16 +39,14 @@ class OpenChargeAppTests: XCTestCase {
 
     func test_doesNotRequestDataOnCreation() {
         let client = HTTPClientSpy()
-        HTTPClient.shared = client
-        let _ = OpenChargeLoader()
+        let _ = OpenChargeLoader(client: client)
         
         XCTAssertNil(client.requestedURL)
     }
     
     func test_load_requestDataFromURL() {
         let client = HTTPClientSpy()
-        HTTPClient.shared = client
-        let sut = OpenChargeLoader()
+        let sut = OpenChargeLoader(client: client)
         
         sut.load()
         
