@@ -89,6 +89,17 @@ class OpenChargeAppTests: XCTestCase {
         })
     }
     
+    func test_load_deliversErrorOn200HTTPResponseWithEmptyJSONList() {
+        let (sut, client) = makeSUT()
+
+        var capturedResults = [OpenChargeLoader.Result]()
+        sut.load { capturedResults.append($0) }
+        let emptyListJSON = Data("[{}]".utf8)
+        client.complete(withStatusCode: 200, data: emptyListJSON)
+        
+        XCTAssertEqual(capturedResults, [.success([])])
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: OpenChargeLoader, client: HTTPClientSpy) {
