@@ -21,7 +21,7 @@ public class OpenChargeLoader {
         self.client = client
     }
     
-    func load(completion: @escaping (Error) -> Void = { _ in }) {
+    func load(completion: @escaping (Error) -> Void) {
         client.get(from: URL(string: "\(baseAPIURL)")!) { error in
             completion(.connectivity)
         }

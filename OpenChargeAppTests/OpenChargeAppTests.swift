@@ -35,7 +35,7 @@ class OpenChargeAppTests: XCTestCase {
     func test_load_requestDataFromURL() {
         let (sut, client) = makeSUT()
 
-        sut.load()
+        sut.load { _ in }
         
         XCTAssertNotNil(client.requestedURLs)
     }
@@ -43,9 +43,9 @@ class OpenChargeAppTests: XCTestCase {
     func test_load_requestDataTwice() {
         let (sut, client) = makeSUT()
         
-        sut.load()
-        sut.load()
-        
+        sut.load { _ in }
+        sut.load { _ in }
+
         XCTAssertNotNil(client.requestedURLs)
     }
     
