@@ -32,6 +32,15 @@ class OpenChargeAppTests: XCTestCase {
         XCTAssertNotNil(client.requestedURL)
     }
     
+    func test_load_requestDataTwice() {
+        let (sut, client) = makeSUT()
+        
+        sut.load()
+        sut.load()
+        
+        XCTAssertNotNil(client.requestedURL)
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: OpenChargeLoader, client: HTTPClientSpy) {
