@@ -74,12 +74,15 @@ class OpenChargeAppTests: XCTestCase {
     func test_load_deliversErrorOnNon200HTTPResponse() {
         let (sut, client) = makeSUT()
 
-        var capturedErrors = [OpenChargeLoader.Error]()
-        sut.load { capturedErrors.append($0) }
+        let sample = [199, 201, 300, 400, 500]
         
-        client.complete(withStatusCode: 400)
-
-        XCTAssertEqual(capturedErrors, [.invalidData])
+        sample.enumerated().forEach { index, code in
+            var capturedErrors = [OpenChargeLoader.Error]()
+            sut.load { capturedErrors.append($0) }
+            client.complete(withStatusCode: code, at: index)
+            
+            XCTAssertEqual(capturedErrors, [.invalidData])
+        }
     }
     
     // MARK: - Helpers
