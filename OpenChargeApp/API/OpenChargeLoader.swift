@@ -15,6 +15,7 @@ public class OpenChargeLoader {
     
     public enum Error: Swift.Error {
         case connectivity
+        case invalidData
     }
     
     init(client: HTTPClient) {
@@ -22,8 +23,14 @@ public class OpenChargeLoader {
     }
     
     func load(completion: @escaping (Error) -> Void) {
-        client.get(from: URL(string: "\(baseAPIURL)")!) { error in
-            completion(.connectivity)
+        let url = URL(string: "\(baseAPIURL)")!
+        
+        client.get(from: url) { error, response in
+            if response != nil {
+                completion(.invalidData)
+            } else {
+                completion(.connectivity)
+            }
         }
     }
 }
