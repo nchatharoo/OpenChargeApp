@@ -13,6 +13,8 @@
 		8E9E73C326E0B66600CFEC24 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9E73C226E0B66600CFEC24 /* Preview Assets.xcassets */; };
 		8E9E73CE26E0B66600CFEC24 /* OpenChargeAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73CD26E0B66600CFEC24 /* OpenChargeAppTests.swift */; };
 		8E9E73D926E0B66600CFEC24 /* OpenChargeAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73D826E0B66600CFEC24 /* OpenChargeAppUITests.swift */; };
+		8E9E73EA26E10AB400CFEC24 /* OpenChargeLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73E926E10AB400CFEC24 /* OpenChargeLoader.swift */; };
+		8E9E73EC26E10ACE00CFEC24 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73EB26E10ACE00CFEC24 /* HTTPClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,8 @@
 		8E9E73D426E0B66600CFEC24 /* OpenChargeAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenChargeAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E9E73D826E0B66600CFEC24 /* OpenChargeAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChargeAppUITests.swift; sourceTree = "<group>"; };
 		8E9E73DA26E0B66600CFEC24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8E9E73E926E10AB400CFEC24 /* OpenChargeLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChargeLoader.swift; sourceTree = "<group>"; };
+		8E9E73EB26E10ACE00CFEC24 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,7 @@
 			children = (
 				8E9E73BB26E0B66300CFEC24 /* OpenChargeAppApp.swift */,
 				8E9E73BD26E0B66400CFEC24 /* ContentView.swift */,
+				8E9E73E826E10AA400CFEC24 /* API */,
 				8E9E73BF26E0B66500CFEC24 /* Assets.xcassets */,
 				8E9E73C426E0B66600CFEC24 /* Info.plist */,
 				8E9E73C126E0B66600CFEC24 /* Preview Content */,
@@ -128,6 +133,15 @@
 				8E9E73DA26E0B66600CFEC24 /* Info.plist */,
 			);
 			path = OpenChargeAppUITests;
+			sourceTree = "<group>";
+		};
+		8E9E73E826E10AA400CFEC24 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				8E9E73E926E10AB400CFEC24 /* OpenChargeLoader.swift */,
+				8E9E73EB26E10ACE00CFEC24 /* HTTPClient.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,6 +275,8 @@
 			files = (
 				8E9E73BE26E0B66400CFEC24 /* ContentView.swift in Sources */,
 				8E9E73BC26E0B66300CFEC24 /* OpenChargeAppApp.swift in Sources */,
+				8E9E73EC26E10ACE00CFEC24 /* HTTPClient.swift in Sources */,
+				8E9E73EA26E10AB400CFEC24 /* OpenChargeLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
