@@ -9,12 +9,12 @@ import XCTest
 @testable import OpenChargeApp
 
 class HTTPClientSpy: HTTPClient {
-    var requestedURL: URL?
+    var requestedURLs = [URL]()
     var completions = [(Error) -> Void]()
 
     func get(from url: URL, completion: @escaping (Error) -> Void) {
         completions.append(completion)
-        requestedURL = url
+        requestedURLs.append(url)
     }
 }
 
@@ -23,7 +23,7 @@ class OpenChargeAppTests: XCTestCase {
     func test_doesNotRequestDataOnCreation() {
         let (_, client) = makeSUT()
 
-        XCTAssertNil(client.requestedURL)
+        XCTAssertTrue(client.requestedURLs.isEmpty)
     }
     
     func test_load_requestDataFromURL() {
@@ -31,7 +31,7 @@ class OpenChargeAppTests: XCTestCase {
 
         sut.load()
         
-        XCTAssertNotNil(client.requestedURL)
+        XCTAssertNotNil(client.requestedURLs)
     }
     
     func test_load_requestDataTwice() {
@@ -40,7 +40,7 @@ class OpenChargeAppTests: XCTestCase {
         sut.load()
         sut.load()
         
-        XCTAssertNotNil(client.requestedURL)
+        XCTAssertNotNil(client.requestedURLs)
     }
     
     func test_load_deliversErrorOnClientError() {
