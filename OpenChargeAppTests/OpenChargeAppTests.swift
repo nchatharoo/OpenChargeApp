@@ -62,7 +62,7 @@ class OpenChargeAppTests: XCTestCase {
     func test_load_deliversErrorOnClientError() {
         let (sut, client) = makeSUT()
         
-        expect(sut, completeWithError: .connectivity, when: {
+        expect(sut, toCompleteWith: .failure(.connectivity), when: {
             let clientError = NSError(domain: "Test", code: 0)
             client.complete(with: clientError)
         })
@@ -74,7 +74,7 @@ class OpenChargeAppTests: XCTestCase {
         let sample = [199, 201, 300, 400, 500]
         
         sample.enumerated().forEach { index, code in
-            expect(sut, completeWithError: .invalidData, when: {
+            expect(sut, toCompleteWith: .failure(.invalidData), when: {
                 client.complete(withStatusCode: code, at: index)
             })
         }
@@ -83,7 +83,7 @@ class OpenChargeAppTests: XCTestCase {
     func test_load_deliversErrorOn200HTTPResponseWithInvalidJSON() {
         let (sut, client) = makeSUT()
         
-        expect(sut, completeWithError: .invalidData, when: {
+        expect(sut, toCompleteWith: .failure(.invalidData), when: {
             let invalidJSON = Data("invalid json".utf8)
             client.complete(withStatusCode: 200, data: invalidJSON)
         })
@@ -91,13 +91,10 @@ class OpenChargeAppTests: XCTestCase {
     
     func test_load_deliversErrorOn200HTTPResponseWithEmptyJSONList() {
         let (sut, client) = makeSUT()
-
-        var capturedResults = [OpenChargeLoader.Result]()
-        sut.load { capturedResults.append($0) }
-        let emptyListJSON = Data("[{}]".utf8)
-        client.complete(withStatusCode: 200, data: emptyListJSON)
-        
-        XCTAssertEqual(capturedResults, [.success([])])
+        expect(sut, toCompleteWith: .success([]), when: {
+            let emptyListJSON = Data("[{}]".utf8)
+            client.complete(withStatusCode: 200, data: emptyListJSON)
+        })
     }
     
     // MARK: - Helpers
@@ -108,12 +105,12 @@ class OpenChargeAppTests: XCTestCase {
         return (sut, client)
     }
     
-    private func expect(_ sut: OpenChargeLoader, completeWithError error: OpenChargeLoader.Error, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
+    private func expect(_ sut: OpenChargeLoader, toCompleteWith result: OpenChargeLoader.Result, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
         var capturedResults = [OpenChargeLoader.Result]()
         sut.load { capturedResults.append($0) }
 
         action()
         
-        XCTAssertEqual(capturedResults, [.failure(error)], file: file, line: line)
+        XCTAssertEqual(capturedResults, [result], file: file, line: line)
     }
 }
