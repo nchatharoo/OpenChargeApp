@@ -98,11 +98,11 @@ class OpenChargeAppTests: XCTestCase {
     }
     
     private func expect(_ sut: OpenChargeLoader, completeWithError error: OpenChargeLoader.Error, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
-        var capturedErrors = [OpenChargeLoader.Error]()
-        sut.load { capturedErrors.append($0) }
-        
+        var capturedResults = [OpenChargeLoader.Result]()
+        sut.load { capturedResults.append($0) }
+
         action()
         
-        XCTAssertEqual(capturedErrors, [error], file: file, line: line)
+        XCTAssertEqual(capturedResults, [.failure(error)], file: file, line: line)
     }
 }

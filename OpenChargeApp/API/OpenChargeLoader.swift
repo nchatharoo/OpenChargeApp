@@ -18,19 +18,24 @@ public class OpenChargeLoader {
         case invalidData
     }
     
+    public enum Result: Equatable {
+        case success([Item])
+        case failure(Error)
+    }
+    
     init(client: HTTPClient) {
         self.client = client
     }
     
-    func load(completion: @escaping (Error) -> Void) {
+    func load(completion: @escaping (Result) -> Void) {
         let url = URL(string: "\(baseAPIURL)")!
         
         client.get(from: url) { result in
             switch result {
             case .success:
-                completion(.invalidData)
+                completion(.failure(.invalidData))
             case .failure:
-                completion(.connectivity)
+                completion(.failure(.connectivity))
             }
         }
     }
