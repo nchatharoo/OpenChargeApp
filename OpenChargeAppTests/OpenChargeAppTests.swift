@@ -10,12 +10,10 @@ import XCTest
 
 class HTTPClientSpy: HTTPClient {
     var requestedURL: URL?
-    var error: Error?
+    var completions = [(Error) -> Void]()
 
     func get(from url: URL, completion: @escaping (Error) -> Void) {
-        if let error = error {
-            completion(error)
-        }
+        completions.append(completion)
         requestedURL = url
     }
 }
@@ -47,9 +45,12 @@ class OpenChargeAppTests: XCTestCase {
     
     func test_load_deliversErrorOnClientError() {
         let (sut, client) = makeSUT()
-        client.error = NSError(domain: "Test", code: 0)
+
         var capturedError = [OpenChargeLoader.Error]()
         sut.load { capturedError.append($0) }
+        
+        let clientError = NSError(domain: "Test", code: 0)
+        client.completions[0](clientError)
         
         XCTAssertEqual(capturedError, [.connectivity])
     }
