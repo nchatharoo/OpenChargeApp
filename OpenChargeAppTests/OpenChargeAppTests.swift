@@ -13,6 +13,9 @@ protocol HTTPClient {
 }
 
 class OpenChargeLoader {
+    private let baseAPIURL = "https://api.openchargemap.io/v3/poi/"
+    private let apiKey = "6bdc7787-1e5b-4567-920a-9a77632ccb96"
+
     let client: HTTPClient
     
     init(client: HTTPClient) {
@@ -20,7 +23,7 @@ class OpenChargeLoader {
     }
     
     func load() {
-        client.get(from: URL(string: "https://a-url.com")!)
+        client.get(from: URL(string: "\(baseAPIURL)")!)
     }
 }
 
@@ -33,9 +36,6 @@ class HTTPClientSpy: HTTPClient {
 }
 
 class OpenChargeAppTests: XCTestCase {
-    
-    private let baseAPIURL = "https://api.openchargemap.io/v3/poi/"
-    private let apiKey = "6bdc7787-1e5b-4567-920a-9a77632ccb96"
 
     func test_doesNotRequestDataOnCreation() {
         let client = HTTPClientSpy()
