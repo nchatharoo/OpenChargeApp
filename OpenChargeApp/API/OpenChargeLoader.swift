@@ -30,7 +30,10 @@ public class OpenChargeLoader {
     func load(completion: @escaping (Result) -> Void) {
         let url = URL(string: "\(baseAPIURL)")!
         
-        client.get(from: url) { result in
+        client.get(from: url) { [weak self] result in
+            
+            guard self != nil else { return }
+
             switch result {
             case let .success(data, _):
                 if let items = try? JSONDecoder().decode(Item.self, from: data) {

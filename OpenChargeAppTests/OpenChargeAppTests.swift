@@ -113,11 +113,29 @@ class OpenChargeAppTests: XCTestCase {
         })
     }
     
+    func testDoesNotDeliverResultAfterSUTInstanceHasBeenDeallocated() {
+        let client = HTTPClientSpy()
+        var sut: OpenChargeLoader? = OpenChargeLoader(client: client)
+        
+        var capturedResults = [OpenChargeLoader.Result]()
+        sut?.load { capturedResults.append($0) }
+
+        sut = nil
+
+        let response: Item? = try? Bundle.main.loadAndDecodeJSON(filename: "response")
+        let json = try? JSONEncoder().encode(response)
+        client.complete(withStatusCode: 200, data: json!)
+
+        XCTAssertTrue(capturedResults.isEmpty)
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: OpenChargeLoader, client: HTTPClientSpy) {
         let client = HTTPClientSpy()
         let sut = OpenChargeLoader(client: client)
+        trackForMemoryLeaks(sut)
+        trackForMemoryLeaks(client)
         return (sut, client)
     }
     
@@ -128,6 +146,12 @@ class OpenChargeAppTests: XCTestCase {
         action()
         
         XCTAssertEqual(capturedResults, [result], file: file, line: line)
+    }
+    
+    private func trackForMemoryLeaks(_ instance: AnyObject, file: StaticString = #file, line: UInt = #line) {
+        addTeardownBlock { [weak instance] in
+            XCTAssertNil(instance, "Instance should have been deallocated. Potential memory leak.")
+        }
     }
 }
 
