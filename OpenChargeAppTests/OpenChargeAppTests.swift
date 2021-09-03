@@ -97,7 +97,7 @@ class OpenChargeAppTests: XCTestCase {
         })
     }
     
-    func test_load_deliversErrorOn200HTTPResponseWithJSONItems() {
+    func test_load_deliversItemsOn200HTTPResponseWithJSONItems() {
         let (sut, client) = makeSUT()
         
         let response: Item? = try? Bundle.main.loadAndDecodeJSON(filename: "response")
