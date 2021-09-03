@@ -34,7 +34,7 @@ class HTTPClientSpy: HTTPClient {
     }
 }
 
-class OpenChargeAppTests: XCTestCase {
+class OpenChargeLoaderTests: XCTestCase {
     
     func test_doesNotRequestDataOnCreation() {
         let (_, client) = makeSUT()

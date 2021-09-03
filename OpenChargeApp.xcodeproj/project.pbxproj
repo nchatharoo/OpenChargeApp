@@ -14,7 +14,7 @@
 		8E9E73BE26E0B66400CFEC24 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73BD26E0B66400CFEC24 /* ContentView.swift */; };
 		8E9E73C026E0B66500CFEC24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9E73BF26E0B66500CFEC24 /* Assets.xcassets */; };
 		8E9E73C326E0B66600CFEC24 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9E73C226E0B66600CFEC24 /* Preview Assets.xcassets */; };
-		8E9E73CE26E0B66600CFEC24 /* OpenChargeAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73CD26E0B66600CFEC24 /* OpenChargeAppTests.swift */; };
+		8E9E73CE26E0B66600CFEC24 /* OpenChargeLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73CD26E0B66600CFEC24 /* OpenChargeLoaderTests.swift */; };
 		8E9E73D926E0B66600CFEC24 /* OpenChargeAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73D826E0B66600CFEC24 /* OpenChargeAppUITests.swift */; };
 		8E9E73EA26E10AB400CFEC24 /* OpenChargeLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73E926E10AB400CFEC24 /* OpenChargeLoader.swift */; };
 		8E9E73EC26E10ACE00CFEC24 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73EB26E10ACE00CFEC24 /* HTTPClient.swift */; };
@@ -47,7 +47,7 @@
 		8E9E73C226E0B66600CFEC24 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8E9E73C426E0B66600CFEC24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E9E73C926E0B66600CFEC24 /* OpenChargeAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenChargeAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E9E73CD26E0B66600CFEC24 /* OpenChargeAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChargeAppTests.swift; sourceTree = "<group>"; };
+		8E9E73CD26E0B66600CFEC24 /* OpenChargeLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChargeLoaderTests.swift; sourceTree = "<group>"; };
 		8E9E73CF26E0B66600CFEC24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E9E73D426E0B66600CFEC24 /* OpenChargeAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenChargeAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E9E73D826E0B66600CFEC24 /* OpenChargeAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChargeAppUITests.swift; sourceTree = "<group>"; };
@@ -128,7 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				8E644E8826E2071B00ED95DF /* response.json */,
-				8E9E73CD26E0B66600CFEC24 /* OpenChargeAppTests.swift */,
+				8E9E73CD26E0B66600CFEC24 /* OpenChargeLoaderTests.swift */,
 				8E9E73CF26E0B66600CFEC24 /* Info.plist */,
 			);
 			path = OpenChargeAppTests;
@@ -296,7 +296,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E9E73CE26E0B66600CFEC24 /* OpenChargeAppTests.swift in Sources */,
+				8E9E73CE26E0B66600CFEC24 /* OpenChargeLoaderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
