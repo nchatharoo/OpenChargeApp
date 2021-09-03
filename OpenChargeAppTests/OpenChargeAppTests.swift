@@ -92,8 +92,24 @@ class OpenChargeAppTests: XCTestCase {
     func test_load_deliversErrorOn200HTTPResponseWithEmptyJSONList() {
         let (sut, client) = makeSUT()
         expect(sut, toCompleteWith: .success([]), when: {
-            let emptyListJSON = Data("[{}]".utf8)
+            let emptyListJSON = Data("[]".utf8)
             client.complete(withStatusCode: 200, data: emptyListJSON)
+        })
+    }
+    
+    func test_load_deliversErrorOn200HTTPResponseWithJSONItems() {
+        let (sut, client) = makeSUT()
+        
+        let response: Item? = try? Bundle.main.loadAndDecodeJSON(filename: "response")
+        expect(sut, toCompleteWith: .success(response!), when: {
+            do {
+                let json = try JSONEncoder().encode(response)
+                client.complete(withStatusCode: 200, data: json)
+            } catch EncodingError.invalidValue( _, let context) {
+                print(context)
+            } catch {
+                print("error: ", error)
+            }
         })
     }
     
@@ -112,5 +128,42 @@ class OpenChargeAppTests: XCTestCase {
         action()
         
         XCTAssertEqual(capturedResults, [result], file: file, line: line)
+    }
+}
+
+extension Bundle {
+    
+    func loadAndDecodeJSON<D: Decodable>(filename: String) throws -> D? {
+        guard let url = self.url(forResource: filename, withExtension: "json") else {
+            return nil
+        }
+        let data = try Data(contentsOf: url)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+
+        let jsonDecoder = JSONDecoder()
+        jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+        jsonDecoder.dateDecodingStrategy = .formatted(dateFormatter)
+        
+        do {
+            let decodedModel = try jsonDecoder.decode(D.self, from: data)
+            return decodedModel
+        } catch DecodingError.dataCorrupted(let context) {
+            print(context)
+        } catch DecodingError.keyNotFound(let key, let context) {
+            print("Key '\(key)' not found:", context.debugDescription)
+            print("codingPath:", context.codingPath)
+        } catch DecodingError.valueNotFound(let value, let context) {
+            print("Value '\(value)' not found:", context.debugDescription)
+            print("codingPath:", context.codingPath)
+        } catch DecodingError.typeMismatch(let type, let context) {
+            print("Type '\(type)' mismatch:", context.debugDescription)
+            print("codingPath:", context.codingPath)
+        } catch {
+            print("error: ", error)
+        }
+        
+        return nil
     }
 }
