@@ -25,9 +25,19 @@ class URLSessionHTTPClient {
 }
 
 class URLSessionHTTPClientTests: XCTestCase {
+    
+    override func setUp() {
+        super.setUp()
+        URLProtocolStub.startInterceptingRequests()
+    }
+    
+    override func tearDown() {
+        super.tearDown()
+        URLProtocolStub.stopInterceptingRequests()
+    }
+
         
     func test_getFromURL_failsOnRequestError() {
-        URLProtocolStub.startInterceptingRequests()
 
         let url = URL(string: "https://api.openchargemap.io/v3/poi/?output=json&latitude=45.872&longitude=-1.248&maxresults=10&compact=true&verbose=false")!
         let error = NSError(domain: "any error", code: 1)
@@ -49,11 +59,9 @@ class URLSessionHTTPClientTests: XCTestCase {
         }
         
         wait(for: [exp], timeout: 1.0)
-        URLProtocolStub.stopInterceptingRequests()
     }
     
     func test_getFromURL_performsGETRequestWithURL() {
-        URLProtocolStub.startInterceptingRequests()
         let url = URL(string: "https://api.openchargemap.io/v3/poi/?output=json&latitude=45.872&longitude=-1.248&maxresults=10&compact=true&verbose=false")!
         let exp = expectation(description: "Wait for request")
         
@@ -66,7 +74,6 @@ class URLSessionHTTPClientTests: XCTestCase {
         URLSessionHTTPClient().get(from: url) { _ in }
         
         wait(for: [exp], timeout: 1.0)
-        URLProtocolStub.stopInterceptingRequests()
     }
     
     // MARK: Helpers
