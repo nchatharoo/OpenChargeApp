@@ -106,6 +106,14 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		8E69AC9D26EB8A9C00485CC2 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				8E69CB2E26E89E1A003B14FC /* LocationManagerTests.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
 		8E9E73AF26E0B66300CFEC24 = {
 			isa = PBXGroup;
 			children = (
@@ -132,8 +140,8 @@
 				8E9E73BB26E0B66300CFEC24 /* OpenChargeAppApp.swift */,
 				8E9E73BD26E0B66400CFEC24 /* ContentView.swift */,
 				8E9E73ED26E1211C00CFEC24 /* Item.swift */,
-				8E69AC9926EB7A8200485CC2 /* Location */,
 				8E9E73E826E10AA400CFEC24 /* API */,
+				8E69AC9926EB7A8200485CC2 /* Location */,
 				8E9E73BF26E0B66500CFEC24 /* Assets.xcassets */,
 				8E9E73C426E0B66600CFEC24 /* Info.plist */,
 				8E9E73C126E0B66600CFEC24 /* Preview Content */,
@@ -153,7 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				8E69AC9C26EB8A4A00485CC2 /* API */,
-				8E69CB2E26E89E1A003B14FC /* LocationManagerTests.swift */,
+				8E69AC9D26EB8A9C00485CC2 /* Location */,
 				8E9E73CF26E0B66600CFEC24 /* Info.plist */,
 			);
 			path = OpenChargeAppTests;
