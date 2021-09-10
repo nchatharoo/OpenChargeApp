@@ -7,76 +7,7 @@
 
 import XCTest
 import CoreLocation
-
-protocol LocationManagerInterface {
-    var locationManagerDelegate: LocationManagerDelegate? { get set }
-    var accuracyAuthorization: CLAccuracyAuthorization { get }
-    var desiredAccuracy: CLLocationAccuracy { get set }
-    func requestWhenInUseAuthorization()
-    func requestLocation()
-}
-
-protocol LocationManagerDelegate: AnyObject {
-    func locationManager(_ manager: LocationManagerInterface, didUpdateLocations locations: [CLLocation])
-}
-
-extension CLLocationManager: LocationManagerInterface {
-    var locationManagerDelegate: LocationManagerDelegate? {
-        get { return delegate as! LocationManagerDelegate? }
-        set { delegate = newValue as! CLLocationManagerDelegate? }
-    }
-}
-
-class LocationManager: NSObject {
-
-    var locationManager: LocationManagerInterface
-    
-    private var currentLocationCallback: ((CLLocation) -> Void)?
-    
-    init(locationManager: LocationManagerInterface = CLLocationManager()) {
-        self.locationManager = locationManager
-        super.init()
-        self.locationManager.locationManagerDelegate = self
-        switch self.locationManager.accuracyAuthorization {
-        case .fullAccuracy:
-            self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        default:
-            self.locationManager.desiredAccuracy = kCLLocationAccuracyReduced
-        }
-    }
-
-    func requestWhenInUseAuthorization(completion: @escaping (CLLocation) -> Void) {
-        currentLocationCallback = {  (location) in
-            completion(location)
-        }
-        self.locationManager.requestWhenInUseAuthorization()
-    }
-    
-    func requestLocation(completion: @escaping (CLLocation) -> Void) {
-        currentLocationCallback = {  (location) in
-            completion(location)
-        }
-        self.locationManager.requestLocation()
-    }
-}
-
-extension LocationManager: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.locationManager(manager, didUpdateLocations: locations)
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        self.locationManager(manager, didFailWithError: error)
-    }
-}
-
-extension LocationManager: LocationManagerDelegate {
-    func locationManager(_ manager: LocationManagerInterface, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else { return }
-        self.currentLocationCallback?(location)
-        self.currentLocationCallback = nil
-    }
-}
+import OpenChargeApp
 
 class LocationManagerMock: LocationManagerInterface {
     var desiredAccuracy: CLLocationAccuracy = kCLLocationAccuracyBest
