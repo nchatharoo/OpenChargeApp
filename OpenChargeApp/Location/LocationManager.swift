@@ -30,6 +30,10 @@ public class LocationManager: NSObject {
     public init(locationManager: LocationManagerInterface = CLLocationManager()) {
         self.locationManager = locationManager
         super.init()
+        setupLocationManager()
+    }
+    
+    private func setupLocationManager() {
         self.locationManager.locationManagerDelegate = self
         switch self.locationManager.accuracyAuthorization {
         case .fullAccuracy:
