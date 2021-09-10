@@ -101,7 +101,7 @@ class LocationManagerMock: LocationManagerInterface {
 class LocationManagerTests: XCTestCase {
         
     func test_delegateIsNotNil() {
-        let sut = LocationManager()
+        let sut = makeSUT()
         
         XCTAssertNotNil(sut.locationManager.locationManagerDelegate)
     }
@@ -113,7 +113,7 @@ class LocationManagerTests: XCTestCase {
             return CLLocation(latitude: 10.0, longitude: 10.0)
         }
         
-        let sut = LocationManager(locationManager: mock)
+        let sut = makeSUT(manager: mock)
 
         let expectedLocation = CLLocation(latitude: 10.0, longitude: 10.0)
         let completionExpectation = expectation(description: "completion expectation")
@@ -128,12 +128,12 @@ class LocationManagerTests: XCTestCase {
     
     func test_requestLocation() {
         let mock = LocationManagerMock()
-
+        
         mock.locationToReturn = {
             return CLLocation(latitude: 10.0, longitude: 10.0)
         }
         
-        let sut = LocationManager(locationManager: mock)
+        let sut = makeSUT(manager: mock)
 
         let expectedLocation = CLLocation(latitude: 10.0, longitude: 10.0)
         let completionExpectation = expectation(description: "completion expectation")
@@ -158,5 +158,11 @@ class LocationManagerTests: XCTestCase {
         }
         
         wait(for: [completionExpectation, completionExpectation2], timeout: 1)
+    }
+    
+    // MARK: Helpers
+
+    private func makeSUT(manager: LocationManagerInterface = CLLocationManager()) -> LocationManager {
+        return LocationManager(locationManager: manager)
     }
 }
