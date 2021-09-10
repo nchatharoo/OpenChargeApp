@@ -11,6 +11,7 @@ import CoreLocation
 protocol LocationManagerInterface {
     var locationManagerDelegate: LocationManagerDelegate? { get set }
     func requestWhenInUseAuthorization()
+    func requestLocation()
 }
 
 protocol LocationManagerDelegate: AnyObject {
@@ -36,11 +37,18 @@ class LocationManager: NSObject {
         self.locationManager.locationManagerDelegate = self
     }
 
-    func requestLocationCompletion(completion: @escaping (CLLocation) -> Void) {
+    func requestWhenInUseAuthorization(completion: @escaping (CLLocation) -> Void) {
         currentLocationCallback = {  (location) in
             completion(location)
         }
         self.locationManager.requestWhenInUseAuthorization()
+    }
+    
+    func requestLocation(completion: @escaping (CLLocation) -> Void) {
+        currentLocationCallback = {  (location) in
+            completion(location)
+        }
+        self.locationManager.requestLocation()
     }
 }
 
@@ -56,25 +64,30 @@ extension LocationManager: CLLocationManagerDelegate {
 
 extension LocationManager: LocationManagerDelegate {
     func locationManager(_ manager: LocationManagerInterface, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.first else { return }
+        guard let location = locations.last else { return }
         self.currentLocationCallback?(location)
         self.currentLocationCallback = nil
     }
 }
 
-class LocationManagerTests: XCTestCase {
+class LocationManagerMock: LocationManagerInterface {
     
-    struct LocationManagerMock: LocationManagerInterface {
+    var locationManagerDelegate: LocationManagerDelegate?
         
-        var locationManagerDelegate: LocationManagerDelegate?
-            
-        var locationToReturn: (()->CLLocation)?
-        
-        func requestWhenInUseAuthorization() {
-            guard let location = locationToReturn?() else { return }
-            locationManagerDelegate?.locationManager(self, didUpdateLocations: [location])
-        }
+    var locationToReturn: (()->CLLocation)?
+    
+    func requestWhenInUseAuthorization() {
+        guard let location = locationToReturn?() else { return }
+        locationManagerDelegate?.locationManager(self, didUpdateLocations: [location])
     }
+    
+    func requestLocation() {
+        guard let location = locationToReturn?() else { return }
+        locationManagerDelegate?.locationManager(self, didUpdateLocations: [location])
+    }
+}
+
+class LocationManagerTests: XCTestCase {
         
     func test_delegateIsNotNil() {
         let sut = LocationManager()
@@ -82,8 +95,8 @@ class LocationManagerTests: XCTestCase {
         XCTAssertNotNil(sut.locationManager.locationManagerDelegate)
     }
     
-    func test_requestLocation() {
-        var mock = LocationManagerMock()
+    func test_requestWhenInUseAuthorization() {
+        let mock = LocationManagerMock()
 
         mock.locationToReturn = {
             return CLLocation(latitude: 10.0, longitude: 10.0)
@@ -94,11 +107,45 @@ class LocationManagerTests: XCTestCase {
         let expectedLocation = CLLocation(latitude: 10.0, longitude: 10.0)
         let completionExpectation = expectation(description: "completion expectation")
                 
-        sut.requestLocationCompletion { (location) in
+        sut.requestWhenInUseAuthorization { (location) in
             completionExpectation.fulfill()
             XCTAssertEqual(location.coordinate.latitude,expectedLocation.coordinate.latitude)
             XCTAssertEqual(location.coordinate.longitude,expectedLocation.coordinate.longitude)
         }
         wait(for: [completionExpectation], timeout: 1)
+    }
+    
+    func test_requestLocation() {
+        let mock = LocationManagerMock()
+
+        mock.locationToReturn = {
+            return CLLocation(latitude: 10.0, longitude: 10.0)
+        }
+        
+        let sut = LocationManager(locationManager: mock)
+
+        let expectedLocation = CLLocation(latitude: 10.0, longitude: 10.0)
+        let completionExpectation = expectation(description: "completion expectation")
+                
+        sut.requestWhenInUseAuthorization { (location) in
+            completionExpectation.fulfill()
+            XCTAssertEqual(location.coordinate.latitude, expectedLocation.coordinate.latitude)
+            XCTAssertEqual(location.coordinate.longitude, expectedLocation.coordinate.longitude)
+        }
+        
+        mock.locationToReturn = {
+            return CLLocation(latitude: 20.0, longitude: 20.0)
+        }
+        
+        let expectedLocation2 = CLLocation(latitude: 20.0, longitude: 20.0)
+        let completionExpectation2 = expectation(description: "completion2 expectation")
+
+        sut.requestLocation { (location) in
+            completionExpectation2.fulfill()
+            XCTAssertEqual(location.coordinate.latitude, expectedLocation2.coordinate.latitude)
+            XCTAssertEqual(location.coordinate.longitude, expectedLocation2.coordinate.longitude)
+        }
+        
+        wait(for: [completionExpectation, completionExpectation2], timeout: 1)
     }
 }
