@@ -11,6 +11,7 @@ import CoreLocation
 protocol LocationManagerInterface {
     var locationManagerDelegate: LocationManagerDelegate? { get set }
     var accuracyAuthorization: CLAccuracyAuthorization { get }
+    var desiredAccuracy: CLLocationAccuracy { get set }
     func requestWhenInUseAuthorization()
     func requestLocation()
 }
@@ -36,6 +37,12 @@ class LocationManager: NSObject {
         self.locationManager = locationManager
         super.init()
         self.locationManager.locationManagerDelegate = self
+        switch self.locationManager.accuracyAuthorization {
+        case .fullAccuracy:
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        default:
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyReduced
+        }
     }
 
     func requestWhenInUseAuthorization(completion: @escaping (CLLocation) -> Void) {
@@ -72,6 +79,8 @@ extension LocationManager: LocationManagerDelegate {
 }
 
 class LocationManagerMock: LocationManagerInterface {
+    var desiredAccuracy: CLLocationAccuracy = kCLLocationAccuracyBest
+    
     var accuracyAuthorization: CLAccuracyAuthorization = .fullAccuracy
     
     var locationManagerDelegate: LocationManagerDelegate?
