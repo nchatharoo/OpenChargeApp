@@ -10,6 +10,7 @@ import CoreLocation
 
 protocol LocationManagerInterface {
     var locationManagerDelegate: LocationManagerDelegate? { get set }
+    var accuracyAuthorization: CLAccuracyAuthorization { get }
     func requestWhenInUseAuthorization()
     func requestLocation()
 }
@@ -71,6 +72,7 @@ extension LocationManager: LocationManagerDelegate {
 }
 
 class LocationManagerMock: LocationManagerInterface {
+    var accuracyAuthorization: CLAccuracyAuthorization = .fullAccuracy
     
     var locationManagerDelegate: LocationManagerDelegate?
         
