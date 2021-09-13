@@ -9,7 +9,7 @@ import XCTest
 import OpenChargeApp
 import MapKit
 
-class LocationViewModel: NSObject {
+class LocationViewModel {
     let locationManager: LocationManager
     var coordinateRegion: MKCoordinateRegion?
 
