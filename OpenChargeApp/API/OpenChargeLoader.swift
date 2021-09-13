@@ -23,11 +23,11 @@ public class OpenChargeLoader {
         case failure(Error)
     }
     
-    init(client: HTTPClient) {
+    public init(client: HTTPClient) {
         self.client = client
     }
     
-    func load(completion: @escaping (Result) -> Void) {
+    public func load(completion: @escaping (Result) -> Void) {
         let url = URL(string: "\(baseAPIURL)")!
         
         client.get(from: url) { [weak self] result in
