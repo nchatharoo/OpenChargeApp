@@ -9,22 +9,6 @@ import XCTest
 import OpenChargeApp
 import MapKit
 
-class LocationViewModel {
-    let locationManager: LocationManager
-    var coordinateRegion: MKCoordinateRegion?
-
-    init(locationManager: LocationManager) {
-        self.locationManager = locationManager
-    }
-    
-    func getLocation(completion: @escaping (CLLocation) -> Void) {
-        self.locationManager.requestWhenInUseAuthorization { location in
-        self.coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 100, longitudinalMeters: 100)
-            completion(location)
-        }
-    }
-}
-
 class LocationViewModelTests: XCTestCase {
     
     func test_initDoesNotGetLocation() {
