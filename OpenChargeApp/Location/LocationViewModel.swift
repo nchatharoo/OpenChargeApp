@@ -8,15 +8,16 @@
 import Foundation
 import MapKit
 
-public class LocationViewModel {
+public class LocationViewModel: ObservableObject {
     let locationManager: LocationManager
-    public var coordinateRegion: MKCoordinateRegion?
+    @Published public var coordinateRegion = MKCoordinateRegion()
 
     public init(locationManager: LocationManager) {
         self.locationManager = locationManager
+        self.getLocation()
     }
     
-    public func getLocation(completion: @escaping (CLLocation) -> Void) {
+    public func getLocation(completion: @escaping (CLLocation) -> Void = { _ in }) {
         self.locationManager.requestWhenInUseAuthorization { location in
         self.coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 100, longitudinalMeters: 100)
             completion(location)
