@@ -23,6 +23,7 @@ class LocationViewModel: NSObject {
             completion(location)
         }
     }
+}
 
 class LocationViewModelTests: XCTestCase {
     
