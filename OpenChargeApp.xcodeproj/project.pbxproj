@@ -13,6 +13,7 @@
 		8E644E8F26E20FA400ED95DF /* response.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E644E8826E2071B00ED95DF /* response.json */; };
 		8E66780F26EF2F0F0008D7D2 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E66780E26EF2F0F0008D7D2 /* LocationViewModel.swift */; };
 		8E66781326EFD8720008D7D2 /* OpenChargeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E66781226EFD8720008D7D2 /* OpenChargeViewModel.swift */; };
+		8E66781526EFDACE0008D7D2 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E66781426EFDACE0008D7D2 /* URLSessionHTTPClient.swift */; };
 		8E69AC9B26EB7A8D00485CC2 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69AC9A26EB7A8D00485CC2 /* LocationManager.swift */; };
 		8E69ACA126EB9FF000485CC2 /* LocationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69ACA026EB9FF000485CC2 /* LocationViewModelTests.swift */; };
 		8E69CB2F26E89E1A003B14FC /* LocationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69CB2E26E89E1A003B14FC /* LocationManagerTests.swift */; };
@@ -49,6 +50,7 @@
 		8E644E8826E2071B00ED95DF /* response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = response.json; sourceTree = "<group>"; };
 		8E66780E26EF2F0F0008D7D2 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		8E66781226EFD8720008D7D2 /* OpenChargeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChargeViewModel.swift; sourceTree = "<group>"; };
+		8E66781426EFDACE0008D7D2 /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = URLSessionHTTPClient.swift; path = OpenChargeApp/URLSessionHTTPClient.swift; sourceTree = SOURCE_ROOT; };
 		8E69AC9A26EB7A8D00485CC2 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		8E69ACA026EB9FF000485CC2 /* LocationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModelTests.swift; sourceTree = "<group>"; };
 		8E69CB2E26E89E1A003B14FC /* LocationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerTests.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 			children = (
 				8E9E73E926E10AB400CFEC24 /* OpenChargeLoader.swift */,
 				8E9E73EB26E10ACE00CFEC24 /* HTTPClient.swift */,
+				8E66781426EFDACE0008D7D2 /* URLSessionHTTPClient.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				8E9E73EE26E1211C00CFEC24 /* Item.swift in Sources */,
 				8E9E73BE26E0B66400CFEC24 /* ContentView.swift in Sources */,
 				8E69AC9B26EB7A8D00485CC2 /* LocationManager.swift in Sources */,
+				8E66781526EFDACE0008D7D2 /* URLSessionHTTPClient.swift in Sources */,
 				8E9E73BC26E0B66300CFEC24 /* OpenChargeAppApp.swift in Sources */,
 				8E66780F26EF2F0F0008D7D2 /* LocationViewModel.swift in Sources */,
 				8E9E73EC26E10ACE00CFEC24 /* HTTPClient.swift in Sources */,
