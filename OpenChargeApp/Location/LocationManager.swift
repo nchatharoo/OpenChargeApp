@@ -38,9 +38,13 @@ public class LocationManager: NSObject {
         switch self.locationManager.accuracyAuthorization {
         case .fullAccuracy:
             self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        default:
+        case .reducedAccuracy:
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyReduced
+        @unknown default:
             self.locationManager.desiredAccuracy = kCLLocationAccuracyReduced
         }
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.requestLocation()
     }
 
     public func requestWhenInUseAuthorization(completion: @escaping (CLLocation) -> Void) {
@@ -67,11 +71,11 @@ extension CLLocationManager: LocationManagerInterface {
 
 extension LocationManager: CLLocationManagerDelegate {
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.locationManager(manager, didUpdateLocations: locations)
+        self.locationManager.locationManagerDelegate?.locationManager(manager, didUpdateLocations: locations)
     }
     
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        self.locationManager(manager, didFailWithError: error)
+        print(error)
     }
 }
 
