@@ -6,16 +6,19 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct ContentView: View {
+    @ObservedObject var locationViewModel: LocationViewModel
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        Map(coordinateRegion: $locationViewModel.coordinateRegion, showsUserLocation: true)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
+    static var locationViewModel = LocationViewModel(locationManager: LocationManager())
     static var previews: some View {
-        ContentView()
+        ContentView(locationViewModel: locationViewModel)
     }
 }

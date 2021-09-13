@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct OpenChargeAppApp: App {
+    @ObservedObject private var locationViewModel = LocationViewModel(locationManager: LocationManager())
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(locationViewModel: locationViewModel)
         }
     }
 }
