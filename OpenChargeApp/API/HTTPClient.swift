@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MapKit
 
 public enum HTTPClientResult {
     case success(Data, HTTPURLResponse)
@@ -13,5 +14,5 @@ public enum HTTPClientResult {
 }
 
 public protocol HTTPClient {
-    func get(from url: URL, completion: @escaping (HTTPClientResult) -> Void)
+    func get(from url: URL, with coordinate: CLLocationCoordinate2D, completion: @escaping (HTTPClientResult) -> Void)
 }

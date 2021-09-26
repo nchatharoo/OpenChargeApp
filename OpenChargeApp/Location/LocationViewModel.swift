@@ -19,7 +19,7 @@ public class LocationViewModel: ObservableObject {
     
     public func getLocation(completion: @escaping (CLLocation) -> Void = { _ in }) {
         self.locationManager.requestWhenInUseAuthorization { location in
-        self.coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 100, longitudinalMeters: 100)
+        self.coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 250, longitudinalMeters: 250)
             completion(location)
         }
     }

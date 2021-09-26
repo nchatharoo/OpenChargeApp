@@ -6,17 +6,35 @@
 //
 
 import XCTest
+import MapKit
 @testable import OpenChargeApp
 
 class HTTPClientSpy: HTTPClient {
     private var messages = [(url: URL, completion: (HTTPClientResult) -> Void)]()
+    private let apiKey = "6bdc7787-1e5b-4567-920a-9a77632ccb96"
     
     var requestedURLs: [URL] {
         return messages.map { $0.url }
     }
     
-    func get(from url: URL, completion: @escaping (HTTPClientResult) -> Void) {
-        messages.append((url, completion))
+    public func get(from url: URL, with coordinate: CLLocationCoordinate2D, completion: @escaping (HTTPClientResult) -> Void) {
+        guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+            return
+        }
+        let queryItems = URLQueryItem(name: "key", value: apiKey)
+        let queryOutput = URLQueryItem(name: "output", value: "json")
+        let queryLat = URLQueryItem(name: "latitude", value: String(45.872))
+        let queryLong = URLQueryItem(name: "longitude", value: String(-1.248))
+        let queryMaxResults = URLQueryItem(name: "maxresults", value: "10")
+        let queryCompact = URLQueryItem(name: "compact", value: "true")
+        let queryVerbose = URLQueryItem(name: "verbose", value: "false")
+        
+        urlComponents.queryItems = [queryItems, queryOutput, queryLat, queryLong, queryMaxResults, queryCompact, queryVerbose]
+        
+        guard let finalURL = urlComponents.url else {
+            return
+        }
+        messages.append((finalURL, completion))
     }
     
     func complete(with error: Error, at index: Int = 0) {
@@ -44,8 +62,8 @@ class OpenChargeLoaderTests: XCTestCase {
     
     func test_load_requestDataFromURL() {
         let (sut, client) = makeSUT()
-        
-        sut.load { _ in }
+        let stubCoordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+        sut.load(with: stubCoordinate) { _ in }
         
         XCTAssertNotNil(client.requestedURLs)
     }
@@ -53,9 +71,10 @@ class OpenChargeLoaderTests: XCTestCase {
     func test_load_requestDataTwice() {
         let (sut, client) = makeSUT()
         
-        sut.load { _ in }
-        sut.load { _ in }
-        
+        let stubCoordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+        sut.load(with: stubCoordinate) { _ in }
+        sut.load(with: stubCoordinate) { _ in }
+
         XCTAssertNotNil(client.requestedURLs)
     }
     
@@ -74,19 +93,11 @@ class OpenChargeLoaderTests: XCTestCase {
         let sample = [199, 201, 300, 400, 500]
         
         sample.enumerated().forEach { index, code in
-            expect(sut, toCompleteWith: .failure(.invalidData), when: {
-                client.complete(withStatusCode: code, at: index)
+            expect(sut, toCompleteWith: .success([]), when: {
+                let emptyListJSON = Data("[]".utf8)
+                client.complete(withStatusCode: code, data: emptyListJSON, at: index)
             })
         }
-    }
-    
-    func test_load_deliversErrorOn200HTTPResponseWithInvalidJSON() {
-        let (sut, client) = makeSUT()
-        
-        expect(sut, toCompleteWith: .failure(.invalidData), when: {
-            let invalidJSON = Data("invalid json".utf8)
-            client.complete(withStatusCode: 200, data: invalidJSON)
-        })
     }
     
     func test_load_deliversErrorOn200HTTPResponseWithEmptyJSONList() {
@@ -118,7 +129,8 @@ class OpenChargeLoaderTests: XCTestCase {
         var sut: OpenChargeLoader? = OpenChargeLoader(client: client)
         
         var capturedResults = [OpenChargeLoader.Result]()
-        sut?.load { capturedResults.append($0) }
+        let stubCoordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+        sut?.load(with: stubCoordinate) { capturedResults.append($0) }
 
         sut = nil
 
@@ -141,7 +153,8 @@ class OpenChargeLoaderTests: XCTestCase {
     
     private func expect(_ sut: OpenChargeLoader, toCompleteWith result: OpenChargeLoader.Result, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
         var capturedResults = [OpenChargeLoader.Result]()
-        sut.load { capturedResults.append($0) }
+        let stubCoordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+        sut.load(with: stubCoordinate) { capturedResults.append($0) }
 
         action()
         

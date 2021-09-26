@@ -7,6 +7,7 @@
 
 import XCTest
 import OpenChargeApp
+import MapKit
 
 class URLSessionHTTPClientTests: XCTestCase {
     
@@ -19,19 +20,20 @@ class URLSessionHTTPClientTests: XCTestCase {
         super.tearDown()
         URLProtocolStub.stopInterceptingRequests()
     }
-
-        
+    
+    
     func test_getFromURL_failsOnRequestError() {
-
-        let url = URL(string: "https://api.openchargemap.io/v3/poi/?output=json&latitude=45.872&longitude=-1.248&maxresults=10&compact=true&verbose=false")!
+        
+        let url = URL(string: "https://api.openchargemap.io/v3/poi/?key=6bdc7787-1e5b-4567-920a-9a77632ccb96&longitude=-1.248&latitude=45.872&verbose=false&compact=true&output=json&maxresults=10")!
         let error = NSError(domain: "any error", code: 1)
         URLProtocolStub.stub(data: nil, response: nil, error: error)
-
+        
         let sut = URLSessionHTTPClient()
         
         let exp = expectation(description: "Wait for completion")
+        let stubCoordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
         
-        sut.get(from: url) { result in
+        sut.get(from: url, with: stubCoordinate) { result in
             switch result {
             case let .failure(receivedError as NSError):
                 XCTAssertEqual(receivedError.domain, error.domain)
@@ -46,7 +48,7 @@ class URLSessionHTTPClientTests: XCTestCase {
     }
     
     func test_getFromURL_performsGETRequestWithURL() {
-        let url = URL(string: "https://api.openchargemap.io/v3/poi/?output=json&latitude=45.872&longitude=-1.248&maxresults=10&compact=true&verbose=false")!
+        let url = URL(string: "https://api.openchargemap.io/v3/poi/?key=6bdc7787-1e5b-4567-920a-9a77632ccb96&output=json&latitude=0.0&longitude=0.0&maxresults=10&compact=true&verbose=false")!
         let exp = expectation(description: "Wait for request")
         
         URLProtocolStub.observeRequests { request in
@@ -55,7 +57,8 @@ class URLSessionHTTPClientTests: XCTestCase {
             exp.fulfill()
         }
         
-        URLSessionHTTPClient().get(from: url) { _ in }
+        let stubCoordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+        URLSessionHTTPClient().get(from: url, with: stubCoordinate) { _ in }
         
         wait(for: [exp], timeout: 1.0)
     }

@@ -6,10 +6,32 @@
 //
 
 import Foundation
+import MapKit
+
+class OpenChargeViewModel: ObservableObject {
+    let openchargeloader: OpenChargeLoader
+    var item = Item()
+    
+    init(openchargeloader: OpenChargeLoader) {
+        self.openchargeloader = openchargeloader
+    }
+    
+    func loadItem(with coordinate: CLLocationCoordinate2D, completion: @escaping (OpenChargeLoader.Result) -> Void) {
+        self.openchargeloader.load(with: coordinate) { result in
+            switch result {
+            case let .success(items):
+                self.item = items
+                print(items)
+            case let .failure(error):
+                print(error)
+            }
+            completion(result)
+        }
+    }
+}
 
 public class OpenChargeLoader {
     private let baseAPIURL = "https://api.openchargemap.io/v3/poi/"
-    private let apiKey = "6bdc7787-1e5b-4567-920a-9a77632ccb96"
 
     let client: HTTPClient
     
@@ -27,18 +49,38 @@ public class OpenChargeLoader {
         self.client = client
     }
     
-    public func load(completion: @escaping (Result) -> Void) {
+    public func load(with coordinate: CLLocationCoordinate2D, completion: @escaping (Result) -> Void) {
         let url = URL(string: "\(baseAPIURL)")!
         
-        client.get(from: url) { [weak self] result in
+        client.get(from: url, with: coordinate) { [weak self] result in
             
             guard self != nil else { return }
 
             switch result {
             case let .success(data, _):
-                if let items = try? JSONDecoder().decode(Item.self, from: data) {
+
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+
+                let jsonDecoder = JSONDecoder()
+                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+                jsonDecoder.dateDecodingStrategy = .formatted(dateFormatter)
+
+                do {
+                    let items = try jsonDecoder.decode(Item.self, from: data)
                     completion(.success(items))
-                } else {
+                } catch DecodingError.dataCorrupted(let context) {
+                    print(context)
+                } catch DecodingError.keyNotFound(let key, let context) {
+                    print("Key '\(key)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch DecodingError.valueNotFound(let value, let context) {
+                    print("Value '\(value)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch DecodingError.typeMismatch(let type, let context) {
+                    print("Type '\(type)' mismatch:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch {
                     completion(.failure(.invalidData))
                 }
             case .failure:
