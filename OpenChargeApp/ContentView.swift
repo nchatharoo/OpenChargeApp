@@ -15,10 +15,11 @@ struct ContentView: View {
     @State private var userTrackingMode: MapUserTrackingMode = .follow
     @State private var displayRipple = false
     @State private var dismissRipple = false
-
+    
     var body: some View {
         ZStack {
-            Map(coordinateRegion: $locationViewModel.coordinateRegion, showsUserLocation: true,
+            ScrollViewReader { proxy in
+                Map(coordinateRegion: $locationViewModel.coordinateRegion, showsUserLocation: true,
                 userTrackingMode: $userTrackingMode,
                 annotationItems: openchargeViewModel.item,
                 annotationContent: { place in
@@ -41,7 +42,9 @@ struct ContentView: View {
                             self.displayRipple.toggle()
                         }
                     }
-                    .onTapGesture(perform: { print("tapped\(place)") })
+                    .onTapGesture(perform: {
+                        proxy.scrollTo(place.id)
+                    })
                 }
             })
                 .overlay(
@@ -69,7 +72,12 @@ struct ContentView: View {
                         openchargeViewModel.loadItem(with: locationViewModel.coordinateRegion.center) { _ in }
                     }
                 }
+            }
         }
+    }
+    
+    func scrollTo(_ place: ItemElement) {
+            
     }
 }
 
