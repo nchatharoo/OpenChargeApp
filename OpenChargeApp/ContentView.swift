@@ -13,8 +13,9 @@ struct ContentView: View {
     @ObservedObject var openchargeViewModel: OpenChargeViewModel
     
     @State private var userTrackingMode: MapUserTrackingMode = .follow
-    @State private var value = 1.0
-    
+    @State private var displayRipple = false
+    @State private var dismissRipple = false
+
     var body: some View {
         ZStack {
             Map(coordinateRegion: $locationViewModel.coordinateRegion, showsUserLocation: true,
@@ -23,14 +24,24 @@ struct ContentView: View {
                 annotationContent: { place in
                 MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: (place.addressInfo?.latitude)!, longitude: (place.addressInfo?.longitude)!)) {
                     VStack {
-                        Image(systemName: "bolt.circle.fill")
-                        
-                            .frame(width: 20.0, height: 20.0)
-                            .foregroundColor(.yellow)
-                            .opacity(value)
-                            .animation(Animation.easeInOut(duration: 0.5).repeatForever(autoreverses: true))
-                            .onAppear { self.value = 0.2 }
+                        ZStack {
+                            Circle()
+                                .strokeBorder(lineWidth: displayRipple ? 1 : 5)
+                                .foregroundColor(.green)
+                                .frame(width: 40.0, height: 40.0)
+                                .scaleEffect(displayRipple ? 1 : 0)
+                                .opacity(displayRipple ? 0 : 1)
+                                .animation(Animation.easeInOut(duration: 1).delay(0.2).repeatForever(autoreverses: false))
+                            
+                            Image(systemName: "bolt.circle.fill")
+                                .frame(width: 40.0, height: 40.0)
+                                .foregroundColor(.green)
+                        }
+                        .onAppear() {
+                            self.displayRipple.toggle()
+                        }
                     }
+                    .onTapGesture(perform: { print("tapped\(place)") })
                 }
             })
                 .overlay(
