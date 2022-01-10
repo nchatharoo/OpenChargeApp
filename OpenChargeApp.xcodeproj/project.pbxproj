@@ -25,7 +25,7 @@
 		8E9E73D926E0B66600CFEC24 /* OpenChargeAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73D826E0B66600CFEC24 /* OpenChargeAppUITests.swift */; };
 		8E9E73EA26E10AB400CFEC24 /* OpenChargeLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73E926E10AB400CFEC24 /* OpenChargeLoader.swift */; };
 		8E9E73EC26E10ACE00CFEC24 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73EB26E10ACE00CFEC24 /* HTTPClient.swift */; };
-		8E9E73EE26E1211C00CFEC24 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73ED26E1211C00CFEC24 /* Item.swift */; };
+		8E9E73EE26E1211C00CFEC24 /* ChargePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73ED26E1211C00CFEC24 /* ChargePoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,7 +68,7 @@
 		8E9E73DA26E0B66600CFEC24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E9E73E926E10AB400CFEC24 /* OpenChargeLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChargeLoader.swift; sourceTree = "<group>"; };
 		8E9E73EB26E10ACE00CFEC24 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
-		8E9E73ED26E1211C00CFEC24 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		8E9E73ED26E1211C00CFEC24 /* ChargePoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargePoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,7 +150,7 @@
 			children = (
 				8E9E73BB26E0B66300CFEC24 /* OpenChargeAppApp.swift */,
 				8E9E73BD26E0B66400CFEC24 /* ContentView.swift */,
-				8E9E73ED26E1211C00CFEC24 /* Item.swift */,
+				8E9E73ED26E1211C00CFEC24 /* ChargePoint.swift */,
 				8E9E73E826E10AA400CFEC24 /* API */,
 				8E69AC9926EB7A8200485CC2 /* Location */,
 				8E9E73BF26E0B66500CFEC24 /* Assets.xcassets */,
@@ -332,7 +332,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E9E73EE26E1211C00CFEC24 /* Item.swift in Sources */,
+				8E9E73EE26E1211C00CFEC24 /* ChargePoint.swift in Sources */,
 				8E9E73BE26E0B66400CFEC24 /* ContentView.swift in Sources */,
 				8E69AC9B26EB7A8D00485CC2 /* LocationManager.swift in Sources */,
 				8E66781526EFDACE0008D7D2 /* URLSessionHTTPClient.swift in Sources */,

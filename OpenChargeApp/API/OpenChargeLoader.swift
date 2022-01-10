@@ -10,7 +10,7 @@ import MapKit
 
 class OpenChargeViewModel: ObservableObject {
     let openchargeloader: OpenChargeLoader
-    var item = Item()
+    var item = ChargePoint()
     
     init(openchargeloader: OpenChargeLoader) {
         self.openchargeloader = openchargeloader
@@ -41,7 +41,7 @@ public class OpenChargeLoader {
     }
     
     public enum Result: Equatable {
-        case success(Item)
+        case success(ChargePoint)
         case failure(Error)
     }
     
@@ -52,10 +52,8 @@ public class OpenChargeLoader {
     public func load(with coordinate: CLLocationCoordinate2D, completion: @escaping (Result) -> Void) {
         let url = URL(string: "\(baseAPIURL)")!
         
-        client.get(from: url, with: coordinate) { [weak self] result in
+        client.get(from: url, with: coordinate) { result in
             
-            guard self != nil else { return }
-
             switch result {
             case let .success(data, _):
 
@@ -67,7 +65,7 @@ public class OpenChargeLoader {
                 jsonDecoder.dateDecodingStrategy = .formatted(dateFormatter)
 
                 do {
-                    let items = try jsonDecoder.decode(Item.self, from: data)
+                    let items = try jsonDecoder.decode(ChargePoint.self, from: data)
                     completion(.success(items))
                 } catch DecodingError.dataCorrupted(let context) {
                     print(context)

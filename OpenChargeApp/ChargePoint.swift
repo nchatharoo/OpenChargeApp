@@ -7,11 +7,9 @@
 
 import Foundation
 
-public typealias Item = [ItemElement]
-
 // MARK: - ItemElement
-public struct ItemElement: Codable, Equatable, Identifiable {
-    public static func == (lhs: ItemElement, rhs: ItemElement) -> Bool {
+public struct ChargePoint: Codable, Equatable, Identifiable {
+    public static func == (lhs: ChargePoint, rhs: ChargePoint) -> Bool {
         lhs.id == rhs.id
     }
     let isRecentlyVerified: Bool?

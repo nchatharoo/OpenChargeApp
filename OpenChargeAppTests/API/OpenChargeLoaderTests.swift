@@ -111,7 +111,7 @@ class OpenChargeLoaderTests: XCTestCase {
     func test_load_deliversItemsOn200HTTPResponseWithJSONItems() {
         let (sut, client) = makeSUT()
         
-        let response: Item? = try? Bundle.main.loadAndDecodeJSON(filename: "response")
+        let response: ChargePoint? = try? Bundle.main.loadAndDecodeJSON(filename: "response")
         expect(sut, toCompleteWith: .success(response!), when: {
             do {
                 let json = try JSONEncoder().encode(response)
@@ -134,7 +134,7 @@ class OpenChargeLoaderTests: XCTestCase {
 
         sut = nil
 
-        let response: Item? = try? Bundle.main.loadAndDecodeJSON(filename: "response")
+        let response: ChargePoint? = try? Bundle.main.loadAndDecodeJSON(filename: "response")
         let json = try? JSONEncoder().encode(response)
         client.complete(withStatusCode: 200, data: json!)
 

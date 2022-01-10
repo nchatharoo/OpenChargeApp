@@ -76,7 +76,7 @@ struct ContentView: View {
         }
     }
     
-    func scrollTo(_ place: ItemElement) {
+    func scrollTo(_ place: ChargePoint) {
             
     }
 }
