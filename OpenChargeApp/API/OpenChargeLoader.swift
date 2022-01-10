@@ -10,7 +10,7 @@ import MapKit
 
 class OpenChargeViewModel: ObservableObject {
     let openchargeloader: OpenChargeLoader
-    var item = ChargePoint()
+    var item: ChargePoint?
     
     init(openchargeloader: OpenChargeLoader) {
         self.openchargeloader = openchargeloader
