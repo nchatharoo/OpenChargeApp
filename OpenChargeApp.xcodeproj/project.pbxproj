@@ -17,6 +17,7 @@
 		8E69AC9B26EB7A8D00485CC2 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69AC9A26EB7A8D00485CC2 /* LocationManager.swift */; };
 		8E69ACA126EB9FF000485CC2 /* LocationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69ACA026EB9FF000485CC2 /* LocationViewModelTests.swift */; };
 		8E69CB2F26E89E1A003B14FC /* LocationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69CB2E26E89E1A003B14FC /* LocationManagerTests.swift */; };
+		8E6BEDBE27957989009DDF94 /* OpenChargeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6BEDBD27957989009DDF94 /* OpenChargeViewModel.swift */; };
 		8E9E73BC26E0B66300CFEC24 /* OpenChargeAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73BB26E0B66300CFEC24 /* OpenChargeAppApp.swift */; };
 		8E9E73BE26E0B66400CFEC24 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73BD26E0B66400CFEC24 /* ContentView.swift */; };
 		8E9E73C026E0B66500CFEC24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9E73BF26E0B66500CFEC24 /* Assets.xcassets */; };
@@ -54,6 +55,7 @@
 		8E69AC9A26EB7A8D00485CC2 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		8E69ACA026EB9FF000485CC2 /* LocationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModelTests.swift; sourceTree = "<group>"; };
 		8E69CB2E26E89E1A003B14FC /* LocationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerTests.swift; sourceTree = "<group>"; };
+		8E6BEDBD27957989009DDF94 /* OpenChargeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChargeViewModel.swift; sourceTree = "<group>"; };
 		8E9E73B826E0B66300CFEC24 /* OpenChargeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenChargeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E9E73BB26E0B66300CFEC24 /* OpenChargeAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChargeAppApp.swift; sourceTree = "<group>"; };
 		8E9E73BD26E0B66400CFEC24 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				8E9E73BB26E0B66300CFEC24 /* OpenChargeAppApp.swift */,
 				8E9E73BD26E0B66400CFEC24 /* ContentView.swift */,
 				8E9E73ED26E1211C00CFEC24 /* ChargePoint.swift */,
+				8E6BEDBD27957989009DDF94 /* OpenChargeViewModel.swift */,
 				8E9E73E826E10AA400CFEC24 /* API */,
 				8E69AC9926EB7A8200485CC2 /* Location */,
 				8E9E73BF26E0B66500CFEC24 /* Assets.xcassets */,
@@ -340,6 +343,7 @@
 				8E66780F26EF2F0F0008D7D2 /* LocationViewModel.swift in Sources */,
 				8E9E73EC26E10ACE00CFEC24 /* HTTPClient.swift in Sources */,
 				8E9E73EA26E10AB400CFEC24 /* OpenChargeLoader.swift in Sources */,
+				8E6BEDBE27957989009DDF94 /* OpenChargeViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

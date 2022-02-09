@@ -7,6 +7,8 @@
 
 import Foundation
 
+public typealias Charge = [ChargePoint]
+
 // MARK: - ItemElement
 public struct ChargePoint: Codable, Equatable, Identifiable {
     public static func == (lhs: ChargePoint, rhs: ChargePoint) -> Bool {

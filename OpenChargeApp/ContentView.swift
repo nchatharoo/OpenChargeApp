@@ -9,8 +9,8 @@ import SwiftUI
 import MapKit
 
 struct ContentView: View {
-    @ObservedObject var locationViewModel: LocationViewModel
-    @ObservedObject var openchargeViewModel: OpenChargeViewModel
+    @StateObject var locationViewModel: LocationViewModel
+    @StateObject var openchargeViewModel: OpenChargeViewModel
     
     @State private var userTrackingMode: MapUserTrackingMode = .follow
     @State private var displayRipple = false
@@ -32,15 +32,15 @@ struct ContentView: View {
                                 .frame(width: 40.0, height: 40.0)
                                 .scaleEffect(displayRipple ? 1 : 0)
                                 .opacity(displayRipple ? 0 : 1)
-                                .animation(Animation.easeInOut(duration: 1).delay(0.2).repeatForever(autoreverses: false))
+                                .animation(Animation.easeInOut(duration: 1).delay(0.2).repeatForever(autoreverses: false), value: displayRipple)
                             
                             Image(systemName: "bolt.circle.fill")
                                 .frame(width: 40.0, height: 40.0)
                                 .foregroundColor(.green)
                         }
-                        .onAppear() {
+                        .onChange(of: openchargeViewModel.item, perform: { _ in
                             self.displayRipple.toggle()
-                        }
+                        })
                     }
                     .onTapGesture(perform: {
                         proxy.scrollTo(place.id)
@@ -55,6 +55,7 @@ struct ContentView: View {
                                     Text(charger.addressInfo?.title ?? "")
                                     Text(charger.addressInfo?.addressLine1 ?? "")
                                     Text(charger.addressInfo?.contactTelephone1 ?? "")
+                                    Text(charger.addressInfo?.accessComments ?? "")
                                 }
                                 .frame(width: 300)
                                 .background(Color.red)
@@ -64,20 +65,13 @@ struct ContentView: View {
                         .background(Color.blue)
                         .frame(height: 100)
                         .cornerRadius(20)
-                    }.tabViewStyle(PageTabViewStyle())
-                    
+                    }
                 )
                 .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        openchargeViewModel.loadItem(with: locationViewModel.coordinateRegion.center) { _ in }
-                    }
+                    openchargeViewModel.loadItem(with: locationViewModel.coordinateRegion.center) { _ in }
                 }
             }
         }
-    }
-    
-    func scrollTo(_ place: ChargePoint) {
-            
     }
 }
 

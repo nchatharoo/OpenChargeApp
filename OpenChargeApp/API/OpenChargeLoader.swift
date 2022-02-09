@@ -8,27 +8,27 @@
 import Foundation
 import MapKit
 
-class OpenChargeViewModel: ObservableObject {
-    let openchargeloader: OpenChargeLoader
-    var item: ChargePoint?
-    
-    init(openchargeloader: OpenChargeLoader) {
-        self.openchargeloader = openchargeloader
-    }
-    
-    func loadItem(with coordinate: CLLocationCoordinate2D, completion: @escaping (OpenChargeLoader.Result) -> Void) {
-        self.openchargeloader.load(with: coordinate) { result in
-            switch result {
-            case let .success(items):
-                self.item = items
-                print(items)
-            case let .failure(error):
-                print(error)
-            }
-            completion(result)
-        }
-    }
-}
+//class OpenChargeViewModel: ObservableObject {
+//    let openchargeloader: OpenChargeLoader
+//    var item: ChargePoint?
+//    
+//    init(openchargeloader: OpenChargeLoader) {
+//        self.openchargeloader = openchargeloader
+//    }
+//    
+//    func loadItem(with coordinate: CLLocationCoordinate2D, completion: @escaping (OpenChargeLoader.Result) -> Void) {
+//        self.openchargeloader.load(with: coordinate) { result in
+//            switch result {
+//            case let .success(items):
+//                self.item = items
+//                print(items)
+//            case let .failure(error):
+//                print(error)
+//            }
+//            completion(result)
+//        }
+//    }
+//}
 
 public class OpenChargeLoader {
     private let baseAPIURL = "https://api.openchargemap.io/v3/poi/"
@@ -41,7 +41,7 @@ public class OpenChargeLoader {
     }
     
     public enum Result: Equatable {
-        case success(ChargePoint)
+        case success(Charge)
         case failure(Error)
     }
     
@@ -55,7 +55,7 @@ public class OpenChargeLoader {
         client.get(from: url, with: coordinate) { result in
             
             switch result {
-            case let .success(data, _):
+            case let .success((data, _)):
 
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
@@ -65,7 +65,7 @@ public class OpenChargeLoader {
                 jsonDecoder.dateDecodingStrategy = .formatted(dateFormatter)
 
                 do {
-                    let items = try jsonDecoder.decode(ChargePoint.self, from: data)
+                    let items = try jsonDecoder.decode(Charge.self, from: data)
                     completion(.success(items))
                 } catch DecodingError.dataCorrupted(let context) {
                     print(context)

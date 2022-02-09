@@ -9,8 +9,8 @@ import SwiftUI
 
 @main
 struct OpenChargeAppApp: App {
-    @ObservedObject private var locationViewModel = LocationViewModel(locationManager: LocationManager())
-    @ObservedObject private var openchargeViewModel = OpenChargeViewModel(openchargeloader: OpenChargeLoader(client: URLSessionHTTPClient()))
+    @StateObject private var locationViewModel = LocationViewModel(locationManager: LocationManager())
+    @StateObject private var openchargeViewModel = OpenChargeViewModel(openchargeloader: OpenChargeLoader(client: URLSessionHTTPClient()))
     
     var body: some Scene {
         WindowGroup {

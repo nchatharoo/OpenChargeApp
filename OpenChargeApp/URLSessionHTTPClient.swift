@@ -18,7 +18,7 @@ public class URLSessionHTTPClient: HTTPClient {
         self.session = session
     }
     
-    public func get(from url: URL, with coordinate: CLLocationCoordinate2D, completion: @escaping (HTTPClientResult) -> Void) {
+    public func get(from url: URL, with coordinate: CLLocationCoordinate2D, completion: @escaping (HTTPClient.Result) -> Void) {
         
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
             return
@@ -43,7 +43,7 @@ public class URLSessionHTTPClient: HTTPClient {
                 print(error)
                 completion(.failure(error))
             } else if let data = data, let response = response as? HTTPURLResponse {
-                completion(.success(data, response))
+                completion(.success((data, response)))
             } else {
                 completion(.failure(UnexpectedValuesRepresentation()))
             }
