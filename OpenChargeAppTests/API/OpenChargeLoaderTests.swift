@@ -10,14 +10,14 @@ import MapKit
 @testable import OpenChargeApp
 
 class HTTPClientSpy: HTTPClient {
-    private var messages = [(url: URL, completion: (HTTPClientResult) -> Void)]()
+    private var messages = [(url: URL, completion: (HTTPClient.Result) -> Void)]()
     private let apiKey = "6bdc7787-1e5b-4567-920a-9a77632ccb96"
     
     var requestedURLs: [URL] {
         return messages.map { $0.url }
     }
     
-    public func get(from url: URL, with coordinate: CLLocationCoordinate2D, completion: @escaping (HTTPClientResult) -> Void) {
+    public func get(from url: URL, with coordinate: CLLocationCoordinate2D, completion: @escaping (HTTPClient.Result) -> Void) {
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
             return
         }
@@ -48,7 +48,7 @@ class HTTPClientSpy: HTTPClient {
             httpVersion: nil,
             headerFields: nil
         )!
-        messages[index].completion(.success(data, response))
+        messages[index].completion(.success((data, response)))
     }
 }
 
@@ -111,7 +111,7 @@ class OpenChargeLoaderTests: XCTestCase {
     func test_load_deliversItemsOn200HTTPResponseWithJSONItems() {
         let (sut, client) = makeSUT()
         
-        let response: ChargePoint? = try? Bundle.main.loadAndDecodeJSON(filename: "response")
+        let response: Charge? = try? Bundle.main.loadAndDecodeJSON(filename: "response")
         expect(sut, toCompleteWith: .success(response!), when: {
             do {
                 let json = try JSONEncoder().encode(response)
