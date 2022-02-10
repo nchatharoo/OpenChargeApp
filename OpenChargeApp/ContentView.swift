@@ -77,7 +77,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var locationViewModel = LocationViewModel(locationManager: LocationManager())
-    static var openchargeViewModel = OpenChargeViewModel(openchargeloader: OpenChargeLoader(client: URLSessionHTTPClient()))
+    static var openchargeViewModel = OpenChargeViewModel(client: URLSessionHTTPClient())
     static var previews: some View {
         ContentView(locationViewModel: locationViewModel, openchargeViewModel: openchargeViewModel)
     }

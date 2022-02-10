@@ -8,12 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		8E575D1426E3BDAC00CC73D7 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E575D1326E3BDAC00CC73D7 /* URLSessionHTTPClientTests.swift */; };
-		8E644E8926E2071B00ED95DF /* response.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E644E8826E2071B00ED95DF /* response.json */; };
 		8E66780F26EF2F0F0008D7D2 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E66780E26EF2F0F0008D7D2 /* LocationViewModel.swift */; };
 		8E66781326EFD8720008D7D2 /* OpenChargeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E66781226EFD8720008D7D2 /* OpenChargeViewModelTests.swift */; };
 		8E66781526EFDACE0008D7D2 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E66781426EFDACE0008D7D2 /* URLSessionHTTPClient.swift */; };
-		8E670E2926F1231B00088564 /* response.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E644E8826E2071B00ED95DF /* response.json */; };
-		8E670E2A26F1231B00088564 /* response.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E644E8826E2071B00ED95DF /* response.json */; };
 		8E69AC9B26EB7A8D00485CC2 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69AC9A26EB7A8D00485CC2 /* LocationManager.swift */; };
 		8E69ACA126EB9FF000485CC2 /* LocationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69ACA026EB9FF000485CC2 /* LocationViewModelTests.swift */; };
 		8E69CB2F26E89E1A003B14FC /* LocationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69CB2E26E89E1A003B14FC /* LocationManagerTests.swift */; };
@@ -22,9 +19,7 @@
 		8E9E73BE26E0B66400CFEC24 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73BD26E0B66400CFEC24 /* ContentView.swift */; };
 		8E9E73C026E0B66500CFEC24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9E73BF26E0B66500CFEC24 /* Assets.xcassets */; };
 		8E9E73C326E0B66600CFEC24 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9E73C226E0B66600CFEC24 /* Preview Assets.xcassets */; };
-		8E9E73CE26E0B66600CFEC24 /* OpenChargeLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73CD26E0B66600CFEC24 /* OpenChargeLoaderTests.swift */; };
 		8E9E73D926E0B66600CFEC24 /* OpenChargeAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73D826E0B66600CFEC24 /* OpenChargeAppUITests.swift */; };
-		8E9E73EA26E10AB400CFEC24 /* OpenChargeLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73E926E10AB400CFEC24 /* OpenChargeLoader.swift */; };
 		8E9E73EC26E10ACE00CFEC24 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73EB26E10ACE00CFEC24 /* HTTPClient.swift */; };
 		8E9E73EE26E1211C00CFEC24 /* ChargePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73ED26E1211C00CFEC24 /* ChargePoint.swift */; };
 /* End PBXBuildFile section */
@@ -48,7 +43,6 @@
 
 /* Begin PBXFileReference section */
 		8E575D1326E3BDAC00CC73D7 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
-		8E644E8826E2071B00ED95DF /* response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = response.json; sourceTree = "<group>"; };
 		8E66780E26EF2F0F0008D7D2 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		8E66781226EFD8720008D7D2 /* OpenChargeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChargeViewModelTests.swift; sourceTree = "<group>"; };
 		8E66781426EFDACE0008D7D2 /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = URLSessionHTTPClient.swift; path = OpenChargeApp/URLSessionHTTPClient.swift; sourceTree = SOURCE_ROOT; };
@@ -63,12 +57,10 @@
 		8E9E73C226E0B66600CFEC24 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8E9E73C426E0B66600CFEC24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E9E73C926E0B66600CFEC24 /* OpenChargeAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenChargeAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E9E73CD26E0B66600CFEC24 /* OpenChargeLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChargeLoaderTests.swift; sourceTree = "<group>"; };
 		8E9E73CF26E0B66600CFEC24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E9E73D426E0B66600CFEC24 /* OpenChargeAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenChargeAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E9E73D826E0B66600CFEC24 /* OpenChargeAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChargeAppUITests.swift; sourceTree = "<group>"; };
 		8E9E73DA26E0B66600CFEC24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8E9E73E926E10AB400CFEC24 /* OpenChargeLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChargeLoader.swift; sourceTree = "<group>"; };
 		8E9E73EB26E10ACE00CFEC24 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		8E9E73ED26E1211C00CFEC24 /* ChargePoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargePoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -110,8 +102,6 @@
 		8E69AC9C26EB8A4A00485CC2 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				8E644E8826E2071B00ED95DF /* response.json */,
-				8E9E73CD26E0B66600CFEC24 /* OpenChargeLoaderTests.swift */,
 				8E575D1326E3BDAC00CC73D7 /* URLSessionHTTPClientTests.swift */,
 				8E66781226EFD8720008D7D2 /* OpenChargeViewModelTests.swift */,
 			);
@@ -193,7 +183,6 @@
 		8E9E73E826E10AA400CFEC24 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				8E9E73E926E10AB400CFEC24 /* OpenChargeLoader.swift */,
 				8E9E73EB26E10ACE00CFEC24 /* HTTPClient.swift */,
 				8E66781426EFDACE0008D7D2 /* URLSessionHTTPClient.swift */,
 			);
@@ -307,7 +296,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E9E73C326E0B66600CFEC24 /* Preview Assets.xcassets in Resources */,
-				8E670E2926F1231B00088564 /* response.json in Resources */,
 				8E9E73C026E0B66500CFEC24 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -316,7 +304,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E644E8926E2071B00ED95DF /* response.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,7 +311,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E670E2A26F1231B00088564 /* response.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,7 +328,6 @@
 				8E9E73BC26E0B66300CFEC24 /* OpenChargeAppApp.swift in Sources */,
 				8E66780F26EF2F0F0008D7D2 /* LocationViewModel.swift in Sources */,
 				8E9E73EC26E10ACE00CFEC24 /* HTTPClient.swift in Sources */,
-				8E9E73EA26E10AB400CFEC24 /* OpenChargeLoader.swift in Sources */,
 				8E6BEDBE27957989009DDF94 /* OpenChargeViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -353,7 +338,6 @@
 			files = (
 				8E66781326EFD8720008D7D2 /* OpenChargeViewModelTests.swift in Sources */,
 				8E69CB2F26E89E1A003B14FC /* LocationManagerTests.swift in Sources */,
-				8E9E73CE26E0B66600CFEC24 /* OpenChargeLoaderTests.swift in Sources */,
 				8E575D1426E3BDAC00CC73D7 /* URLSessionHTTPClientTests.swift in Sources */,
 				8E69ACA126EB9FF000485CC2 /* LocationViewModelTests.swift in Sources */,
 			);
