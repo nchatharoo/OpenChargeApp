@@ -14,5 +14,6 @@ public enum HTTPClientResult {
 }
 
 public protocol HTTPClient {
-    func get(from url: URL, with coordinate: CLLocationCoordinate2D, completion: @escaping (HTTPClientResult) -> Void)
+    typealias Result = Swift.Result<(Data, HTTPURLResponse), Error>
+    func get(from url: URL, with coordinate: CLLocationCoordinate2D, completion: @escaping (Result) -> Void)
 }
