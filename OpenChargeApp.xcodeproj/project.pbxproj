@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E1C011827B6661C001381AA /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C011727B6661C001381AA /* View.swift */; };
+		8E1C011A27B66639001381AA /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C011927B66639001381AA /* Shape.swift */; };
 		8E575D1426E3BDAC00CC73D7 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E575D1326E3BDAC00CC73D7 /* URLSessionHTTPClientTests.swift */; };
 		8E66780F26EF2F0F0008D7D2 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E66780E26EF2F0F0008D7D2 /* LocationViewModel.swift */; };
 		8E66781326EFD8720008D7D2 /* OpenChargeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E66781226EFD8720008D7D2 /* OpenChargeViewModelTests.swift */; };
@@ -42,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E1C011727B6661C001381AA /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		8E1C011927B66639001381AA /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 		8E575D1326E3BDAC00CC73D7 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
 		8E66780E26EF2F0F0008D7D2 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		8E66781226EFD8720008D7D2 /* OpenChargeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChargeViewModelTests.swift; sourceTree = "<group>"; };
@@ -90,6 +94,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8E1C011627B66602001381AA /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				8E1C011727B6661C001381AA /* View.swift */,
+				8E1C011927B66639001381AA /* Shape.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		8E69AC9926EB7A8200485CC2 /* Location */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +157,7 @@
 				8E9E73BD26E0B66400CFEC24 /* ContentView.swift */,
 				8E9E73ED26E1211C00CFEC24 /* ChargePoint.swift */,
 				8E6BEDBD27957989009DDF94 /* OpenChargeViewModel.swift */,
+				8E1C011627B66602001381AA /* Extension */,
 				8E9E73E826E10AA400CFEC24 /* API */,
 				8E69AC9926EB7A8200485CC2 /* Location */,
 				8E9E73BF26E0B66500CFEC24 /* Assets.xcassets */,
@@ -326,6 +340,8 @@
 				8E69AC9B26EB7A8D00485CC2 /* LocationManager.swift in Sources */,
 				8E66781526EFDACE0008D7D2 /* URLSessionHTTPClient.swift in Sources */,
 				8E9E73BC26E0B66300CFEC24 /* OpenChargeAppApp.swift in Sources */,
+				8E1C011A27B66639001381AA /* Shape.swift in Sources */,
+				8E1C011827B6661C001381AA /* View.swift in Sources */,
 				8E66780F26EF2F0F0008D7D2 /* LocationViewModel.swift in Sources */,
 				8E9E73EC26E10ACE00CFEC24 /* HTTPClient.swift in Sources */,
 				8E6BEDBE27957989009DDF94 /* OpenChargeViewModel.swift in Sources */,
@@ -493,7 +509,7 @@
 				DEVELOPMENT_TEAM = P9CD4D4F5T;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = OpenChargeApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -515,7 +531,7 @@
 				DEVELOPMENT_TEAM = P9CD4D4F5T;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = OpenChargeApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
