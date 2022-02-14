@@ -6,83 +6,51 @@
 //
 
 import Foundation
+import Combine
 import CoreLocation
 
-public protocol LocationManagerInterface {
-    var locationManagerDelegate: LocationManagerDelegate? { get set }
-    var accuracyAuthorization: CLAccuracyAuthorization { get }
-    var desiredAccuracy: CLLocationAccuracy { get set }
-    func requestWhenInUseAuthorization()
-    func requestLocation()
+public protocol LocationManagerPublisher: AnyObject {
+    func authorizationPublisher() -> AnyPublisher<CLAuthorizationStatus, Never>
+    func locationPublisher() -> AnyPublisher<[CLLocation], Error>
 }
 
-public protocol LocationManagerDelegate: AnyObject {
-    func locationManager(_ manager: LocationManagerInterface, didUpdateLocations locations: [CLLocation])
-}
-
-
-public class LocationManager: NSObject {
-
-    public var locationManager: LocationManagerInterface
+public class LocationManager: CLLocationManager {
+    let authorizationSubject = PassthroughSubject<CLAuthorizationStatus, Never>()
+    let locationSubject = PassthroughSubject<[CLLocation], Error>()
     
-    private var currentLocationCallback: ((CLLocation) -> Void)?
-    
-    public init(locationManager: LocationManagerInterface = CLLocationManager()) {
-        self.locationManager = locationManager
+    public override init() {
         super.init()
         setupLocationManager()
     }
     
     private func setupLocationManager() {
-        self.locationManager.locationManagerDelegate = self
-        switch self.locationManager.accuracyAuthorization {
-        case .fullAccuracy:
-            self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        case .reducedAccuracy:
-            self.locationManager.desiredAccuracy = kCLLocationAccuracyReduced
-        @unknown default:
-            self.locationManager.desiredAccuracy = kCLLocationAccuracyReduced
-        }
-        self.locationManager.requestWhenInUseAuthorization()
-        self.locationManager.requestLocation()
-    }
-
-    public func requestWhenInUseAuthorization(completion: @escaping (CLLocation) -> Void) {
-        currentLocationCallback = {  (location) in
-            completion(location)
-        }
-        self.locationManager.requestWhenInUseAuthorization()
-    }
-    
-    public func requestLocation(completion: @escaping (CLLocation) -> Void) {
-        currentLocationCallback = {  (location) in
-            completion(location)
-        }
-        self.locationManager.requestLocation()
-    }
-}
-
-extension CLLocationManager: LocationManagerInterface {
-    public var locationManagerDelegate: LocationManagerDelegate? {
-        get { return delegate as! LocationManagerDelegate? }
-        set { delegate = newValue as! CLLocationManagerDelegate? }
+        self.delegate = self
+        self.requestWhenInUseAuthorization()
     }
 }
 
 extension LocationManager: CLLocationManagerDelegate {
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.locationManager.locationManagerDelegate?.locationManager(manager, didUpdateLocations: locations)
+        self.locationSubject.send(locations)
     }
     
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error)
+        self.locationSubject.send(completion: .failure(error))
+    }
+    
+    public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        self.authorizationSubject.send(manager.authorizationStatus)
     }
 }
 
-extension LocationManager: LocationManagerDelegate {
-    public func locationManager(_ manager: LocationManagerInterface, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else { return }
-        self.currentLocationCallback?(location)
-        self.currentLocationCallback = nil
+extension LocationManager: LocationManagerPublisher {
+    public func authorizationPublisher() -> AnyPublisher<CLAuthorizationStatus, Never> {
+        return Just(CLLocationManager().authorizationStatus)
+            .merge(with: authorizationSubject)
+            .eraseToAnyPublisher()
+    }
+    
+    public func locationPublisher() -> AnyPublisher<[CLLocation], Error> {
+        return locationSubject.eraseToAnyPublisher()
     }
 }

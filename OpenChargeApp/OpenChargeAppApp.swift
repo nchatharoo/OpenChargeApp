@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct OpenChargeAppApp: App {
-    @StateObject private var locationViewModel = LocationViewModel(locationManager: LocationManager())
+    @StateObject private var locationViewModel = LocationViewModel()
     @StateObject private var openchargeViewModel = OpenChargeViewModel(client: URLSessionHTTPClient())
     
     var body: some Scene {
