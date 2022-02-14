@@ -8,6 +8,21 @@
 import SwiftUI
 import MapKit
 
+struct ProcessingView: View {
+    var body: some View {
+        VStack {
+            ProgressView()
+                .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                .scaleEffect(2)
+                .padding()
+            Text("Processing...")
+                .foregroundColor(.white)
+        }
+        .padding(20)
+        .background(RoundedRectangle(cornerRadius: 25).fill(Color.black.opacity(0.9)))
+    }
+}
+
 struct ContentView: View {
     @StateObject var locationViewModel: LocationViewModel
     @StateObject var openchargeViewModel: OpenChargeViewModel
@@ -19,7 +34,7 @@ struct ContentView: View {
             ScrollViewReader { proxy in
                 Map(coordinateRegion: $locationViewModel.coordinateRegion, showsUserLocation: true,
                 userTrackingMode: $userTrackingMode,
-                annotationItems: openchargeViewModel.item,
+                annotationItems: openchargeViewModel.items,
                 annotationContent: { place in
                 MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: (place.addressInfo?.latitude)!, longitude: (place.addressInfo?.longitude)!)) {
                     VStack {
@@ -34,40 +49,42 @@ struct ContentView: View {
                     })
                 }
                 })
-                .ignoresSafeArea()
-                .overlay(
-                    VStack {
-                        SearchBarView()
-                        Spacer()
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            LazyHStack(spacing: 40) {
-                                ForEach(openchargeViewModel.item, id: \.self.id) { charger in
-                                    VStack {
-                                        Text(charger.addressInfo?.title ?? "Title")
-                                        Text(charger.addressInfo?.addressLine1 ?? "addressLine1")
-                                        Text(charger.addressInfo?.contactTelephone1 ?? "contactTelephone1")
-                                        Text(charger.addressInfo?.accessComments ?? "accessComments")
-                                    }
-                                    .background(Color.red)
-                                    .cornerRadius(20)
-                                }
+            }
+            VStack {
+                SearchBarView()
+                    .padding(.top)
+                Spacer()
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHStack(spacing: 40) {
+                        ForEach(openchargeViewModel.items, id: \.self.id) { charger in
+                            VStack {
+                                Text(charger.addressInfo?.title ?? "")
+                                Text(charger.addressInfo?.addressLine1 ?? "")
+                                Text(charger.addressInfo?.contactTelephone1 ?? "")
+                                Text(charger.addressInfo?.accessComments ?? "")
                             }
-                            .padding()
-                            .background(Color.blue)
-                            .frame(height: 100)
+                            .background(Color.red)
+                            .cornerRadius(20)
                         }
                     }
-                )
+                    .background(Color.blue)
+                    .frame(height: 100)
+                }
             }
+            if openchargeViewModel.isProcessing { ProcessingView() }
         }
         .onAppear {
             openchargeViewModel.loadItem(with: locationViewModel.coordinateRegion.center) { _ in }
         }
+        .onChange(of: locationViewModel.coordinateRegion.center, perform: { newValue in
+            openchargeViewModel.loadItem(with: newValue) { _ in }
+        })
+        .ignoresSafeArea()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static var locationViewModel = LocationViewModel(locationManager: LocationManager())
+    static var locationViewModel = LocationViewModel()
     static var openchargeViewModel = OpenChargeViewModel(client: URLSessionHTTPClient())
     static var previews: some View {
         ContentView(locationViewModel: locationViewModel, openchargeViewModel: openchargeViewModel)

@@ -8,12 +8,15 @@
 import Foundation
 import MapKit
 import Combine
+import SwiftUI
 
 final public class OpenChargeViewModel: ObservableObject {
     let client: HTTPClient
     private let baseAPIURL = URL(string: "https://api.openchargemap.io/v3/poi/")!
     public var cancellables: AnyCancellable? = nil
-    @Published public var item = Charge()
+    @Published public var items = Charge()
+    @Published var isProcessing = false
+    @Published var query = ""
     
     private lazy var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -33,6 +36,7 @@ final public class OpenChargeViewModel: ObservableObject {
     }
     
     public func loadItem(with coordinate: CLLocationCoordinate2D, completion: @escaping (Swift.Result<Any, Error>) -> Void) {
+        isProcessing = true
         
         cancellables = client.getPublisher(from: baseAPIURL, with: coordinate)
             .map { (data: Data, response: HTTPURLResponse) in
@@ -40,10 +44,15 @@ final public class OpenChargeViewModel: ObservableObject {
             }
             .decode(type: Charge.self, decoder: jsonDecoder)
             .receive(on: RunLoop.main)
-            .sink(receiveCompletion: { completion in
-                print(completion)
-            }, receiveValue: { [unowned self] items in
-                self.item.append(contentsOf: items)
+            .sink(receiveCompletion: { [weak self] completion in
+                guard let self = self else { return }
+                switch completion {
+                case .finished: break
+                case let .failure(error): print(error) }
+                self.isProcessing = false
+            }, receiveValue: { [weak self] items in
+                guard let self = self else { return }
+                self.items = items
             })
     }
 }
