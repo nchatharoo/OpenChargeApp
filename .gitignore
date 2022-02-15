@@ -91,3 +91,7 @@ OpenChargeApp/Extension/._CLLocationCoordinate2D.swift
 ._ChargePointViewModel.swift
 ._AuthorizationPermission.swift
 ._ContentView.swift
+OpenChargeApp/._URLSessionHTTPClient.swift
+OpenChargeApp/API/._HTTPClient.swift
+OpenChargeAppTests/API/._OpenChargeViewModelTests.swift
+OpenChargeAppTests/Location/._LocationManagerTests.swift
