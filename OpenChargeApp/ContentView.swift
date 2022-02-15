@@ -25,7 +25,7 @@ struct ProcessingView: View {
 
 struct ContentView: View {
     @StateObject var locationViewModel: LocationViewModel
-    @StateObject var openchargeViewModel: OpenChargeViewModel
+    @StateObject var openchargeViewModel: ChargePointViewModel
     
     @State private var userTrackingMode: MapUserTrackingMode = .follow
     
@@ -90,7 +90,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var locationViewModel = LocationViewModel()
-    static var openchargeViewModel = OpenChargeViewModel(client: URLSessionHTTPClient())
+    static var openchargeViewModel = ChargePointViewModel(client: URLSessionHTTPClient())
     static var previews: some View {
         ContentView(locationViewModel: locationViewModel, openchargeViewModel: openchargeViewModel)
     }

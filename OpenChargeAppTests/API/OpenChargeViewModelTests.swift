@@ -57,14 +57,14 @@ class HTTPClientSpy: HTTPClient {
 class OpenChargeViewModelTests: XCTestCase {
 
     func test_initDoesNotLoadItemsOnCreation() {
-        let sut = OpenChargeViewModel(client: HTTPClientSpy())
+        let sut = ChargePointViewModel(client: HTTPClientSpy())
         
         XCTAssertTrue(sut.items.isEmpty)
     }
     
     func testDoesNotDeliverResultAfterSUTInstanceHasBeenDeallocated() {
         let client = HTTPClientSpy()
-        var sut: OpenChargeViewModel? = OpenChargeViewModel(client: client)
+        var sut: ChargePointViewModel? = ChargePointViewModel(client: client)
         
         var capturedResults = [Swift.Result<Any, Error>]()
         let stubCoordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
