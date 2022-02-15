@@ -76,8 +76,7 @@ struct ContentView: View {
         .alert(isPresented: $locationViewModel.isDeniedOrRestricted, content: {
             Alert(title: Text(locationViewModel.locationError.title),
                   message: Text(locationViewModel.locationError.message),
-                  dismissButton: .default(Text("Settings"),
-                                          action: {
+                  dismissButton: .default(Text(locationViewModel.locationError.dismissButtonTitle), action: {
                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
             }))
         })

@@ -16,17 +16,17 @@ public func ==(lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool
     return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
 }
 
-struct LocationError: Error, Identifiable {
-    let id = UUID()
+struct AuthorizationPermission {
     var title = "Please"
     var message = "Allow access to your location"
+    var dismissButtonTitle = "Go to settings"
 }
 
 public class LocationViewModel: ObservableObject {
     private let locationManager: LocationManager
     @Published public var coordinateRegion = MKCoordinateRegion()
     @Published var isDeniedOrRestricted: Bool = false
-    var locationError = LocationError()
+    var permission = AuthorizationPermission()
     
     public init() {
         self.locationManager = LocationManager()
