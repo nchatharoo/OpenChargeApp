@@ -22,13 +22,7 @@ struct ContentView: View {
                 annotationItems: openchargeViewModel.items,
                 annotationContent: { place in
                 MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: (place.addressInfo?.latitude)!, longitude: (place.addressInfo?.longitude)!)) {
-                    VStack {
-                        ZStack {
-                            Image(systemName: "bolt.circle.fill")
-                                .frame(width: 40.0, height: 40.0)
-                                .foregroundColor(.green)
-                        }
-                    }
+                    PlaceAnnotationView()
                     .onTapGesture(perform: {
                         proxy.scrollTo(place.id)
                     })
