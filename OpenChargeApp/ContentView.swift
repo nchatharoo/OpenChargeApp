@@ -81,8 +81,8 @@ struct ContentView: View {
                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
             }))
         })
-        .onChange(of: locationViewModel.coordinateRegion.center, perform: { newValue in
-            openchargeViewModel.loadItem(with: newValue) { _ in }
+        .onChange(of: locationViewModel.coordinateRegion.center, perform: { newCoordinate in
+            openchargeViewModel.loadChargePoints(with: newCoordinate)
         })
         .ignoresSafeArea()
     }

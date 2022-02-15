@@ -35,7 +35,7 @@ final public class OpenChargeViewModel: ObservableObject {
         self.client = client
     }
     
-    public func loadItem(with coordinate: CLLocationCoordinate2D, completion: @escaping (Swift.Result<Any, Error>) -> Void) {
+    public func loadChargePoints(with coordinate: CLLocationCoordinate2D) {
         isProcessing = true
         
         cancellables = client.getPublisher(from: baseAPIURL, with: coordinate)
