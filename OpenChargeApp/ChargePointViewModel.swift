@@ -10,7 +10,7 @@ import MapKit
 import Combine
 import SwiftUI
 
-final public class OpenChargeViewModel: ObservableObject {
+final public class ChargePointViewModel: ObservableObject {
     let client: HTTPClient
     private let baseAPIURL = URL(string: "https://api.openchargemap.io/v3/poi/")!
     public var cancellables: AnyCancellable? = nil
