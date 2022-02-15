@@ -110,6 +110,24 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		8E5FBF3727BBCE9500241226 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8E9E73BD26E0B66400CFEC24 /* ContentView.swift */,
+				8E1C011B27B67107001381AA /* SearchBarView.swift */,
+				8E5FBF3527BBCE4800241226 /* ProcessingView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8E5FBF3827BBCEA000241226 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8E9E73ED26E1211C00CFEC24 /* ChargePoint.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		8E69AC9926EB7A8200485CC2 /* Location */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,11 +179,9 @@
 			isa = PBXGroup;
 			children = (
 				8E9E73BB26E0B66300CFEC24 /* OpenChargeApp.swift */,
-				8E9E73BD26E0B66400CFEC24 /* ContentView.swift */,
-				8E1C011B27B67107001381AA /* SearchBarView.swift */,
-				8E5FBF3527BBCE4800241226 /* ProcessingView.swift */,
-				8E9E73ED26E1211C00CFEC24 /* ChargePoint.swift */,
 				8E6BEDBD27957989009DDF94 /* ChargePointViewModel.swift */,
+				8E5FBF3727BBCE9500241226 /* Views */,
+				8E5FBF3827BBCEA000241226 /* Model */,
 				8E1C011627B66602001381AA /* Extension */,
 				8E9E73E826E10AA400CFEC24 /* API */,
 				8E69AC9926EB7A8200485CC2 /* Location */,
