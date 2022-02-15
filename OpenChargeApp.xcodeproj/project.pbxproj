@@ -13,6 +13,7 @@
 		8E575D1426E3BDAC00CC73D7 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E575D1326E3BDAC00CC73D7 /* URLSessionHTTPClientTests.swift */; };
 		8E5FBF3427BBCD9500241226 /* CLLocationCoordinate2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5FBF3327BBCD9500241226 /* CLLocationCoordinate2D.swift */; };
 		8E5FBF3627BBCE4900241226 /* ProcessingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5FBF3527BBCE4800241226 /* ProcessingView.swift */; };
+		8E5FBF3A27BBCF7400241226 /* AuthorizationPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5FBF3927BBCF7400241226 /* AuthorizationPermission.swift */; };
 		8E66780F26EF2F0F0008D7D2 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E66780E26EF2F0F0008D7D2 /* LocationViewModel.swift */; };
 		8E66781326EFD8720008D7D2 /* OpenChargeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E66781226EFD8720008D7D2 /* OpenChargeViewModelTests.swift */; };
 		8E66781526EFDACE0008D7D2 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E66781426EFDACE0008D7D2 /* URLSessionHTTPClient.swift */; };
@@ -53,6 +54,7 @@
 		8E575D1326E3BDAC00CC73D7 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
 		8E5FBF3327BBCD9500241226 /* CLLocationCoordinate2D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationCoordinate2D.swift; sourceTree = "<group>"; };
 		8E5FBF3527BBCE4800241226 /* ProcessingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingView.swift; sourceTree = "<group>"; };
+		8E5FBF3927BBCF7400241226 /* AuthorizationPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationPermission.swift; sourceTree = "<group>"; };
 		8E66780E26EF2F0F0008D7D2 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		8E66781226EFD8720008D7D2 /* OpenChargeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChargeViewModelTests.swift; sourceTree = "<group>"; };
 		8E66781426EFDACE0008D7D2 /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = URLSessionHTTPClient.swift; path = OpenChargeApp/URLSessionHTTPClient.swift; sourceTree = SOURCE_ROOT; };
@@ -133,6 +135,7 @@
 			children = (
 				8E69AC9A26EB7A8D00485CC2 /* LocationManager.swift */,
 				8E66780E26EF2F0F0008D7D2 /* LocationViewModel.swift */,
+				8E5FBF3927BBCF7400241226 /* AuthorizationPermission.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E5FBF3A27BBCF7400241226 /* AuthorizationPermission.swift in Sources */,
 				8E5FBF3627BBCE4900241226 /* ProcessingView.swift in Sources */,
 				8E9E73EE26E1211C00CFEC24 /* ChargePoint.swift in Sources */,
 				8E9E73BE26E0B66400CFEC24 /* ContentView.swift in Sources */,

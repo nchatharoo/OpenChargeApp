@@ -10,12 +10,6 @@ import MapKit
 import Combine
 import SwiftUI
 
-struct AuthorizationPermission {
-    var title = "Please"
-    var message = "Allow access to your location"
-    var dismissButtonTitle = "Go to settings"
-}
-
 public class LocationViewModel: ObservableObject {
     private let locationManager: LocationManager
     @Published public var coordinateRegion = MKCoordinateRegion()
