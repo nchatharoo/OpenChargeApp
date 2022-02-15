@@ -74,9 +74,9 @@ struct ContentView: View {
             if openchargeViewModel.isProcessing { ProcessingView() }
         }
         .alert(isPresented: $locationViewModel.isDeniedOrRestricted, content: {
-            Alert(title: Text(locationViewModel.locationError.title),
-                  message: Text(locationViewModel.locationError.message),
-                  dismissButton: .default(Text(locationViewModel.locationError.dismissButtonTitle), action: {
+            Alert(title: Text(locationViewModel.permission.title),
+                  message: Text(locationViewModel.permission.message),
+                  dismissButton: .default(Text(locationViewModel.permission.dismissButtonTitle), action: {
                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
             }))
         })
