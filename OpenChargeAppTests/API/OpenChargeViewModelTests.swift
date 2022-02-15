@@ -66,10 +66,9 @@ class OpenChargeViewModelTests: XCTestCase {
         let client = HTTPClientSpy()
         var sut: ChargePointViewModel? = ChargePointViewModel(client: client)
         
-        var capturedResults = [Swift.Result<Any, Error>]()
         let stubCoordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
 
-        sut?.loadItem(with: stubCoordinate, completion: { capturedResults.append($0) })
+        sut?.loadChargePoints(with: stubCoordinate)
         sut = nil
         
         XCTAssertEqual(sut?.cancellables, nil)

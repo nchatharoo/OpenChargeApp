@@ -12,7 +12,7 @@ import OpenChargeApp
 
 class LocationManagerMock: CLLocationManager {
     let authorizationSubject = PassthroughSubject<CLAuthorizationStatus, Never>()
-    let locationSubject = PassthroughSubject<[CLLocation], Error>()
+    let locationSubject = PassthroughSubject<CLLocationCoordinate2D, Error>()
 
     public override init() {
         super.init()
@@ -27,7 +27,8 @@ class LocationManagerMock: CLLocationManager {
 
 extension LocationManagerMock: CLLocationManagerDelegate {
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.locationSubject.send(locations)
+        guard let location = locations.last else { return }
+        self.locationSubject.send(location.coordinate)
     }
     
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -46,7 +47,7 @@ extension LocationManagerMock: LocationManagerPublisher {
             .eraseToAnyPublisher()
     }
     
-    func locationPublisher() -> AnyPublisher<[CLLocation], Error> {
+    func locationPublisher() -> AnyPublisher<CLLocationCoordinate2D, Error> {
         return locationSubject.eraseToAnyPublisher()
     }
 }
