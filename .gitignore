@@ -84,3 +84,6 @@ fastlane/test_output
 ._OpenChargeApp.swift
 OpenChargeApp/._ChargePoint.swift
 OpenChargeApp/._SearchBarView.swift
+OpenChargeApp/._ContentView.swift
+OpenChargeApp/Extension/._CLLocationCoordinate2D.swift
+._LocationViewModel.swift
