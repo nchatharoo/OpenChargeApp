@@ -10,12 +10,6 @@ import MapKit
 import Combine
 import SwiftUI
 
-extension CLLocationCoordinate2D: Equatable {}
-
-public func ==(lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
-    return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
-}
-
 struct AuthorizationPermission {
     var title = "Please"
     var message = "Allow access to your location"
