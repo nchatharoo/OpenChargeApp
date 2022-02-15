@@ -73,9 +73,14 @@ struct ContentView: View {
             }
             if openchargeViewModel.isProcessing { ProcessingView() }
         }
-        .onAppear {
-            openchargeViewModel.loadItem(with: locationViewModel.coordinateRegion.center) { _ in }
-        }
+        .alert(isPresented: $locationViewModel.isDeniedOrRestricted, content: {
+            Alert(title: Text(locationViewModel.locationError.title),
+                  message: Text(locationViewModel.locationError.message),
+                  dismissButton: .default(Text("Settings"),
+                                          action: {
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+            }))
+        })
         .onChange(of: locationViewModel.coordinateRegion.center, perform: { newValue in
             openchargeViewModel.loadItem(with: newValue) { _ in }
         })
