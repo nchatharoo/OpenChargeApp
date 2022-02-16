@@ -95,3 +95,8 @@ OpenChargeApp/._URLSessionHTTPClient.swift
 OpenChargeApp/API/._HTTPClient.swift
 OpenChargeAppTests/API/._OpenChargeViewModelTests.swift
 OpenChargeAppTests/Location/._LocationManagerTests.swift
+._PlaceAnnotationView.swift
+OpenChargeApp.xcodeproj/._project.xcworkspace
+OpenChargeApp/Model/._ChargePoint.swift
+OpenChargeApp/Location/._LocationManager.swift
+OpenChargeApp/Views/._SearchBarView.swift
