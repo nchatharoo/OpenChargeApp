@@ -59,7 +59,7 @@ class OpenChargeViewModelTests: XCTestCase {
     func test_initDoesNotLoadItemsOnCreation() {
         let sut = ChargePointViewModel(client: HTTPClientSpy())
         
-        XCTAssertTrue(sut.items.isEmpty)
+        XCTAssertTrue(sut.chargePoints.isEmpty)
     }
     
     func testDoesNotDeliverResultAfterSUTInstanceHasBeenDeallocated() {

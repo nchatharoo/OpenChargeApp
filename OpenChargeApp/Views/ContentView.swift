@@ -10,7 +10,7 @@ import MapKit
 
 struct ContentView: View {
     @StateObject var locationViewModel: LocationViewModel
-    @StateObject var openchargeViewModel: ChargePointViewModel
+    @StateObject var chargePointViewModel: ChargePointViewModel
     
     @State private var userTrackingMode: MapUserTrackingMode = .follow
     
@@ -20,7 +20,7 @@ struct ContentView: View {
                 ZStack(alignment: .bottom) {
                     Map(coordinateRegion: $locationViewModel.region, showsUserLocation: true,
                         userTrackingMode: $userTrackingMode,
-                        annotationItems: openchargeViewModel.items,
+                        annotationItems: chargePointViewModel.chargePoints,
                         annotationContent: { place in
                         MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: (place.addressInfo?.latitude)!, longitude: (place.addressInfo?.longitude)!)) {
                             PlaceAnnotationView()
@@ -33,7 +33,7 @@ struct ContentView: View {
                     })
                     ScrollView(.horizontal, showsIndicators: false) {
                         LazyHStack(spacing: 40) {
-                            ForEach(openchargeViewModel.items, id: \.id) { charger in
+                            ForEach(chargePointViewModel.chargePoints, id: \.id) { charger in
                                 VStack {
                                     Text(charger.addressInfo?.title ?? "")
                                     Text(charger.addressInfo?.addressLine1 ?? "")
@@ -49,10 +49,10 @@ struct ContentView: View {
                     }
                 }
             }
-            if openchargeViewModel.isProcessing { ProcessingView() }
+            if chargePointViewModel.isProcessing { ProcessingView() }
         }
         .onReceive(locationViewModel.getLastCoordinate()) { coordinate in
-            openchargeViewModel.loadChargePoints(with: coordinate)
+            chargePointViewModel.loadChargePoints(with: coordinate)
         }
         .alert(isPresented: $locationViewModel.isDeniedOrRestricted, content: {
             Alert(title: Text(locationViewModel.permission.title),
@@ -61,10 +61,10 @@ struct ContentView: View {
                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
             }))
         })
-        .alert(item: $openchargeViewModel.networkError) { networkError in
+        .alert(item: $chargePointViewModel.networkError) { networkError in
             Alert(title: Text(networkError.title), message: Text(networkError.message),
                   primaryButton: .default(Text("Retry"), action: {
-                openchargeViewModel.loadChargePoints(with: locationViewModel.region.center)
+                chargePointViewModel.loadChargePoints(with: locationViewModel.region.center)
             }), secondaryButton: .default(Text("Cancel")))
         }
         .ignoresSafeArea()
@@ -75,6 +75,6 @@ struct ContentView_Previews: PreviewProvider {
     static var locationViewModel = LocationViewModel()
     static var openchargeViewModel = ChargePointViewModel(client: URLSessionHTTPClient())
     static var previews: some View {
-        ContentView(locationViewModel: locationViewModel, openchargeViewModel: openchargeViewModel)
+        ContentView(locationViewModel: locationViewModel, chargePointViewModel: openchargeViewModel)
     }
 }

@@ -20,7 +20,7 @@ final public class ChargePointViewModel: ObservableObject {
     let client: HTTPClient
     private let baseAPIURL = URL(string: "https://api.openchargemap.io/v3/poi/")!
     public var cancellables: AnyCancellable? = nil
-    @Published public var items = Charge()
+    @Published public var chargePoints = Charge()
     @Published var isProcessing = false
     @Published var query = ""
     @Published var networkError: NetworkError?
@@ -57,9 +57,9 @@ final public class ChargePointViewModel: ObservableObject {
                     self.networkError = NetworkError(message: "Details: \(error.localizedDescription)")
                 }
                 self.isProcessing = false
-            }, receiveValue: { [weak self] items in
+            }, receiveValue: { [weak self] chargePoints in
                 guard let self = self else { return }
-                self.items = items
+                self.chargePoints = chargePoints
             })
     }
 }
