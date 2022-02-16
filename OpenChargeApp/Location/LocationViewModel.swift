@@ -12,7 +12,7 @@ import SwiftUI
 
 public class LocationViewModel: ObservableObject {
     private let locationManager: LocationManager
-    @Published public var coordinateRegion = MKCoordinateRegion()
+    @Published var region = MKCoordinateRegion()
     @Published var isDeniedOrRestricted: Bool = false
     var permission = AuthorizationPermission()
     
@@ -49,5 +49,9 @@ public class LocationViewModel: ObservableObject {
         default:
             locationManager.stopUpdatingLocation()
         }
+    }
+    
+    func getLastCoordinate() -> AnyPublisher<CLLocationCoordinate2D, Never> {
+        return locationManager.locationPublisher()
     }
 }

@@ -17,40 +17,42 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             ScrollViewReader { proxy in
-                Map(coordinateRegion: $locationViewModel.coordinateRegion, showsUserLocation: true,
-                userTrackingMode: $userTrackingMode,
-                annotationItems: openchargeViewModel.items,
-                annotationContent: { place in
-                MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: (place.addressInfo?.latitude)!, longitude: (place.addressInfo?.longitude)!)) {
-                    PlaceAnnotationView()
-                    .onTapGesture(perform: {
-                        proxy.scrollTo(place.id)
-                    })
-                }
-                })
-            }
-            VStack {
-                SearchBarView()
-                    .padding(.top)
-                Spacer()
-                ScrollView(.horizontal, showsIndicators: false) {
-                    LazyHStack(spacing: 40) {
-                        ForEach(openchargeViewModel.items, id: \.self.id) { charger in
-                            VStack {
-                                Text(charger.addressInfo?.title ?? "")
-                                Text(charger.addressInfo?.addressLine1 ?? "")
-                                Text(charger.addressInfo?.contactTelephone1 ?? "")
-                                Text(charger.addressInfo?.accessComments ?? "")
-                            }
-                            .background(Color.red)
-                            .cornerRadius(20)
+                ZStack(alignment: .bottom) {
+                    Map(coordinateRegion: $locationViewModel.region, showsUserLocation: true,
+                        userTrackingMode: $userTrackingMode,
+                        annotationItems: openchargeViewModel.items,
+                        annotationContent: { place in
+                        MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: (place.addressInfo?.latitude)!, longitude: (place.addressInfo?.longitude)!)) {
+                            PlaceAnnotationView()
+                                .onTapGesture(perform: {
+                                    withAnimation {
+                                        proxy.scrollTo(place.id)
+                                    }
+                                })
                         }
+                    })
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        LazyHStack(spacing: 40) {
+                            ForEach(openchargeViewModel.items, id: \.id) { charger in
+                                VStack {
+                                    Text(charger.addressInfo?.title ?? "")
+                                    Text(charger.addressInfo?.addressLine1 ?? "")
+                                    Text(charger.addressInfo?.contactTelephone1 ?? "")
+                                    Text(charger.addressInfo?.accessComments ?? "")
+                                }
+                                .background(Color.red)
+                                .cornerRadius(20)
+                            }
+                        }
+                        .background(Color.blue)
+                        .frame(height: 100)
                     }
-                    .background(Color.blue)
-                    .frame(height: 100)
                 }
             }
             if openchargeViewModel.isProcessing { ProcessingView() }
+        }
+        .onReceive(locationViewModel.getLastCoordinate()) { coordinate in
+            openchargeViewModel.loadChargePoints(with: coordinate)
         }
         .alert(isPresented: $locationViewModel.isDeniedOrRestricted, content: {
             Alert(title: Text(locationViewModel.permission.title),
@@ -59,9 +61,12 @@ struct ContentView: View {
                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
             }))
         })
-        .onChange(of: locationViewModel.coordinateRegion.center, perform: { newCoordinate in
-            openchargeViewModel.loadChargePoints(with: newCoordinate)
-        })
+        .alert(item: $openchargeViewModel.networkError) { networkError in
+            Alert(title: Text(networkError.title), message: Text(networkError.message),
+                  primaryButton: .default(Text("Retry"), action: {
+                openchargeViewModel.loadChargePoints(with: locationViewModel.region.center)
+            }), secondaryButton: .default(Text("Cancel")))
+        }
         .ignoresSafeArea()
     }
 }

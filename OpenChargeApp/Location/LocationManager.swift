@@ -11,12 +11,12 @@ import CoreLocation
 
 public protocol LocationManagerPublisher: AnyObject {
     func authorizationPublisher() -> AnyPublisher<CLAuthorizationStatus, Never>
-    func locationPublisher() -> AnyPublisher<CLLocationCoordinate2D, Error>
+    func locationPublisher() -> AnyPublisher<CLLocationCoordinate2D, Never>
 }
 
 public class LocationManager: CLLocationManager {
     let authorizationSubject = PassthroughSubject<CLAuthorizationStatus, Never>()
-    let locationSubject = PassthroughSubject<CLLocationCoordinate2D, Error>()
+    let locationSubject = PassthroughSubject<CLLocationCoordinate2D, Never>()
     
     public override init() {
         super.init()
@@ -35,7 +35,7 @@ extension LocationManager: CLLocationManagerDelegate {
     }
     
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        self.locationSubject.send(completion: .failure(error))
+        self.locationSubject.send(completion: .finished)
     }
     
     public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
@@ -50,7 +50,7 @@ extension LocationManager: LocationManagerPublisher {
             .eraseToAnyPublisher()
     }
     
-    public func locationPublisher() -> AnyPublisher<CLLocationCoordinate2D, Error> {
+    public func locationPublisher() -> AnyPublisher<CLLocationCoordinate2D, Never> {
         return locationSubject.eraseToAnyPublisher()
     }
 }
