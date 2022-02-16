@@ -57,9 +57,9 @@ struct ContentView: View {
         .alert(isPresented: $locationViewModel.isDeniedOrRestricted, content: {
             Alert(title: Text(locationViewModel.permission.title),
                   message: Text(locationViewModel.permission.message),
-                  dismissButton: .default(Text(locationViewModel.permission.dismissButtonTitle), action: {
+                  primaryButton: .default(Text(locationViewModel.permission.dismissButtonTitle), action: {
                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-            }))
+            }), secondaryButton: .default(Text("Cancel")))
         })
         .alert(item: $chargePointViewModel.networkError) { networkError in
             Alert(title: Text(networkError.title), message: Text(networkError.message),
