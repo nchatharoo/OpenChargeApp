@@ -4,21 +4,22 @@
 //
 //  Created by Nadheer on 02/09/2021.
 //
-
-import SwiftUI
 import MapKit
+import SwiftUI
 
 struct ContentView: View {
     @StateObject var locationViewModel: LocationViewModel
     @StateObject var chargePointViewModel: ChargePointViewModel
     
     @State private var userTrackingMode: MapUserTrackingMode = .follow
+    @State private var isSheetActive = false
     
     var body: some View {
         ZStack {
-            ScrollViewReader { proxy in
+            ScrollViewReader { scrollView in
                 ZStack(alignment: .bottom) {
-                    Map(coordinateRegion: $locationViewModel.region, showsUserLocation: true,
+                    Map(coordinateRegion: $locationViewModel.region,
+                        showsUserLocation: true,
                         userTrackingMode: $userTrackingMode,
                         annotationItems: chargePointViewModel.chargePoints,
                         annotationContent: { place in
@@ -26,26 +27,35 @@ struct ContentView: View {
                             PlaceAnnotationView()
                                 .onTapGesture(perform: {
                                     withAnimation {
-                                        proxy.scrollTo(place.id)
+                                        scrollView.scrollTo(place.id)
+                                        isSheetActive.toggle()
                                     }
                                 })
                         }
                     })
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        LazyHStack(spacing: 40) {
-                            ForEach(chargePointViewModel.chargePoints, id: \.id) { charger in
-                                VStack {
-                                    Text(charger.addressInfo?.title ?? "")
-                                    Text(charger.addressInfo?.addressLine1 ?? "")
-                                    Text(charger.addressInfo?.contactTelephone1 ?? "")
-                                    Text(charger.addressInfo?.accessComments ?? "")
+                    
+                    BottomBarView()
+                        .offset(y: isSheetActive ? 200 : 0)
+                    
+                    if isSheetActive {
+                        GeometryReader { geometry in
+                            BottomSheetView(isOpen: $isSheetActive, maxHeight: geometry.size.height / 1.4) {
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    LazyHStack(spacing: 40) {
+                                        ForEach(chargePointViewModel.chargePoints, id: \.id) { charger in
+                                            VStack {
+                                                Text(charger.addressInfo?.title ?? "")
+                                                Text(charger.addressInfo?.addressLine1 ?? "")
+                                                Text(charger.addressInfo?.contactTelephone1 ?? "")
+                                                Text(charger.addressInfo?.accessComments ?? "")
+                                            }
+                                            .background(Color.white)
+                                        }
+                                    }
                                 }
-                                .background(Color.red)
-                                .cornerRadius(20)
                             }
                         }
-                        .background(Color.blue)
-                        .frame(height: 100)
+                        .transition(.moveAndFade)
                     }
                 }
             }
