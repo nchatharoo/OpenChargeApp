@@ -100,3 +100,10 @@ OpenChargeApp.xcodeproj/._project.xcworkspace
 OpenChargeApp/Model/._ChargePoint.swift
 OpenChargeApp/Location/._LocationManager.swift
 OpenChargeApp/Views/._SearchBarView.swift
+._URLSessionHTTPClientTests.swift
+._LocationViewModelTests.swift
+._OpenChargeApp.xcodeproj
+OpenChargeApp/Extension/._AnyTransition.swift
+OpenChargeApp/Views/._BottomBarView.swift
+OpenChargeApp/Views/._BottomSheetView.swift
+OpenChargeApp/Views/Helpers/._Constants.swift
