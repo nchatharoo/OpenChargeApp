@@ -143,7 +143,8 @@ struct Connection: Codable {
     let levelID: Int?
     let level: Level?
     let amps, voltage: Int?
-    let powerKW, currentTypeID: Int?
+    let powerKW: Decimal?
+    let currentTypeID: Int?
     let currentType: CurrentType?
     let quantity: Int?
     let comments: String?
@@ -234,7 +235,7 @@ struct DataProvider: Codable {
     let license: String?
     let dateLastImported: String?
     let id: Int?
-    let title: DataProviderTitle?
+    let title: String?
 
     enum CodingKeys: String, CodingKey {
         case websiteURL = "WebsiteURL"
@@ -254,21 +255,13 @@ struct DataProvider: Codable {
 struct DataProviderStatusType: Codable {
     let isProviderEnabled: Bool?
     let id: Int?
-    let title: DataProviderStatusTypeTitle?
+    let title: String?
 
     enum CodingKeys: String, CodingKey {
         case isProviderEnabled = "IsProviderEnabled"
         case id = "ID"
         case title = "Title"
     }
-}
-
-enum DataProviderStatusTypeTitle: String, Codable {
-    case manualDataEntry = "Manual Data Entry"
-}
-
-enum DataProviderTitle: String, Codable {
-    case openChargeMapContributors = "Open Charge Map Contributors"
 }
 
 // MARK: - MediaItem
@@ -372,17 +365,13 @@ struct OperatorInfo: Codable {
 struct SubmissionStatus: Codable {
     let isLive: Bool?
     let id: Int?
-    let title: SubmissionStatusTitle?
+    let title: String?
 
     enum CodingKeys: String, CodingKey {
         case isLive = "IsLive"
         case id = "ID"
         case title = "Title"
     }
-}
-
-enum SubmissionStatusTitle: String, Codable {
-    case submissionPublished = "Submission Published"
 }
 
 // MARK: - UsageType
