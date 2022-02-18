@@ -24,7 +24,7 @@ class URLSessionHTTPClientTests: XCTestCase {
     
     func test_getFromURL_failsOnRequestError() {
         
-        let url = URL(string: "https://api.openchargemap.io/v3/poi/?key=6bdc7787-1e5b-4567-920a-9a77632ccb96&longitude=-1.248&latitude=45.872&verbose=false&compact=true&output=json&maxresults=10")!
+        let url = URL(string: "https://api.openchargemap.io/v3/poi/?key=6bdc7787-1e5b-4567-920a-9a77632ccb96&longitude=-1.248&latitude=45.872&verbose=true&compact=false&output=json&maxresults=10")!
         let error = NSError(domain: "any error", code: 1)
         URLProtocolStub.stub(data: nil, response: nil, error: error)
         
@@ -48,7 +48,7 @@ class URLSessionHTTPClientTests: XCTestCase {
     }
     
     func test_getFromURL_performsGETRequestWithURL() {
-        let url = URL(string: "https://api.openchargemap.io/v3/poi/?key=6bdc7787-1e5b-4567-920a-9a77632ccb96&output=json&latitude=0.0&longitude=0.0&maxresults=10&compact=true&verbose=false")!
+        let url = URL(string: "https://api.openchargemap.io/v3/poi/?key=6bdc7787-1e5b-4567-920a-9a77632ccb96&output=json&latitude=0.0&longitude=0.0&maxresults=10&compact=false&verbose=true")!
         let exp = expectation(description: "Wait for request")
         
         URLProtocolStub.observeRequests { request in

@@ -29,8 +29,8 @@ public class URLSessionHTTPClient: HTTPClient {
         let queryLat = URLQueryItem(name: "latitude", value: String(coordinate.latitude))
         let queryLong = URLQueryItem(name: "longitude", value: String(coordinate.longitude))
         let queryMaxResults = URLQueryItem(name: "maxresults", value: "10")
-        let queryCompact = URLQueryItem(name: "compact", value: "true")
-        let queryVerbose = URLQueryItem(name: "verbose", value: "false")
+        let queryCompact = URLQueryItem(name: "compact", value: "false")
+        let queryVerbose = URLQueryItem(name: "verbose", value: "true")
         
         urlComponents.queryItems = [queryItems, queryOutput, queryLat, queryLong, queryMaxResults, queryCompact, queryVerbose]
         
