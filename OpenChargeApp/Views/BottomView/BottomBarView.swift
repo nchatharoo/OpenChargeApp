@@ -15,15 +15,16 @@ struct BottomBarView: View {
                     .frame(height: 90)
                     .cornerRadius(35)
                 
-                HStack(spacing: 85) {
-                    Image(systemName: "map.fill")
+                HStack(spacing: 60) {
+                    Image("Map-location")
                         .resizable()
                         .frame(width: 24, height: 24)
-                    
-                    Divider()
-                        .frame(height: 36)
+                      
+                    Image("Refresh")
+                        .resizable()
+                        .frame(width: 24, height: 24)
 
-                    Image(systemName: "list.bullet")
+                    Image("Rows")
                         .resizable()
                         .frame(width: 24, height: 24)
                 }

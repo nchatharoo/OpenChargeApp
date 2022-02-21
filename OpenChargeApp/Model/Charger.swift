@@ -7,12 +7,12 @@
 
 import Foundation
 
-public typealias Charge = [ChargePoint]
+public typealias Charge = [Charger]
 
 // MARK: - ChargePoint
-public struct ChargePoint: Codable, Equatable, Identifiable {
+public struct Charger: Codable, Equatable, Identifiable {
     
-    public static func == (lhs: ChargePoint, rhs: ChargePoint) -> Bool {
+    public static func == (lhs: Charger, rhs: Charger) -> Bool {
         lhs.id == rhs.id
     }
     

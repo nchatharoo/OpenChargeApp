@@ -51,6 +51,6 @@ extension LocationManager: LocationManagerPublisher {
     }
     
     public func locationPublisher() -> AnyPublisher<CLLocationCoordinate2D, Never> {
-        return locationSubject.eraseToAnyPublisher()
+        locationSubject.eraseToAnyPublisher()
     }
 }

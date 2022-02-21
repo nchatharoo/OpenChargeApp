@@ -16,7 +16,7 @@ struct NetworkError: Error, Identifiable {
     var message = ""
 }
 
-final public class ChargePointViewModel: ObservableObject {
+final public class ChargersViewModel: ObservableObject {
     let client: HTTPClient
     private let baseAPIURL = URL(string: "https://api.openchargemap.io/v3/poi/")!
     public var cancellables: AnyCancellable? = nil
@@ -46,6 +46,7 @@ final public class ChargePointViewModel: ObservableObject {
         isProcessing = true
         
         cancellables = client.getPublisher(from: baseAPIURL, with: coordinate)
+            .print()
             .tryMap { (data: Data, response: HTTPURLResponse) in
                 data
             }

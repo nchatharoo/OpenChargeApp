@@ -9,60 +9,91 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var locationViewModel: LocationViewModel
-    @StateObject var chargePointViewModel: ChargePointViewModel
+    @StateObject var chargersViewModel: ChargersViewModel
     
     @State private var userTrackingMode: MapUserTrackingMode = .follow
-    @State private var isSheetActive = false
+    @State private var isSheetPresented = false
+    
+    @State private var charger: Charger?
+    @State private var isMapPresented = true
+    @State private var isListPresented = false
     
     var body: some View {
-        ZStack {
-            ScrollViewReader { scrollView in
-                ZStack(alignment: .bottom) {
-                    Map(coordinateRegion: $locationViewModel.region,
-                        showsUserLocation: true,
-                        userTrackingMode: $userTrackingMode,
-                        annotationItems: chargePointViewModel.chargePoints,
-                        annotationContent: { place in
-                        MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: (place.addressInfo?.latitude)!, longitude: (place.addressInfo?.longitude)!)) {
-                            PlaceAnnotationView()
-                                .onTapGesture(perform: {
-                                    withAnimation {
-                                        scrollView.scrollTo(place.id)
-                                        isSheetActive.toggle()
-                                    }
-                                })
-                        }
-                    })
-                    
-                    BottomBarView()
-                        .offset(y: isSheetActive ? 200 : 0)
-                    
-                    if isSheetActive {
-                        GeometryReader { geometry in
-                            BottomSheetView(isOpen: $isSheetActive, maxHeight: geometry.size.height / 1.4) {
-                                ScrollView(.horizontal, showsIndicators: false) {
-                                    LazyHStack(spacing: 40) {
-                                        ForEach(chargePointViewModel.chargePoints, id: \.id) { charger in
-                                            VStack {
-                                                Text(charger.addressInfo?.title ?? "")
-                                                Text(charger.addressInfo?.addressLine1 ?? "")
-                                                Text(charger.addressInfo?.contactTelephone1 ?? "")
-                                                Text(charger.addressInfo?.accessComments ?? "")
-                                            }
-                                            .background(Color.white)
+        ZStack(alignment: .bottom) {
+            if isMapPresented {
+                ScrollViewReader { scrollView in
+                        Map(coordinateRegion: $locationViewModel.region,
+                            showsUserLocation: true,
+                            userTrackingMode: $userTrackingMode,
+                            annotationItems: chargersViewModel.chargePoints,
+                            annotationContent: { place in
+                            MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: (place.addressInfo?.latitude)!, longitude: (place.addressInfo?.longitude)!)) {
+                                ChargerAnnotationView(levelID: place.connections?.first?.levelID ?? 0)
+                                    .onTapGesture(perform: {
+                                        charger = place
+                                        withAnimation {
+                                            isSheetPresented.toggle()
                                         }
-                                    }
-                                }
+                                    })
                             }
-                        }
-                        .transition(.moveAndFade)
+                        })
+                }
+                .opacity(isMapPresented ? 1 : 0)
+                .animation(.linear, value: isMapPresented)
+                
+            } else {
+                Color.red
+                    .opacity(isListPresented ? 1 : 0)
+                    .animation(.linear, value: isListPresented)
+            }
+            
+            VStack {
+                if chargersViewModel.isProcessing { ProcessingView() }
+                
+                ZStack {
+                    Rectangle()
+                        .fill(Color.white)
+                        .frame(height: 90)
+                        .cornerRadius(35)
+                    
+                    HStack(spacing: 60) {
+                        Image("Map-location")
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .onTapGesture {
+                                isMapPresented = true
+                                isListPresented = false
+                            }
+                        
+                        Image("Search")
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .onTapGesture {
+                                chargersViewModel.loadChargePoints(with: locationViewModel.region.center)
+                            }
+                        
+                        Image("Rows")
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .onTapGesture {
+                                isMapPresented = false
+                                isListPresented = true
+                            }
                     }
                 }
+                .shadow(color: Color.primary.opacity(0.1), radius: 5)
+                .padding()
+                .offset(y: isSheetPresented ? 200 : 0)
             }
-            if chargePointViewModel.isProcessing { ProcessingView() }
-        }
-        .onReceive(locationViewModel.getLastCoordinate()) { coordinate in
-            chargePointViewModel.loadChargePoints(with: coordinate)
+            
+            if isSheetPresented {
+                GeometryReader { geometry in
+                    BottomSheetView(isOpen: $isSheetPresented, maxHeight: geometry.size.height / 1.4) {
+                        ChargerScrollView(chargers:chargersViewModel.chargePoints, charger: charger!)
+                    }
+                }
+                .transition(.moveAndFade)
+            }
         }
         .alert(isPresented: $locationViewModel.isDeniedOrRestricted, content: {
             Alert(title: Text(locationViewModel.permission.title),
@@ -71,10 +102,10 @@ struct ContentView: View {
                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
             }), secondaryButton: .default(Text("Cancel")))
         })
-        .alert(item: $chargePointViewModel.networkError) { networkError in
+        .alert(item: $chargersViewModel.networkError) { networkError in
             Alert(title: Text(networkError.title), message: Text(networkError.message),
                   primaryButton: .default(Text("Retry"), action: {
-                chargePointViewModel.loadChargePoints(with: locationViewModel.region.center)
+                chargersViewModel.loadChargePoints(with: locationViewModel.region.center)
             }), secondaryButton: .default(Text("Cancel")))
         }
         .ignoresSafeArea()
@@ -83,8 +114,8 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var locationViewModel = LocationViewModel()
-    static var openchargeViewModel = ChargePointViewModel(client: URLSessionHTTPClient())
+    static var openchargeViewModel = ChargersViewModel(client: URLSessionHTTPClient())
     static var previews: some View {
-        ContentView(locationViewModel: locationViewModel, chargePointViewModel: openchargeViewModel)
+        ContentView(locationViewModel: locationViewModel, chargersViewModel: openchargeViewModel)
     }
 }

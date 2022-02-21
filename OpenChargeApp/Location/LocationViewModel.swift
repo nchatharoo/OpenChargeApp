@@ -52,6 +52,7 @@ public class LocationViewModel: ObservableObject {
     }
     
     func getLastCoordinate() -> AnyPublisher<CLLocationCoordinate2D, Never> {
-        return locationManager.locationPublisher()
+        locationManager.locationPublisher()
+            .eraseToAnyPublisher()
     }
 }

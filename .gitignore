@@ -107,3 +107,5 @@ OpenChargeApp/Extension/._AnyTransition.swift
 OpenChargeApp/Views/._BottomBarView.swift
 OpenChargeApp/Views/._BottomSheetView.swift
 OpenChargeApp/Views/Helpers/._Constants.swift
+._ChargersViewModel.swift
+._Charger.swift
