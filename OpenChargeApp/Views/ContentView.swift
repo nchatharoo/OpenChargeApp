@@ -15,12 +15,13 @@ struct ContentView: View {
     @State private var isSheetPresented = false
     
     @State private var charger: Charger?
-    @State private var isMapPresented = true
-    @State private var isListPresented = false
+    
+    @State private var isMapTapped = true
+    @State private var isListTapped = false
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            if isMapPresented {
+            if isMapTapped {
                 ScrollViewReader { scrollView in
                         Map(coordinateRegion: $locationViewModel.region,
                             showsUserLocation: true,
@@ -38,13 +39,13 @@ struct ContentView: View {
                             }
                         })
                 }
-                .opacity(isMapPresented ? 1 : 0)
-                .animation(.linear, value: isMapPresented)
+                .opacity(isMapTapped ? 1 : 0)
+                .animation(.linear, value: isMapTapped)
                 
             } else {
                 Color.red
-                    .opacity(isListPresented ? 1 : 0)
-                    .animation(.linear, value: isListPresented)
+                    .opacity(isListTapped ? 1 : 0)
+                    .animation(.linear, value: isListTapped)
             }
             
             VStack {
@@ -61,8 +62,8 @@ struct ContentView: View {
                             .resizable()
                             .frame(width: 24, height: 24)
                             .onTapGesture {
-                                isMapPresented = true
-                                isListPresented = false
+                                isMapTapped = true
+                                isListTapped = false
                             }
                         
                         Image("Search")
@@ -76,8 +77,8 @@ struct ContentView: View {
                             .resizable()
                             .frame(width: 24, height: 24)
                             .onTapGesture {
-                                isMapPresented = false
-                                isListPresented = true
+                                isMapTapped = false
+                                isListTapped = true
                             }
                     }
                 }
@@ -110,6 +111,10 @@ struct ContentView: View {
         }
         .ignoresSafeArea()
     }
+    
+    func didDismiss() {
+            // Handle the dismissing action.
+        }
 }
 
 struct ContentView_Previews: PreviewProvider {
