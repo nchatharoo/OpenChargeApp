@@ -12,7 +12,6 @@
 		8E1C011C27B67107001381AA /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C011B27B67107001381AA /* SearchBarView.swift */; };
 		8E575D1426E3BDAC00CC73D7 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E575D1326E3BDAC00CC73D7 /* URLSessionHTTPClientTests.swift */; };
 		8E5B0D7A27BE8FF100D0BA91 /* AnyTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5B0D7927BE8FF100D0BA91 /* AnyTransition.swift */; };
-		8E5B0D7C27BE901000D0BA91 /* BottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5B0D7B27BE901000D0BA91 /* BottomBarView.swift */; };
 		8E5B0D7F27BE906A00D0BA91 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5B0D7E27BE906A00D0BA91 /* Constants.swift */; };
 		8E5B0D8127BE90B300D0BA91 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5B0D8027BE90B300D0BA91 /* BottomSheetView.swift */; };
 		8E5FBF3427BBCD9500241226 /* CLLocationCoordinate2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5FBF3327BBCD9500241226 /* CLLocationCoordinate2D.swift */; };
@@ -60,7 +59,6 @@
 		8E1C011B27B67107001381AA /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		8E575D1326E3BDAC00CC73D7 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
 		8E5B0D7927BE8FF100D0BA91 /* AnyTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyTransition.swift; sourceTree = "<group>"; };
-		8E5B0D7B27BE901000D0BA91 /* BottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarView.swift; sourceTree = "<group>"; };
 		8E5B0D7E27BE906A00D0BA91 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8E5B0D8027BE90B300D0BA91 /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 		8E5FBF3327BBCD9500241226 /* CLLocationCoordinate2D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationCoordinate2D.swift; sourceTree = "<group>"; };
@@ -197,7 +195,6 @@
 		8E73D23327C41877007818B8 /* BottomView */ = {
 			isa = PBXGroup;
 			children = (
-				8E5B0D7B27BE901000D0BA91 /* BottomBarView.swift */,
 				8E5B0D8027BE90B300D0BA91 /* BottomSheetView.swift */,
 			);
 			path = BottomView;
@@ -409,7 +406,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E5FBF3A27BBCF7400241226 /* AuthorizationPermission.swift in Sources */,
-				8E5B0D7C27BE901000D0BA91 /* BottomBarView.swift in Sources */,
 				8E5B0D7A27BE8FF100D0BA91 /* AnyTransition.swift in Sources */,
 				8E5FBF3627BBCE4900241226 /* ProcessingView.swift in Sources */,
 				8E9E73EE26E1211C00CFEC24 /* Charger.swift in Sources */,
