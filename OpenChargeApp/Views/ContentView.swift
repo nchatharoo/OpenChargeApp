@@ -20,7 +20,7 @@ struct ContentView: View {
     @State private var isMapTapped = true
     @State private var isListTapped = false
     
-    @State private var isAnnotationTapped = false
+    @State private var isChargerTapped = false
     @State private var isFilterTapped = false
     
     var body: some View {
@@ -31,24 +31,59 @@ struct ContentView: View {
                             showsUserLocation: true,
                             userTrackingMode: $userTrackingMode,
                             annotationItems: chargersViewModel.chargePoints,
-                            annotationContent: { place in
-                            MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: (place.addressInfo?.latitude)!, longitude: (place.addressInfo?.longitude)!)) {
-                                ChargerAnnotationView(levelID: place.connections?.first?.levelID ?? 0)
+                            annotationContent: { charger in
+                            MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: (charger.addressInfo?.latitude)!, longitude: (charger.addressInfo?.longitude)!)) {
+                                ChargerAnnotationView(levelID: charger.connections?.first?.levelID ?? 0)
                                     .onTapGesture(perform: {
-                                        charger = place
+                                        self.charger = charger
                                         withAnimation {
                                             isSheetPresented = true
-                                            isAnnotationTapped = true
+                                            isChargerTapped = true
                                         }
                                     })
                             }
                         })
                 }
-                    .opacity(isMapTapped ? 1 : 0)
+                .opacity(isMapTapped ? 1 : 0)
                 
             } else {
-                Color.red
-                    .opacity(isListTapped ? 1 : 0)
+                List {
+                    if chargersViewModel.chargePoints.isEmpty {
+                        Button {
+                            chargersViewModel.loadChargePoints(with: locationViewModel.region.center)
+                        } label: {
+                            Text("Tap here to retrieve charger points")
+                        }
+                    }
+                    ForEach(chargersViewModel.chargePoints) { charger in
+                        HStack(alignment: .center) {
+                            VStack(alignment: .center) {
+                                ChargerAnnotationView(levelID: charger.connections?.first?.levelID ?? 0)
+                                Text("\(charger.connections?.first?.levelID ?? 0)")
+                                    .font(.callout)
+                            }
+
+                            VStack(alignment: .leading) {
+                                Text("\(charger.addressInfo?.title ?? "")")
+                                    .fontWeight(.semibold)
+                                Text("\(charger.addressInfo?.distance ?? 0.0, specifier: "%.2f") km")
+                                    .font(.callout)
+                            }
+                            Spacer()
+                            Image("Caret")
+                        }
+                        .onTapGesture {
+                            self.charger = charger
+                            withAnimation {
+                                isSheetPresented = true
+                                isChargerTapped = true
+                            }
+                        }
+                    }
+                    .listRowSeparator(.hidden)
+                }
+                .listStyle(GroupedListStyle())
+                .opacity(isListTapped ? 1 : 0)
             }
             
             VStack {
@@ -65,7 +100,7 @@ struct ContentView: View {
                             isMapTapped = true
                             isListTapped = false
                         } label: {
-                            Image("Map-location")
+                            Image("Map")
                                 .resizable()
                                 .frame(width: 24, height: 24)
                         }
@@ -74,7 +109,7 @@ struct ContentView: View {
                             isMapTapped = false
                             isListTapped = true
                         } label: {
-                            Image("Rows")
+                            Image("List")
                                 .resizable()
                                 .frame(width: 24, height: 24)
                         }
@@ -89,8 +124,10 @@ struct ContentView: View {
                         .disabled(chargersViewModel.isProcessing)
                         
                         Button {
-                            isSheetPresented = true
-                            isFilterTapped = true
+                            withAnimation {
+                                isSheetPresented = true
+                                isFilterTapped = true
+                            }
                         } label: {
                             Image("Filters")
                                 .resizable()
@@ -107,7 +144,7 @@ struct ContentView: View {
                 GeometryReader { geometry in
                     BottomSheetView(isOpen: $isSheetPresented, maxHeight: geometry.size.height - 20) {
 
-                        if isAnnotationTapped {
+                        if isChargerTapped {
                             ChargerScrollView(chargers:chargersViewModel.chargePoints, charger: charger!)
                         }
                         
@@ -119,7 +156,7 @@ struct ContentView: View {
                 .transition(.moveAndFade)
                 .onDisappear {
                     isSheetPresented = false
-                    isAnnotationTapped = false
+                    isChargerTapped = false
                     isFilterTapped = false
                 }
             }
@@ -139,6 +176,7 @@ struct ContentView: View {
             }), secondaryButton: .default(Text("Cancel")))
         }
         .ignoresSafeArea()
+        .statusBar(hidden: true)
     }
 }
 
