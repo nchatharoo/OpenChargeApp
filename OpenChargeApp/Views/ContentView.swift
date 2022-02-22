@@ -61,38 +61,40 @@ struct ContentView: View {
                         .cornerRadius(35)
                     
                     HStack(spacing: 60) {
-                        Image("Map-location")
-                            .resizable()
-                            .frame(width: 24, height: 24)
-                            .onTapGesture {
-                                isMapTapped = true
-                                isListTapped = false
-                            }
+                        Button {
+                            isMapTapped = true
+                            isListTapped = false
+                        } label: {
+                            Image("Map-location")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                        }
                         
-                        Image("Rows")
-                            .resizable()
-                            .frame(width: 24, height: 24)
-                            .onTapGesture {
-                                isMapTapped = false
-                                isListTapped = true
-                            }
+                        Button {
+                            isMapTapped = false
+                            isListTapped = true
+                        } label: {
+                            Image("Rows")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                        }
                         
-                        Image("Search")
-                            .resizable()
-                            .frame(width: 24, height: 24)
-                            .onTapGesture {
-                                chargersViewModel.loadChargePoints(with: locationViewModel.region.center)
-                            }
+                        Button {
+                            chargersViewModel.loadChargePoints(with: locationViewModel.region.center)
+                        } label: {
+                            Image("Search")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                        }
                         
-                        Image("Filters")
-                            .resizable()
-                            .frame(width: 24, height: 24)
-                            .onTapGesture {
-                                withAnimation {
-                                    isSheetPresented = true
-                                    isFilterTapped = true
-                                }
-                            }
+                        Button {
+                            isSheetPresented = true
+                            isFilterTapped = true
+                        } label: {
+                            Image("Filters")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                        }
                     }
                 }
                 .shadow(color: Color.primary.opacity(0.1), radius: 5)
