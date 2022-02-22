@@ -86,6 +86,7 @@ struct ContentView: View {
                                 .resizable()
                                 .frame(width: 24, height: 24)
                         }
+                        .disabled(chargersViewModel.isProcessing)
                         
                         Button {
                             isSheetPresented = true
