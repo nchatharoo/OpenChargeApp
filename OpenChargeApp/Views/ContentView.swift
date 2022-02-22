@@ -12,12 +12,16 @@ struct ContentView: View {
     @StateObject var chargersViewModel: ChargersViewModel
     
     @State private var userTrackingMode: MapUserTrackingMode = .follow
-    @State private var isAnnotationTapped = false
     
     @State private var charger: Charger?
     
+    @State private var isSheetPresented = false
+    
     @State private var isMapTapped = true
     @State private var isListTapped = false
+    
+    @State private var isAnnotationTapped = false
+    @State private var isFilterTapped = false
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -33,19 +37,18 @@ struct ContentView: View {
                                     .onTapGesture(perform: {
                                         charger = place
                                         withAnimation {
-                                            isAnnotationTapped.toggle()
+                                            isSheetPresented = true
+                                            isAnnotationTapped = true
                                         }
                                     })
                             }
                         })
                 }
-                .opacity(isMapTapped ? 1 : 0)
-                .animation(.linear, value: isMapTapped)
+                    .opacity(isMapTapped ? 1 : 0)
                 
             } else {
                 Color.red
                     .opacity(isListTapped ? 1 : 0)
-                    .animation(.linear, value: isListTapped)
             }
             
             VStack {
@@ -66,13 +69,6 @@ struct ContentView: View {
                                 isListTapped = false
                             }
                         
-                        Image("Search")
-                            .resizable()
-                            .frame(width: 24, height: 24)
-                            .onTapGesture {
-                                chargersViewModel.loadChargePoints(with: locationViewModel.region.center)
-                            }
-                        
                         Image("Rows")
                             .resizable()
                             .frame(width: 24, height: 24)
@@ -80,21 +76,51 @@ struct ContentView: View {
                                 isMapTapped = false
                                 isListTapped = true
                             }
+                        
+                        Image("Search")
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .onTapGesture {
+                                chargersViewModel.loadChargePoints(with: locationViewModel.region.center)
+                            }
+                        
+                        Image("Filters")
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .onTapGesture {
+                                withAnimation {
+                                    isSheetPresented = true
+                                    isFilterTapped = true
+                                }
+                            }
                     }
                 }
                 .shadow(color: Color.primary.opacity(0.1), radius: 5)
                 .padding()
-                .offset(y: isAnnotationTapped ? 200 : 0)
+                .offset(y: isSheetPresented ? 200 : 0)
             }
             
-            if isAnnotationTapped {
+            if isSheetPresented {
                 GeometryReader { geometry in
-                    BottomSheetView(isOpen: $isAnnotationTapped, maxHeight: geometry.size.height) {
-                        ChargerScrollView(chargers:chargersViewModel.chargePoints, charger: charger!)
+                    BottomSheetView(isOpen: $isSheetPresented, maxHeight: geometry.size.height - 20) {
+
+                        if isAnnotationTapped {
+                            ChargerScrollView(chargers:chargersViewModel.chargePoints, charger: charger!)
+                        }
+                        
+                        if isFilterTapped {
+                            Text("Filter View")
+                        }
                     }
                 }
                 .transition(.moveAndFade)
+                .onDisappear {
+                    isSheetPresented = false
+                    isAnnotationTapped = false
+                    isFilterTapped = false
+                }
             }
+            
         }
         .alert(isPresented: $locationViewModel.isDeniedOrRestricted, content: {
             Alert(title: Text(locationViewModel.permission.title),
@@ -111,10 +137,6 @@ struct ContentView: View {
         }
         .ignoresSafeArea()
     }
-    
-    func didDismiss() {
-            // Handle the dismissing action.
-        }
 }
 
 struct ContentView_Previews: PreviewProvider {
