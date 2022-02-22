@@ -12,7 +12,7 @@ struct ContentView: View {
     @StateObject var chargersViewModel: ChargersViewModel
     
     @State private var userTrackingMode: MapUserTrackingMode = .follow
-    @State private var isSheetPresented = false
+    @State private var isAnnotationTapped = false
     
     @State private var charger: Charger?
     
@@ -33,7 +33,7 @@ struct ContentView: View {
                                     .onTapGesture(perform: {
                                         charger = place
                                         withAnimation {
-                                            isSheetPresented.toggle()
+                                            isAnnotationTapped.toggle()
                                         }
                                     })
                             }
@@ -84,12 +84,12 @@ struct ContentView: View {
                 }
                 .shadow(color: Color.primary.opacity(0.1), radius: 5)
                 .padding()
-                .offset(y: isSheetPresented ? 200 : 0)
+                .offset(y: isAnnotationTapped ? 200 : 0)
             }
             
-            if isSheetPresented {
+            if isAnnotationTapped {
                 GeometryReader { geometry in
-                    BottomSheetView(isOpen: $isSheetPresented, maxHeight: geometry.size.height / 1.4) {
+                    BottomSheetView(isOpen: $isAnnotationTapped, maxHeight: geometry.size.height) {
                         ChargerScrollView(chargers:chargersViewModel.chargePoints, charger: charger!)
                     }
                 }
