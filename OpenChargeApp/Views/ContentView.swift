@@ -49,35 +49,17 @@ struct ContentView: View {
             } else {
                 List {
                     if chargersViewModel.chargePoints.isEmpty {
-                        Button {
-                            chargersViewModel.loadChargePoints(with: locationViewModel.region.center)
-                        } label: {
-                            Text("Tap here to retrieve charger points")
-                        }
+                        EmptyRowButton
                     }
                     ForEach(chargersViewModel.chargePoints) { charger in
-                        HStack(alignment: .center) {
-                            VStack(alignment: .center) {
-                                ChargerAnnotationView(levelID: charger.connections?.first?.levelID ?? 0)
-                                Text("\(charger.connections?.first?.levelID ?? 0)")
-                                    .font(.callout)
-                            }
-
-                            VStack(alignment: .leading) {
-                                Text("\(charger.addressInfo?.title ?? "")")
-                                    .fontWeight(.semibold)
-                                Text("\(charger.addressInfo?.distance ?? 0.0, specifier: "%.2f") km")
-                                    .font(.callout)
-                            }
-                            Spacer()
-                            Image("Caret")
-                        }
-                        .onTapGesture {
+                        Button {
                             self.charger = charger
                             withAnimation {
                                 isSheetPresented = true
                                 isChargerTapped = true
                             }
+                        } label: {
+                            ChargerRow(charger: charger)
                         }
                     }
                     .listRowSeparator(.hidden)
@@ -160,7 +142,6 @@ struct ContentView: View {
                     isFilterTapped = false
                 }
             }
-            
         }
         .alert(isPresented: $locationViewModel.isDeniedOrRestricted, content: {
             Alert(title: Text(locationViewModel.permission.title),
@@ -177,6 +158,20 @@ struct ContentView: View {
         }
         .ignoresSafeArea()
         .statusBar(hidden: true)
+    }
+    
+    var EmptyRowButton: some View {
+        Button {
+            chargersViewModel.loadChargePoints(with: locationViewModel.region.center)
+        } label: {
+            HStack(alignment: .center) {
+                Text("Tap here to retrieve charger points")
+                Spacer()
+                Image("Caret")
+            }
+        }
+        .foregroundColor(Color.primary)
+        .listRowSeparator(.hidden)
     }
 }
 
