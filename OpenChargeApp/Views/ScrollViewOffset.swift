@@ -39,3 +39,7 @@ struct ScrollViewOffset<Content: View>: View {
     }
 }
 
+private struct OffsetPreferenceKey: PreferenceKey {
+    static var defaultValue: CGFloat = .zero
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {}
+}
