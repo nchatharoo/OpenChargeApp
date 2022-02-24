@@ -19,6 +19,7 @@
 		8E5FBF3A27BBCF7400241226 /* AuthorizationPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5FBF3927BBCF7400241226 /* AuthorizationPermission.swift */; };
 		8E5FBF3C27BBEBC000241226 /* ChargerAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5FBF3B27BBEBC000241226 /* ChargerAnnotationView.swift */; };
 		8E64D40127C79202008BEB65 /* ChargerRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E64D40027C79202008BEB65 /* ChargerRow.swift */; };
+		8E64D40327C7D955008BEB65 /* ScrollViewOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E64D40227C7D955008BEB65 /* ScrollViewOffset.swift */; };
 		8E66780F26EF2F0F0008D7D2 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E66780E26EF2F0F0008D7D2 /* LocationViewModel.swift */; };
 		8E66781326EFD8720008D7D2 /* OpenChargeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E66781226EFD8720008D7D2 /* OpenChargeViewModelTests.swift */; };
 		8E66781526EFDACE0008D7D2 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E66781426EFDACE0008D7D2 /* URLSessionHTTPClient.swift */; };
@@ -67,6 +68,7 @@
 		8E5FBF3927BBCF7400241226 /* AuthorizationPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationPermission.swift; sourceTree = "<group>"; };
 		8E5FBF3B27BBEBC000241226 /* ChargerAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargerAnnotationView.swift; sourceTree = "<group>"; };
 		8E64D40027C79202008BEB65 /* ChargerRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargerRow.swift; sourceTree = "<group>"; };
+		8E64D40227C7D955008BEB65 /* ScrollViewOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewOffset.swift; sourceTree = "<group>"; };
 		8E66780E26EF2F0F0008D7D2 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		8E66781226EFD8720008D7D2 /* OpenChargeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChargeViewModelTests.swift; sourceTree = "<group>"; };
 		8E66781426EFDACE0008D7D2 /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = URLSessionHTTPClient.swift; path = OpenChargeApp/URLSessionHTTPClient.swift; sourceTree = SOURCE_ROOT; };
@@ -143,6 +145,7 @@
 				8E73D23327C41877007818B8 /* BottomView */,
 				8E1C011B27B67107001381AA /* SearchBarView.swift */,
 				8E5FBF3527BBCE4800241226 /* ProcessingView.swift */,
+				8E64D40227C7D955008BEB65 /* ScrollViewOffset.swift */,
 				8E73D23227C4186C007818B8 /* Charger */,
 			);
 			path = Views;
@@ -416,6 +419,7 @@
 				8E69AC9B26EB7A8D00485CC2 /* LocationManager.swift in Sources */,
 				8E66781526EFDACE0008D7D2 /* URLSessionHTTPClient.swift in Sources */,
 				8E9E73BC26E0B66300CFEC24 /* OpenChargeApp.swift in Sources */,
+				8E64D40327C7D955008BEB65 /* ScrollViewOffset.swift in Sources */,
 				8E64D40127C79202008BEB65 /* ChargerRow.swift in Sources */,
 				8E73D23127C417A2007818B8 /* ChargerScrollView.swift in Sources */,
 				8E5FBF3427BBCD9500241226 /* CLLocationCoordinate2D.swift in Sources */,
