@@ -46,7 +46,6 @@ final public class ChargersViewModel: ObservableObject {
         isProcessing = true
         
         cancellables = client.getPublisher(from: baseAPIURL, with: coordinate)
-            .print()
             .tryMap { (data: Data, response: HTTPURLResponse) in
                 data
             }

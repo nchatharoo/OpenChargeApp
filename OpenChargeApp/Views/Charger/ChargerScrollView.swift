@@ -16,7 +16,7 @@ struct ChargerScrollView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 40) {
                     ForEach(chargers, id: \.id) { charger in
-                        ChargerView(charger: charger)
+                        ChargerView(chargerViewModel: ChargerViewModel(charger: charger))
                     }
                     .onAppear {
                         scrollView.scrollTo(charger.id, anchor: .center)

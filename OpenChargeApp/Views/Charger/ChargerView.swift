@@ -8,38 +8,67 @@
 import SwiftUI
 
 struct ChargerView: View {
-    let charger: Charger
+    let chargerViewModel: ChargerViewModel
+    
+    init(chargerViewModel: ChargerViewModel) {
+        self.chargerViewModel = chargerViewModel
+    }
     
     var body: some View {
         VStack {
             VStack {
-                Text(charger.addressInfo?.title ?? "")
+                Text(chargerViewModel.operatorInfoTitle())
                     .fontWeight(.bold)
-                Text((charger.addressInfo?.addressLine1 ?? "") + " " + (charger.addressInfo?.town ?? ""))
+                Text(chargerViewModel.operatorInfoEmail())
+                Text(chargerViewModel.operatorInfoPrimaryPhone())
+                Text(chargerViewModel.operatorInfoBookingURL())
+            }
+            VStack {
+                Text(chargerViewModel.addressTitle())
+                    .fontWeight(.bold)
+                Text((chargerViewModel.addressLine()) + " " + (chargerViewModel.addressTown()))
                     .fontWeight(.thin)
-                Text(charger.addressInfo?.stateOrProvince ?? "")
-                Text(charger.addressInfo?.postcode ?? "")
-                Text("\(charger.addressInfo?.distance ?? 0.0, specifier: "%.2f") km")
+                Text(chargerViewModel.stateOrProvince())
+                Text(chargerViewModel.postcode())
+                Text("\(chargerViewModel.distance(), specifier: "%.2f") km")
             }
             VStack {
-                Text("Type of connection: \(charger.connections?.first?.connectionType?.title ?? "")")
-                Text("Status: \(charger.connections?.first?.statusType?.title ?? "Unkown")")
+                Text("\(chargerViewModel.connectionType())")
+                Text("Status: \(chargerViewModel.statusTitle())")
+                    .foregroundColor(chargerViewModel.statusIsOperational() ? .green : .red)
             }
             VStack {
-                Text("Level: \(charger.connections?.first?.level?.title ?? "")")
-                Text(charger.connections?.first?.level?.comments ?? "")
+                Text("Level: \(chargerViewModel.levelTitle())")
+                Text(chargerViewModel.levelComments())
+                Text(chargerViewModel.amps())
+                Text(chargerViewModel.voltage())
+                Text(chargerViewModel.powerKW())
             }
             VStack {
-                Text("Type: \(charger.connections?.first?.currentType?.title ?? "")")
+                Text("Type: \(chargerViewModel.currentTypeTitle())")
             }
             VStack {
-                Text("Quantity: \(charger.connections?.first?.quantity ?? 0)")
+                Text(chargerViewModel.quantity())
             }
             VStack {
-                Text("Number of bays: \(charger.numberOfPoints ?? 0)")
+                Text("Number of bays: \(chargerViewModel.numberOfPoints())")
             }
             VStack {
-                Text("Usage type: \(charger.usageType?.title ?? "")")
+                Text(chargerViewModel.usageTypeTitle())
+                HStack {
+                    Image("Pay")
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                        .foregroundColor(chargerViewModel.isPayAtLocation() ? .yellow : .gray)
+                    Image("Member")
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                        .foregroundColor(chargerViewModel.isMembershipRequired() ? .yellow : .gray)
+                    Image("Key")
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                        .foregroundColor(chargerViewModel.isAccessKeyRequired() ? .yellow : .gray)
+                }
             }
         }
         .background(Color.white)
