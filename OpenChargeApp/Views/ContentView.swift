@@ -23,48 +23,54 @@ struct ContentView: View {
     @State private var isChargerTapped = false
     @State private var isFilterTapped = false
     
+    @State private var scrollOffset: CGFloat = .zero
+    
     var body: some View {
         ZStack(alignment: .bottom) {
             if isMapTapped {
                 ScrollViewReader { scrollView in
-                        Map(coordinateRegion: $locationViewModel.region,
-                            showsUserLocation: true,
-                            userTrackingMode: $userTrackingMode,
-                            annotationItems: chargersViewModel.chargePoints,
-                            annotationContent: { charger in
-                            MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: (charger.addressInfo?.latitude)!, longitude: (charger.addressInfo?.longitude)!)) {
-                                ChargerAnnotationView(levelID: charger.connections?.first?.levelID ?? 0)
-                                    .onTapGesture(perform: {
-                                        self.charger = charger
-                                        withAnimation {
-                                            isSheetPresented = true
-                                            isChargerTapped = true
-                                        }
-                                    })
-                            }
-                        })
+                    Map(coordinateRegion: $locationViewModel.region,
+                        showsUserLocation: true,
+                        userTrackingMode: $userTrackingMode,
+                        annotationItems: chargersViewModel.chargePoints,
+                        annotationContent: { charger in
+                        MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: (charger.addressInfo?.latitude)!, longitude: (charger.addressInfo?.longitude)!)) {
+                            ChargerAnnotationView(levelID: charger.connections?.first?.levelID ?? 0)
+                                .onTapGesture(perform: {
+                                    self.charger = charger
+                                    withAnimation {
+                                        isSheetPresented = true
+                                        isChargerTapped = true
+                                    }
+                                })
+                        }
+                    })
                 }
                 .opacity(isMapTapped ? 1 : 0)
                 
             } else {
-                List {
-                    if chargersViewModel.chargePoints.isEmpty {
-                        EmptyRowButton
-                    }
-                    ForEach(chargersViewModel.chargePoints) { charger in
-                        Button {
-                            self.charger = charger
-                            withAnimation {
-                                isSheetPresented = true
-                                isChargerTapped = true
-                            }
-                        } label: {
-                            ChargerRow(charger: charger)
+                NavigationView {
+                    ScrollViewOffset {
+                        if chargersViewModel.chargePoints.isEmpty {
+                            EmptyRowButton
                         }
+                        ForEach(chargersViewModel.chargePoints) { charger in
+                            Button {
+                                self.charger = charger
+                                withAnimation {
+                                    isSheetPresented = true
+                                    isChargerTapped = true
+                                }
+                            } label: {
+                                ChargerRow(charger: charger)
+                            }
+                        }
+                    } onOffsetChange: {
+                        scrollOffset = $0
                     }
-                    .listRowSeparator(.hidden)
+                    .padding(.horizontal)
+                    .navigationTitle("Charging stations")
                 }
-                .listStyle(GroupedListStyle())
                 .opacity(isListTapped ? 1 : 0)
             }
             
@@ -120,12 +126,13 @@ struct ContentView: View {
                 .shadow(color: Color.primary.opacity(0.1), radius: 5)
                 .padding()
                 .offset(y: isSheetPresented ? 200 : 0)
+                .offset(y: isListTapped ? -scrollOffset : 0)
             }
             
             if isSheetPresented {
                 GeometryReader { geometry in
                     BottomSheetView(isOpen: $isSheetPresented, maxHeight: geometry.size.height - 20) {
-
+                        
                         if isChargerTapped {
                             ChargerScrollView(chargers:chargersViewModel.chargePoints, charger: charger!)
                         }
@@ -170,8 +177,8 @@ struct ContentView: View {
                 Image("Caret")
             }
         }
+        .padding(.horizontal)
         .foregroundColor(Color.primary)
-        .listRowSeparator(.hidden)
     }
 }
 
@@ -180,5 +187,42 @@ struct ContentView_Previews: PreviewProvider {
     static var openchargeViewModel = ChargersViewModel(client: URLSessionHTTPClient())
     static var previews: some View {
         ContentView(locationViewModel: locationViewModel, chargersViewModel: openchargeViewModel)
+    }
+}
+
+private struct OffsetPreferenceKey: PreferenceKey {
+    static var defaultValue: CGFloat = .zero
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {}
+}
+
+struct ScrollViewOffset<Content: View>: View {
+    let content: () -> Content
+    let onOffsetChange: (CGFloat) -> Void
+    
+    init(@ViewBuilder content: @escaping () -> Content,
+         onOffsetChange: @escaping (CGFloat) -> Void) {
+        self.content = content
+        self.onOffsetChange = onOffsetChange
+    }
+    
+    var body: some View {
+        ScrollView {
+            offsetReader
+            content()
+                .padding(.top, -8)
+        }
+        .coordinateSpace(name: "frameLayer")
+        .onPreferenceChange(OffsetPreferenceKey.self, perform: onOffsetChange)
+    }
+    
+    var offsetReader: some View {
+        GeometryReader { proxy in
+            Color.clear
+                .preference(
+                    key: OffsetPreferenceKey.self,
+                    value: proxy.frame(in: .named("frameLayer")).minY
+                )
+        }
+        .frame(height: 0)
     }
 }
