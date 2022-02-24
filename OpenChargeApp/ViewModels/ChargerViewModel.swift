@@ -23,25 +23,25 @@ class ChargerViewModel: ObservableObject {
         return operatorInfoTitle
     }
     
-    func operatorInfoEmail() -> String {
+    func operatorInfoEmail() -> URL? {
         guard let operatorInfoEmail = charger.operatorInfo?.contactEmail else {
-            return ""
+            return nil
         }
-        return operatorInfoEmail
+        return URL(string: "mailto:\(operatorInfoEmail)")!
     }
     
-    func operatorInfoBookingURL() -> String {
-        guard let operatorInfoBookingURL = charger.operatorInfo?.bookingURL else {
-            return ""
-        }
-        return operatorInfoBookingURL
-    }
-    
-    func operatorInfoPrimaryPhone() -> String {
+    func operatorInfoPrimaryPhone() -> URL? {
         guard let operatorInfoPrimaryPhone = charger.operatorInfo?.phonePrimaryContact else {
-            return ""
+            return nil
         }
-        return operatorInfoPrimaryPhone
+        return URL(string: "tel:\(operatorInfoPrimaryPhone.replacingOccurrences(of: " ", with: ""))")!
+    }
+    
+    func operatorInfoBookingURL() -> URL? {
+        guard let operatorInfoBookingURL = charger.operatorInfo?.bookingURL else {
+            return nil
+        }
+        return URL(string: operatorInfoBookingURL)!
     }
 
     //MARK: addressInfo

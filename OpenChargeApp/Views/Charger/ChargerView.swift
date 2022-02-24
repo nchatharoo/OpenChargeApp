@@ -18,10 +18,13 @@ struct ChargerView: View {
         VStack {
             VStack {
                 Text(chargerViewModel.operatorInfoTitle())
+                    .font(.largeTitle)
                     .fontWeight(.bold)
-                Text(chargerViewModel.operatorInfoEmail())
-                Text(chargerViewModel.operatorInfoPrimaryPhone())
-                Text(chargerViewModel.operatorInfoBookingURL())
+                HStack {
+                    mailButton
+                    phoneButton
+                    websiteButton
+                }
             }
             VStack {
                 Text(chargerViewModel.addressTitle())
@@ -72,5 +75,36 @@ struct ChargerView: View {
             }
         }
         .background(Color.white)
+    }
+    
+    var mailButton: some View {
+        Button {
+            UIApplication.shared.open(chargerViewModel.operatorInfoEmail()!)
+        } label: {
+            Image("Mail")
+                .renderingMode(.template)
+                .foregroundColor(chargerViewModel.operatorInfoEmail() == nil ? .secondary : .primary)
+        }
+        .disabled(chargerViewModel.operatorInfoEmail() == nil)
+    }
+    
+    var phoneButton: some View {
+        Button {
+            UIApplication.shared.open(chargerViewModel.operatorInfoPrimaryPhone()!)
+        } label: {
+            Image("Phone")
+                .renderingMode(.template)
+                .foregroundColor(chargerViewModel.operatorInfoPrimaryPhone() == nil ? .secondary : .primary)
+        }.disabled(chargerViewModel.operatorInfoPrimaryPhone() == nil)
+    }
+    
+    var websiteButton: some View {
+        Button {
+            UIApplication.shared.open( chargerViewModel.operatorInfoBookingURL()!)
+        } label: {
+            Image("Web")
+                .renderingMode(.template)
+                .foregroundColor(chargerViewModel.operatorInfoBookingURL() == nil ? .secondary : .primary)
+        }.disabled(chargerViewModel.operatorInfoBookingURL() == nil)
     }
 }
