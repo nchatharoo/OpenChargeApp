@@ -115,3 +115,5 @@ OpenChargeApp/Views/Charger/._ChargerScrollView.swift
 ._BottomSheetView.swift
 ._ChargerView.swift
 ._ChargerRow.swift
+._ScrollViewOffset.swift
+._ChargerViewModel.swift
