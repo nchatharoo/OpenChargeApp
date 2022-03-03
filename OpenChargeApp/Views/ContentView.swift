@@ -138,7 +138,8 @@ struct ContentView: View {
                         }
                         
                         if isFilterTapped {
-                            Text("Filter View")
+                            FilterView()
+                                .environmentObject(chargersViewModel)
                         }
                     }
                 }
