@@ -62,4 +62,18 @@ final public class ChargersViewModel: ObservableObject {
                 self.chargePoints = chargePoints
             })
     }
+    
+    public func filterChargerByPower(_ powerKw: Double) {
+        _ = chargePoints.publisher
+            .map { _ in
+                chargePoints.filter { charger in
+                    print(powerKw)
+                    print(charger.connections?.first?.powerKW)
+                    return powerKw == charger.connections?.first?.powerKW ?? 0.0
+                }
+            }
+            .sink(receiveValue: { charger in
+                self.chargePoints = charger
+            })
+    }
 }
