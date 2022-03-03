@@ -189,3 +189,33 @@ struct ContentView_Previews: PreviewProvider {
         ContentView(locationViewModel: locationViewModel, chargersViewModel: openchargeViewModel)
     }
 }
+
+struct FilterView: View {
+    @EnvironmentObject var chargersViewModel: ChargersViewModel
+    
+    @State private var powerKw: Double = 0
+        
+    var body: some View {
+        VStack {
+            Text("Select the desired power: \(powerKw, specifier: "%.1f")")
+            HStack {
+                Image(systemName: "bolt.circle.fill")
+                    .font(.title)
+                Slider(value: $powerKw, in: 0...650) {
+                    Text("Power")
+                } minimumValueLabel: {
+                    Text("0")
+                } maximumValueLabel: {
+                    Text("650")
+                } onEditingChanged: { _ in
+                    chargersViewModel.filterChargerByPower(powerKw)
+                }
+                .accentColor(Color.green)
+                Image(systemName: "bolt.circle.fill")
+                    .font(.largeTitle)
+            }
+            Text("\(chargersViewModel.chargePoints.count)")
+        }
+        .padding()
+    }
+}
