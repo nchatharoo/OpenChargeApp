@@ -8,8 +8,8 @@ import MapKit
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var locationViewModel: LocationViewModel
-    @StateObject var chargersViewModel: ChargersViewModel
+    @ObservedObject var locationViewModel: LocationViewModel
+    @ObservedObject var chargersViewModel: ChargersViewModel
     
     @State private var userTrackingMode: MapUserTrackingMode = .follow
     
