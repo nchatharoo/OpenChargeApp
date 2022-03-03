@@ -143,7 +143,7 @@ struct Connection: Codable {
     let levelID: Int?
     let level: Level?
     let amps, voltage: Int?
-    let powerKW: Decimal?
+    let powerKW: Double?
     let currentTypeID: Int?
     let currentType: CurrentType?
     let quantity: Int?
