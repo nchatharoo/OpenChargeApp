@@ -20,7 +20,9 @@ final public class ChargersViewModel: ObservableObject {
     let client: HTTPClient
     private let baseAPIURL = URL(string: "https://api.openchargemap.io/v3/poi/")!
     public var cancellables: AnyCancellable? = nil
-    @Published public var chargePoints = Charge()
+    @Published private var chargePoints = Charge()
+    @Published public var filteredChargePoints = Charge()
+
     @Published var isProcessing = false
     @Published var query = ""
     @Published var networkError: NetworkError?
@@ -60,20 +62,35 @@ final public class ChargersViewModel: ObservableObject {
             }, receiveValue: { [weak self] chargePoints in
                 guard let self = self else { return }
                 self.chargePoints = chargePoints
+                self.filteredChargePoints = chargePoints
             })
     }
     
-    public func filterChargerByPower(_ powerKw: Double) {
-        _ = chargePoints.publisher
-            .map { _ in
-                chargePoints.filter { charger in
-                    print(powerKw)
-                    print(charger.connections?.first?.powerKW)
-                    return powerKw == charger.connections?.first?.powerKW ?? 0.0
-                }
+    //MARK: filter
+    /*
+     Connection :
+     powerKW
+     
+     ConnectionType :
+     title
+     
+     StatusType :
+     isOperational
+     isUserSelectable
+    */
+    
+    func filterCharger(with filters: ChargerFilter) {
+        _ = $chargePoints
+            .map { charger in
+                charger.filter({ filters.powerKW == 0 || $0.connections?.first?.powerKW ?? 0.0 < filters.powerKW })
             }
             .sink(receiveValue: { charger in
-                self.chargePoints = charger
+                self.filteredChargePoints = charger
             })
     }
 }
+
+struct ChargerFilter {
+    var powerKW: Double = 0.0
+}
+

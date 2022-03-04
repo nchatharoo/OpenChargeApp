@@ -32,7 +32,7 @@ struct ContentView: View {
                     Map(coordinateRegion: $locationViewModel.region,
                         showsUserLocation: true,
                         userTrackingMode: $userTrackingMode,
-                        annotationItems: chargersViewModel.chargePoints,
+                        annotationItems: chargersViewModel.filteredChargePoints,
                         annotationContent: { charger in
                         MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: (charger.addressInfo?.latitude)!, longitude: (charger.addressInfo?.longitude)!)) {
                             ChargerAnnotationView(levelID: charger.connections?.first?.levelID ?? 0)
@@ -51,10 +51,10 @@ struct ContentView: View {
             } else {
                 NavigationView {
                     ScrollViewOffset {
-                        if chargersViewModel.chargePoints.isEmpty {
+                        if chargersViewModel.filteredChargePoints.isEmpty {
                             EmptyRowButton
                         }
-                        ForEach(chargersViewModel.chargePoints) { charger in
+                        ForEach(chargersViewModel.filteredChargePoints) { charger in
                             Button {
                                 self.charger = charger
                                 withAnimation {
@@ -134,7 +134,7 @@ struct ContentView: View {
                     BottomSheetView(isOpen: $isSheetPresented, maxHeight: geometry.size.height - 20) {
                         
                         if isChargerTapped {
-                            ChargerScrollView(chargers:chargersViewModel.chargePoints, charger: charger!)
+                            ChargerScrollView(chargers:chargersViewModel.filteredChargePoints, charger: charger!)
                         }
                         
                         if isFilterTapped {
@@ -209,13 +209,14 @@ struct FilterView: View {
                 } maximumValueLabel: {
                     Text("650")
                 } onEditingChanged: { _ in
-                    chargersViewModel.filterChargerByPower(powerKw)
+//                    chargersViewModel.filterChargerByPower(powerKw)
+                    chargersViewModel.filterCharger(with: ChargerFilter(powerKW: powerKw))
                 }
                 .accentColor(Color.green)
                 Image(systemName: "bolt.circle.fill")
                     .font(.largeTitle)
             }
-            Text("\(chargersViewModel.chargePoints.count)")
+            Text("\(chargersViewModel.filteredChargePoints.count)")
         }
         .padding()
     }
