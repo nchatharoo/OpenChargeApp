@@ -194,6 +194,8 @@ struct ContentView_Previews: PreviewProvider {
 struct FilterView: View {
     @EnvironmentObject var chargersViewModel: ChargersViewModel
     
+    @State private var filters: ChargerFilter = ChargerFilter()
+    
     @State private var powerKw: Double = 0
     @State private var selectedUsage: ChargerUsage = .all
     
@@ -210,7 +212,7 @@ struct FilterView: View {
                 } maximumValueLabel: {
                     Text("650")
                 } onEditingChanged: { _ in
-                    chargersViewModel.filterCharger(with: ChargerFilter(powerKW: powerKw))
+                    filters.powerKW = powerKw
                 }
                 .accentColor(Color.green)
                 Image(systemName: "bolt.circle.fill")
@@ -219,18 +221,22 @@ struct FilterView: View {
             Text("\(chargersViewModel.filteredChargePoints.count)")
                 
             Picker("", selection: $selectedUsage) {
+                Text("All").tag(ChargerUsage.all)
                 Text("Pay at location").tag(ChargerUsage.isPayAtLocation)
                 Text("Membership required").tag(ChargerUsage.isMembershipRequired)
                 Text("Access key required").tag(ChargerUsage.isAccessKeyRequired)
             }
             .onChange(of: selectedUsage, perform: { newValue in
-                chargersViewModel.filterCharger(with: ChargerFilter(usageType: selectedUsage))
+                filters.usageType = newValue
             })
             .pickerStyle(.segmented)
             
             Text("Selected: \(selectedUsage.rawValue)")
 
         }
+        .onChange(of: filters, perform: { newValue in
+            chargersViewModel.filterCharger(with: filters)
+        })
         .padding()
     }
 }
