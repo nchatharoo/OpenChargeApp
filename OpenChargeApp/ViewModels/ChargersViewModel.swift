@@ -82,7 +82,15 @@ final public class ChargersViewModel: ObservableObject {
     func filterCharger(with filters: ChargerFilter) {
         _ = $chargePoints
             .map { charger in
-                charger.filter({ filters.powerKW == 0 || $0.connections?.first?.powerKW ?? 0.0 < filters.powerKW })
+                var filtered = charger.filter({ filters.powerKW == 0 || $0.connections?.first?.powerKW ?? 0.0 < filters.powerKW })
+                
+                switch filters.usageType {
+                case .isPayAtLocation: filtered.removeAll(where: { $0.usageType?.isPayAtLocation ?? false })
+                case .isMembershipRequired: filtered.removeAll(where: { $0.usageType?.isMembershipRequired ?? false })
+                case .isAccessKeyRequired: filtered.removeAll(where: { $0.usageType?.isAccessKeyRequired ?? false })
+                case .all: break
+                }
+                return filtered
             }
             .sink(receiveValue: { charger in
                 self.filteredChargePoints = charger
@@ -91,6 +99,13 @@ final public class ChargersViewModel: ObservableObject {
 }
 
 struct ChargerFilter {
+    var usageType: ChargerUsage = .all
     var powerKW: Double = 0.0
 }
 
+enum ChargerUsage: String {
+    case all
+    case isPayAtLocation
+    case isMembershipRequired
+    case isAccessKeyRequired
+}

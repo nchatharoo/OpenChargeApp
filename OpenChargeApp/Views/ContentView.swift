@@ -195,7 +195,8 @@ struct FilterView: View {
     @EnvironmentObject var chargersViewModel: ChargersViewModel
     
     @State private var powerKw: Double = 0
-        
+    @State private var selectedUsage: ChargerUsage = .all
+    
     var body: some View {
         VStack {
             Text("Select the desired power: \(powerKw, specifier: "%.1f")")
@@ -209,7 +210,6 @@ struct FilterView: View {
                 } maximumValueLabel: {
                     Text("650")
                 } onEditingChanged: { _ in
-//                    chargersViewModel.filterChargerByPower(powerKw)
                     chargersViewModel.filterCharger(with: ChargerFilter(powerKW: powerKw))
                 }
                 .accentColor(Color.green)
@@ -217,6 +217,19 @@ struct FilterView: View {
                     .font(.largeTitle)
             }
             Text("\(chargersViewModel.filteredChargePoints.count)")
+                
+            Picker("", selection: $selectedUsage) {
+                Text("Pay at location").tag(ChargerUsage.isPayAtLocation)
+                Text("Membership required").tag(ChargerUsage.isMembershipRequired)
+                Text("Access key required").tag(ChargerUsage.isAccessKeyRequired)
+            }
+            .onChange(of: selectedUsage, perform: { newValue in
+                chargersViewModel.filterCharger(with: ChargerFilter(usageType: selectedUsage))
+            })
+            .pickerStyle(.segmented)
+            
+            Text("Selected: \(selectedUsage.rawValue)")
+
         }
         .padding()
     }
