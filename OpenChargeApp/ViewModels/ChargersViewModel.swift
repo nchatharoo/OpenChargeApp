@@ -88,6 +88,10 @@ final public class ChargersViewModel: ObservableObject {
                 
                 filtered.removeAll(where: { $0.connections?.first?.connectionType?.title == filters.connectionType[filters.connectionIndex]
                 })
+                                
+                if filters.showIsOperational {
+                    filtered.removeAll(where: { $0.statusType?.isOperational ?? false })
+                }
                 
                 return filtered
             }
@@ -100,7 +104,7 @@ final public class ChargersViewModel: ObservableObject {
 struct ChargerFilter: Equatable {
     var usageType: ChargerUsage = .all
     var powerKW: Double = 0.0
-    
+    var showIsOperational: Bool = false
     var connectionIndex: Int = 0
     var connectionType = [
         "Avcon Connector",

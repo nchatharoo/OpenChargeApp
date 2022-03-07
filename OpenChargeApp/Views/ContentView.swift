@@ -198,7 +198,8 @@ struct FilterView: View {
     
     @State private var powerKw: Double = 0
     @State private var selectedUsage: ChargerUsage = .all
-    
+    @State private var showIsOperational: Bool = false
+
     @State private var indexType: Int = 0
 
     var body: some View {
@@ -242,7 +243,13 @@ struct FilterView: View {
                     }
                 }
             }
+            
+            Toggle("Show only operationnal", isOn: $showIsOperational)
+            
         }
+        .onChange(of: showIsOperational, perform: { newValue in
+            filters.showIsOperational = newValue
+        })
         .onChange(of: filters, perform: { newValue in
             chargersViewModel.filterCharger(with: filters)
         })
