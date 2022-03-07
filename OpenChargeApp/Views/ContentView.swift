@@ -199,6 +199,8 @@ struct FilterView: View {
     @State private var powerKw: Double = 0
     @State private var selectedUsage: ChargerUsage = .all
     
+    @State private var indexType: Int = 0
+
     var body: some View {
         VStack {
             Text("Select the desired power: \(powerKw, specifier: "%.1f")")
@@ -230,9 +232,16 @@ struct FilterView: View {
                 filters.usageType = newValue
             })
             .pickerStyle(.segmented)
-            
-            Text("Selected: \(selectedUsage.rawValue)")
-
+                                
+            List {
+                ForEach(Array(filters.connectionType.enumerated()), id: \.1) { (index, type) in
+                    Button {
+                        filters.connectionIndex = index
+                    } label: {
+                        Text(type)
+                    }
+                }
+            }
         }
         .onChange(of: filters, perform: { newValue in
             chargersViewModel.filterCharger(with: filters)
