@@ -66,14 +66,6 @@ final public class ChargersViewModel: ObservableObject {
             })
     }
     
-    //MARK: filter
-    /*
-     
-     StatusType :
-     isOperational
-     isUserSelectable
-    */
-    
     func filterCharger(with filters: ChargerFilter) {
         _ = $chargePoints
             .map { charger in
