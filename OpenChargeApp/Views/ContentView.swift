@@ -39,8 +39,8 @@ struct ContentView: View {
                                 .onTapGesture(perform: {
                                     self.charger = charger
                                     withAnimation {
-                                        isSheetPresented = true
-                                        isChargerTapped = true
+                                        isSheetPresented.toggle()
+                                        isChargerTapped.toggle()
                                     }
                                 })
                         }
@@ -58,8 +58,8 @@ struct ContentView: View {
                             Button {
                                 self.charger = charger
                                 withAnimation {
-                                    isSheetPresented = true
-                                    isChargerTapped = true
+                                    isSheetPresented.toggle()
+                                    isChargerTapped.toggle()
                                 }
                             } label: {
                                 ChargerRow(charger: charger)
@@ -113,8 +113,8 @@ struct ContentView: View {
                         
                         Button {
                             withAnimation {
-                                isSheetPresented = true
-                                isFilterTapped = true
+                                isSheetPresented.toggle()
+                                isFilterTapped.toggle()
                             }
                         } label: {
                             Image("Filters")
@@ -127,28 +127,8 @@ struct ContentView: View {
                 .padding()
                 .offset(y: isSheetPresented ? 200 : 0)
                 .offset(y: isListTapped ? -scrollOffset : 0)
-            }
-            
-            if isSheetPresented {
-                GeometryReader { geometry in
-                    BottomSheetView(isOpen: $isSheetPresented, maxHeight: geometry.size.height - 20) {
-                        
-                        if isChargerTapped {
-                            ChargerScrollView(chargers:chargersViewModel.filteredChargePoints, charger: charger!)
-                        }
-                        
-                        if isFilterTapped {
-                            FilterView()
-                                .environmentObject(chargersViewModel)
-                        }
-                    }
-                }
                 .transition(.moveAndFade)
-                .onDisappear {
-                    isSheetPresented = false
-                    isChargerTapped = false
-                    isFilterTapped = false
-                }
+                .animation(.default, value: isSheetPresented)
             }
         }
         .alert(isPresented: $locationViewModel.isDeniedOrRestricted, content: {
@@ -164,8 +144,18 @@ struct ContentView: View {
                 chargersViewModel.loadChargePoints(with: locationViewModel.region.center)
             }), secondaryButton: .default(Text("Cancel")))
         }
+        .sheet(isPresented: $isChargerTapped, onDismiss: {
+            isSheetPresented.toggle()
+        }, content: {
+            ChargerScrollView(chargers:chargersViewModel.filteredChargePoints, charger: charger!)
+        })
+        .sheet(isPresented: $isFilterTapped, onDismiss: {
+            isSheetPresented.toggle()
+        }, content: {
+            FilterView()
+                .environmentObject(chargersViewModel)
+        })
         .ignoresSafeArea()
-        .statusBar(hidden: true)
     }
     
     var EmptyRowButton: some View {
