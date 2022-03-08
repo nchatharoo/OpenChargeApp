@@ -17,23 +17,44 @@ struct ChargerView: View {
     var body: some View {
         VStack {
             VStack {
-                Text(chargerViewModel.operatorInfoTitle())
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
+                HStack {
+                    AsyncImage(url: URL(string: chargerViewModel.itemThumbnailURL())) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(1, contentMode: .fit)
+                            .frame(width: 50, height: 50)
+                        
+                    } placeholder: {
+                        Image(systemName: "bolt.car")
+                            .resizable()
+                            .aspectRatio(1, contentMode: .fit)
+                            .frame(width: 50, height: 50)
+                    }
+                    
+                    Text(chargerViewModel.operatorInfoTitle())
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                }
                 HStack {
                     mailButton
                     phoneButton
                     websiteButton
                 }
             }
-            VStack {
+            
+            VStack(alignment: .leading) {
                 Text(chargerViewModel.addressTitle())
                     .fontWeight(.bold)
                 Text((chargerViewModel.addressLine()) + " " + (chargerViewModel.addressTown()))
                     .fontWeight(.thin)
-                Text(chargerViewModel.stateOrProvince())
                 Text(chargerViewModel.postcode())
-                Text("\(chargerViewModel.distance(), specifier: "%.2f") km")
+                    .fontWeight(.thin)
+
+                HStack {
+                    Image(systemName: "mappin")
+                    Text("\(chargerViewModel.distance(), specifier: "%.2f") km")
+                }
+                .foregroundColor(.green)
             }
             VStack {
                 Text("\(chargerViewModel.connectionType())")
@@ -55,6 +76,9 @@ struct ChargerView: View {
             }
             VStack {
                 Text("Number of bays: \(chargerViewModel.numberOfPoints())")
+            }
+            VStack {
+                Text("Cost: \(chargerViewModel.usageCost())")
             }
             VStack {
                 Text(chargerViewModel.usageTypeTitle())

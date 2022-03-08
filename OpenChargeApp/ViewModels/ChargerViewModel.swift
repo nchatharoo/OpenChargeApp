@@ -67,13 +67,6 @@ class ChargerViewModel: ObservableObject {
         return addressTown
     }
     
-    func stateOrProvince() -> String {
-        guard let stateOrProvince = charger.addressInfo?.stateOrProvince else {
-            return ""
-        }
-        return stateOrProvince
-    }
-    
     func postcode() -> String {
         guard let postcode = charger.addressInfo?.postcode else {
             return ""
@@ -197,5 +190,23 @@ class ChargerViewModel: ObservableObject {
             return false
         }
         return isAccessKeyRequired
+    }
+    
+    //MARK: MediaItem
+    
+    func itemThumbnailURL() -> String {
+        guard let itemThumbnailURL = charger.mediaItems?.first?.itemThumbnailURL else {
+            return ""
+        }
+        return itemThumbnailURL
+    }
+    
+    //MARK: UsageCost
+    
+    func usageCost() -> String {
+        guard let usageCost = charger.usageCost else {
+            return ""
+        }
+        return usageCost
     }
 }

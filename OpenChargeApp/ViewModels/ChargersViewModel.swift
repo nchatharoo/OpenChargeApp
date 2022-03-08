@@ -24,7 +24,6 @@ final public class ChargersViewModel: ObservableObject {
     @Published public var filteredChargePoints = Charge()
 
     @Published var isProcessing = false
-    @Published var query = ""
     @Published var networkError: NetworkError?
     
     private lazy var dateFormatter: DateFormatter = {
