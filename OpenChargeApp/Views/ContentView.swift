@@ -148,6 +148,7 @@ struct ContentView: View {
             isSheetPresented.toggle()
         }, content: {
             ChargerScrollView(chargers:chargersViewModel.filteredChargePoints, charger: charger!)
+                .environmentObject(locationViewModel)
         })
         .sheet(isPresented: $isFilterTapped, onDismiss: {
             isSheetPresented.toggle()

@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import CoreLocation
 
 class ChargerViewModel: ObservableObject {
     let charger: Charger
-    
+
     init(charger: Charger) {
         self.charger = charger
     }
@@ -79,6 +80,13 @@ class ChargerViewModel: ObservableObject {
             return 0.0
         }
         return distance
+    }
+    
+    func coordinate() -> CLLocationCoordinate2D {
+        guard let latitude = charger.addressInfo?.latitude, let longitude = charger.addressInfo?.longitude else { return CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
+        }
+        
+        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
     
     //MARK: connectionType

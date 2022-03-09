@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct ChargerView: View {
+    @EnvironmentObject var locationViewModel: LocationViewModel
     let chargerViewModel: ChargerViewModel
+    
+    @State private var directions: [String] = []
+    @State private var showDirections = false
     
     init(chargerViewModel: ChargerViewModel) {
         self.chargerViewModel = chargerViewModel
@@ -42,7 +46,7 @@ struct ChargerView: View {
                 }
             }
             
-            VStack(alignment: .leading) {
+            VStack {
                 Text(chargerViewModel.addressTitle())
                     .fontWeight(.bold)
                 Text((chargerViewModel.addressLine()) + " " + (chargerViewModel.addressTown()))
@@ -97,8 +101,36 @@ struct ChargerView: View {
                         .foregroundColor(chargerViewModel.isAccessKeyRequired() ? .yellow : .gray)
                 }
             }
+            VStack {
+                directionsButton
+            }
         }
         .background(Color.white)
+        .sheet(isPresented: $showDirections, content: {
+            VStack {
+                MapView(directions: $directions)
+                    .environmentObject(locationViewModel)
+                    .environmentObject(chargerViewModel)
+                
+                Button {
+                    self.showDirections.toggle()
+                } label: {
+                    Text("Dismiss")
+                }
+            }
+        })
+    }
+    
+    var directionsButton: some View {
+        Button {
+            self.showDirections.toggle()
+        } label: {
+            Text("Directions")
+                .padding()
+                .background(.green)
+                .clipShape(Capsule())
+                .foregroundColor(Color.white)
+        }
     }
     
     var mailButton: some View {
