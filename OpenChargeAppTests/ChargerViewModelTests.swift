@@ -41,5 +41,14 @@ class ChargerViewModelTests: XCTestCase {
         
         XCTAssertEqual(sut.charger.operatorInfo?.contactEmail, operatorInfoEmail)
     }
+    
+    func test_operatorInfoPrimaryPhone_returnResult() {
+        let charger = uniqueCharger()
+        let sut = ChargerViewModel(charger: charger)
+
+        let operatorInfoPrimaryPhone = charger.operatorInfo?.phonePrimaryContact
+        
+        XCTAssertEqual(sut.charger.operatorInfo?.phonePrimaryContact, operatorInfoPrimaryPhone)
+    }
 
 }
