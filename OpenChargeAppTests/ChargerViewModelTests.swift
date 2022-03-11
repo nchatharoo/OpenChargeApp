@@ -8,10 +8,6 @@
 import XCTest
 import OpenChargeApp
 
-func uniqueCharger() -> Charger {
-    return Charger(dataProvider: nil, operatorInfo: OperatorInfo(websiteURL: "http://a-url.com", comments: "any comment", phonePrimaryContact: "0123456789", phoneSecondaryContact: "0123456789", isPrivateIndividual: nil, addressInfo: nil, bookingURL: nil, contactEmail: nil, faultReportEmail: nil, isRestrictedEdit: nil, id: nil, title: "any title"), usageType: nil, statusType: nil, submissionStatus: nil, userComments: nil, percentageSimilarity: nil, mediaItems: nil, isRecentlyVerified: nil, dateLastVerified: nil, id: nil, uuid: UUID().uuidString, parentChargePointID: nil, dataProviderID: nil, dataProvidersReference: nil, operatorID: nil, operatorsReference: nil, usageTypeID: nil, usageCost: nil, addressInfo: AddressInfo(id: nil, title: "any address title", addressLine1: "any address line", addressLine2: nil, town: "any town", stateOrProvince: "any state", postcode: "any postcode", countryID: nil, country: nil, latitude: 0.0, longitude: 0.0, contactTelephone1: "0123456789", contactTelephone2: nil, contactEmail: nil, accessComments: nil, relatedURL: nil, distance: 0.1, distanceUnit: nil), connections: nil, numberOfPoints: nil, generalComments: nil, datePlanned: nil, dateLastConfirmed: nil, statusTypeID: nil, dateLastStatusUpdate: Date(), dataQualityLevel: nil, dateCreated: Date(), submissionStatusTypeID: nil)
-}
-
 class ChargerViewModelTests: XCTestCase {
 
     func test_init_with_charger() {
@@ -109,10 +105,14 @@ class ChargerViewModelTests: XCTestCase {
     
     //MARK: Helper
     
-    func makeSUT() -> ChargerViewModel {
+    private func makeSUT() -> ChargerViewModel {
         let charger = uniqueCharger()
         let sut = ChargerViewModel(charger: charger)
 
         return sut
+    }
+    
+    private func uniqueCharger() -> Charger {
+        return Charger(dataProvider: nil, operatorInfo: OperatorInfo(websiteURL: "http://a-url.com", comments: "any comment", phonePrimaryContact: "0123456789", phoneSecondaryContact: "0123456789", isPrivateIndividual: nil, addressInfo: nil, bookingURL: nil, contactEmail: nil, faultReportEmail: nil, isRestrictedEdit: nil, id: nil, title: "any title"), usageType: nil, statusType: nil, submissionStatus: nil, userComments: nil, percentageSimilarity: nil, mediaItems: nil, isRecentlyVerified: nil, dateLastVerified: nil, id: nil, uuid: UUID().uuidString, parentChargePointID: nil, dataProviderID: nil, dataProvidersReference: nil, operatorID: nil, operatorsReference: nil, usageTypeID: nil, usageCost: nil, addressInfo: AddressInfo(id: nil, title: "any address title", addressLine1: "any address line", addressLine2: nil, town: "any town", stateOrProvince: "any state", postcode: "any postcode", countryID: nil, country: nil, latitude: 0.0, longitude: 0.0, contactTelephone1: "0123456789", contactTelephone2: nil, contactEmail: nil, accessComments: nil, relatedURL: nil, distance: 0.1, distanceUnit: nil), connections: nil, numberOfPoints: nil, generalComments: nil, datePlanned: nil, dateLastConfirmed: nil, statusTypeID: nil, dateLastStatusUpdate: Date(), dataQualityLevel: nil, dateCreated: Date(), submissionStatusTypeID: nil)
     }
 }
