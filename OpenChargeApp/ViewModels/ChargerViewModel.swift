@@ -8,10 +8,10 @@
 import Foundation
 import CoreLocation
 
-class ChargerViewModel: ObservableObject {
-    let charger: Charger
+public class ChargerViewModel: ObservableObject {
+    public let charger: Charger
 
-    init(charger: Charger) {
+    public init(charger: Charger) {
         self.charger = charger
     }
     

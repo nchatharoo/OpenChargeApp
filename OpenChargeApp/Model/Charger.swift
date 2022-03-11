@@ -11,6 +11,38 @@ public typealias Charge = [Charger]
 
 // MARK: - ChargePoint
 public struct Charger: Codable, Equatable, Identifiable {
+    public init(dataProvider: DataProvider?, operatorInfo: OperatorInfo?, usageType: UsageType?, statusType: StatusType?, submissionStatus: SubmissionStatus?, userComments: [UserComment]?, percentageSimilarity: Double?, mediaItems: [MediaItem]?, isRecentlyVerified: Bool?, dateLastVerified: Date?, id: Int?, uuid: String?, parentChargePointID: Int?, dataProviderID: Int?, dataProvidersReference: String?, operatorID: Int?, operatorsReference: String?, usageTypeID: Int?, usageCost: String?, addressInfo: AddressInfo?, connections: [Connection]?, numberOfPoints: Int?, generalComments: String?, datePlanned: String?, dateLastConfirmed: String?, statusTypeID: Int?, dateLastStatusUpdate: Date?, dataQualityLevel: Int?, dateCreated: Date?, submissionStatusTypeID: Int?) {
+        self.dataProvider = dataProvider
+        self.operatorInfo = operatorInfo
+        self.usageType = usageType
+        self.statusType = statusType
+        self.submissionStatus = submissionStatus
+        self.userComments = userComments
+        self.percentageSimilarity = percentageSimilarity
+        self.mediaItems = mediaItems
+        self.isRecentlyVerified = isRecentlyVerified
+        self.dateLastVerified = dateLastVerified
+        self.id = id
+        self.uuid = uuid
+        self.parentChargePointID = parentChargePointID
+        self.dataProviderID = dataProviderID
+        self.dataProvidersReference = dataProvidersReference
+        self.operatorID = operatorID
+        self.operatorsReference = operatorsReference
+        self.usageTypeID = usageTypeID
+        self.usageCost = usageCost
+        self.addressInfo = addressInfo
+        self.connections = connections
+        self.numberOfPoints = numberOfPoints
+        self.generalComments = generalComments
+        self.datePlanned = datePlanned
+        self.dateLastConfirmed = dateLastConfirmed
+        self.statusTypeID = statusTypeID
+        self.dateLastStatusUpdate = dateLastStatusUpdate
+        self.dataQualityLevel = dataQualityLevel
+        self.dateCreated = dateCreated
+        self.submissionStatusTypeID = submissionStatusTypeID
+    }    
     
     public static func == (lhs: Charger, rhs: Charger) -> Bool {
         lhs.id == rhs.id
@@ -82,7 +114,7 @@ public struct Charger: Codable, Equatable, Identifiable {
 }
 
 // MARK: - AddressInfo
-struct AddressInfo: Codable {
+public struct AddressInfo: Codable {
     let id: Int?
     let title, addressLine1: String?
     let addressLine2: String?
@@ -134,7 +166,7 @@ struct Country: Codable {
 }
 
 // MARK: - Connection
-struct Connection: Codable {
+public struct Connection: Codable {
     let id, connectionTypeID: Int?
     let connectionType: ConnectionType?
     let reference: String?
@@ -213,7 +245,7 @@ struct Level: Codable {
 }
 
 // MARK: - StatusType
-struct StatusType: Codable {
+public struct StatusType: Codable {
     let isOperational, isUserSelectable: Bool?
     let id: Int?
     let title: String?
@@ -227,7 +259,7 @@ struct StatusType: Codable {
 }
 
 // MARK: - DataProvider
-struct DataProvider: Codable {
+public struct DataProvider: Codable {
     let websiteURL: String?
     let comments: String?
     let dataProviderStatusType: DataProviderStatusType?
@@ -252,7 +284,7 @@ struct DataProvider: Codable {
 }
 
 // MARK: - DataProviderStatusType
-struct DataProviderStatusType: Codable {
+public struct DataProviderStatusType: Codable {
     let isProviderEnabled: Bool?
     let id: Int?
     let title: String?
@@ -265,7 +297,7 @@ struct DataProviderStatusType: Codable {
 }
 
 // MARK: - MediaItem
-struct MediaItem: Codable {
+public struct MediaItem: Codable {
     let id, chargePointID: Int?
     let itemURL, itemThumbnailURL: String?
     let comment: String?
@@ -291,7 +323,7 @@ struct MediaItem: Codable {
 }
 
 // MARK: - User
-struct User: Codable {
+public struct User: Codable {
     let id: Int?
     let identityProvider, identifier, currentSessionToken: String?
     let username: String?
@@ -334,7 +366,7 @@ struct User: Codable {
 }
 
 // MARK: - OperatorInfo
-struct OperatorInfo: Codable {
+public struct OperatorInfo: Codable {
     let websiteURL: String?
     let comments: String?
     let phonePrimaryContact: String?
@@ -362,7 +394,7 @@ struct OperatorInfo: Codable {
 }
 
 // MARK: - SubmissionStatus
-struct SubmissionStatus: Codable {
+public struct SubmissionStatus: Codable {
     let isLive: Bool?
     let id: Int?
     let title: String?
@@ -375,7 +407,7 @@ struct SubmissionStatus: Codable {
 }
 
 // MARK: - UsageType
-struct UsageType: Codable {
+public struct UsageType: Codable {
     let isPayAtLocation, isMembershipRequired, isAccessKeyRequired: Bool?
     let id: Int?
     let title: String?
@@ -390,7 +422,7 @@ struct UsageType: Codable {
 }
 
 // MARK: - UserComment
-struct UserComment: Codable {
+public struct UserComment: Codable {
     let id, chargePointID, commentTypeID: Int?
     let commentType: CommentType?
     let userName, comment: String?
@@ -420,7 +452,7 @@ struct UserComment: Codable {
 }
 
 // MARK: - CheckinStatusType
-struct CheckinStatusType: Codable {
+public struct CheckinStatusType: Codable {
     let isPositive, isAutomatedCheckin: Bool?
     let id: Int?
     let title: String?
@@ -434,7 +466,7 @@ struct CheckinStatusType: Codable {
 }
 
 // MARK: - CommentType
-struct CommentType: Codable {
+public struct CommentType: Codable {
     let id: Int?
     let title: String?
 
