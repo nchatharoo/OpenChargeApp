@@ -115,6 +115,27 @@ public struct Charger: Codable, Equatable, Identifiable {
 
 // MARK: - AddressInfo
 public struct AddressInfo: Codable {
+    public init(id: Int?, title: String?, addressLine1: String?, addressLine2: String?, town: String?, stateOrProvince: String?, postcode: String?, countryID: Int?, country: Country?, latitude: Double?, longitude: Double?, contactTelephone1: String?, contactTelephone2: String?, contactEmail: String?, accessComments: String?, relatedURL: String?, distance: Double?, distanceUnit: Int?) {
+        self.id = id
+        self.title = title
+        self.addressLine1 = addressLine1
+        self.addressLine2 = addressLine2
+        self.town = town
+        self.stateOrProvince = stateOrProvince
+        self.postcode = postcode
+        self.countryID = countryID
+        self.country = country
+        self.latitude = latitude
+        self.longitude = longitude
+        self.contactTelephone1 = contactTelephone1
+        self.contactTelephone2 = contactTelephone2
+        self.contactEmail = contactEmail
+        self.accessComments = accessComments
+        self.relatedURL = relatedURL
+        self.distance = distance
+        self.distanceUnit = distanceUnit
+    }
+    
     public let id: Int?
     public let title, addressLine1: String?
     public let addressLine2: String?
