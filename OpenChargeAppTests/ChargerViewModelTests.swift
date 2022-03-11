@@ -15,49 +15,51 @@ func uniqueCharger() -> Charger {
 class ChargerViewModelTests: XCTestCase {
 
     func test_init_with_charger() {
-        let charger = uniqueCharger()
-        
-        let sut = ChargerViewModel(charger: charger)
-        
+        let sut = makeSUT()
+
         XCTAssertNotNil(sut.charger)
     }
     
     //MARK : Operator info
     
     func test_operatorInfoTitle_returnResult() {
-        let charger = uniqueCharger()
-        let sut = ChargerViewModel(charger: charger)
-        
-        let operatorInfoTitle = charger.operatorInfo?.title
+        let sut = makeSUT()
+
+        let operatorInfoTitle = sut.charger.operatorInfo?.title
         
         XCTAssertEqual(sut.charger.operatorInfo?.title, operatorInfoTitle)
     }
     
     func test_operatorInfoEmail_returnResult() {
-        let charger = uniqueCharger()
-        let sut = ChargerViewModel(charger: charger)
+        let sut = makeSUT()
 
-        let operatorInfoEmail = charger.operatorInfo?.contactEmail
+        let operatorInfoEmail = sut.charger.operatorInfo?.contactEmail
         
         XCTAssertEqual(sut.charger.operatorInfo?.contactEmail, operatorInfoEmail)
     }
     
     func test_operatorInfoPrimaryPhone_returnResult() {
-        let charger = uniqueCharger()
-        let sut = ChargerViewModel(charger: charger)
+        let sut = makeSUT()
 
-        let operatorInfoPrimaryPhone = charger.operatorInfo?.phonePrimaryContact
+        let operatorInfoPrimaryPhone = sut.charger.operatorInfo?.phonePrimaryContact
         
         XCTAssertEqual(sut.charger.operatorInfo?.phonePrimaryContact, operatorInfoPrimaryPhone)
     }
     
     func test_operatorInfoBookingURL_returnResult() {
-        let charger = uniqueCharger()
-        let sut = ChargerViewModel(charger: charger)
+        let sut = makeSUT()
 
-        let operatorInfoBookingURL = charger.operatorInfo?.bookingURL
+        let operatorInfoBookingURL = sut.charger.operatorInfo?.bookingURL
         
         XCTAssertEqual(sut.charger.operatorInfo?.bookingURL, operatorInfoBookingURL)
     }
+    
+    //MARK: Helper
+    
+    func makeSUT() -> ChargerViewModel {
+        let charger = uniqueCharger()
+        let sut = ChargerViewModel(charger: charger)
 
+        return sut
+    }
 }
