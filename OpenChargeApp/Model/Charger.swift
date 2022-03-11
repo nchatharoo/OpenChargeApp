@@ -115,18 +115,18 @@ public struct Charger: Codable, Equatable, Identifiable {
 
 // MARK: - AddressInfo
 public struct AddressInfo: Codable {
-    let id: Int?
-    let title, addressLine1: String?
-    let addressLine2: String?
-    let town, stateOrProvince: String?
-    let postcode: String?
-    let countryID: Int?
-    let country: Country?
-    let latitude, longitude: Double?
-    let contactTelephone1, contactTelephone2, contactEmail, accessComments: String?
-    let relatedURL: String?
-    let distance: Double?
-    let distanceUnit: Int?
+    public let id: Int?
+    public let title, addressLine1: String?
+    public let addressLine2: String?
+    public let town, stateOrProvince: String?
+    public let postcode: String?
+    public let countryID: Int?
+    public let country: Country?
+    public let latitude, longitude: Double?
+    public let contactTelephone1, contactTelephone2, contactEmail, accessComments: String?
+    public let relatedURL: String?
+    public let distance: Double?
+    public let distanceUnit: Int?
 
     enum CodingKeys: String, CodingKey {
         case id = "ID"
@@ -151,7 +151,7 @@ public struct AddressInfo: Codable {
 }
 
 // MARK: - Country
-struct Country: Codable {
+public struct Country: Codable {
     let isoCode: String?
     let continentCode: String?
     let id: Int?

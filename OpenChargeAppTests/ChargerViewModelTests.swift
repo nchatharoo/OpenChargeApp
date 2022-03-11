@@ -54,6 +54,16 @@ class ChargerViewModelTests: XCTestCase {
         XCTAssertEqual(sut.charger.operatorInfo?.bookingURL, operatorInfoBookingURL)
     }
     
+    //MARK: addressInfo
+
+    func test_addressTitle_returnResult() {
+        let sut = makeSUT()
+
+        let addressTitle = sut.charger.addressInfo?.title
+        
+        XCTAssertEqual(sut.charger.addressInfo?.title, addressTitle)
+    }
+    
     //MARK: Helper
     
     func makeSUT() -> ChargerViewModel {
