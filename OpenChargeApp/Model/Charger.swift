@@ -48,36 +48,36 @@ public struct Charger: Codable, Equatable, Identifiable {
         lhs.id == rhs.id
     }
     
-    let dataProvider: DataProvider?
-    let operatorInfo: OperatorInfo?
-    let usageType: UsageType?
-    let statusType: StatusType?
-    let submissionStatus: SubmissionStatus?
-    let userComments: [UserComment]?
-    let percentageSimilarity: Double?
-    let mediaItems: [MediaItem]?
-    let isRecentlyVerified: Bool?
-    let dateLastVerified: Date?
+    public let dataProvider: DataProvider?
+    public let operatorInfo: OperatorInfo?
+    public let usageType: UsageType?
+    public let statusType: StatusType?
+    public let submissionStatus: SubmissionStatus?
+    public let userComments: [UserComment]?
+    public let percentageSimilarity: Double?
+    public let mediaItems: [MediaItem]?
+    public let isRecentlyVerified: Bool?
+    public let dateLastVerified: Date?
     public let id: Int?
-    let uuid: String?
-    let parentChargePointID: Int?
-    let dataProviderID: Int?
-    let dataProvidersReference: String?
-    let operatorID: Int?
-    let operatorsReference: String?
-    let usageTypeID: Int?
-    let usageCost: String?
-    let addressInfo: AddressInfo?
-    let connections: [Connection]?
-    let numberOfPoints: Int?
-    let generalComments, datePlanned, dateLastConfirmed: String?
-    let statusTypeID: Int?
-    let dateLastStatusUpdate: Date?
-//    let metadataValues: JSONNull?
-    let dataQualityLevel: Int?
-    let dateCreated: Date?
-    let submissionStatusTypeID: Int?
-
+    public let uuid: String?
+    public let parentChargePointID: Int?
+    public let dataProviderID: Int?
+    public let dataProvidersReference: String?
+    public let operatorID: Int?
+    public let operatorsReference: String?
+    public let usageTypeID: Int?
+    public let usageCost: String?
+    public let addressInfo: AddressInfo?
+    public let connections: [Connection]?
+    public let numberOfPoints: Int?
+    public let generalComments, datePlanned, dateLastConfirmed: String?
+    public let statusTypeID: Int?
+    public let dateLastStatusUpdate: Date?
+//  public   let metadataValues: JSONNull?
+    public let dataQualityLevel: Int?
+    public let dateCreated: Date?
+    public let submissionStatusTypeID: Int?
+    
     enum CodingKeys: String, CodingKey {
         case dataProvider = "DataProvider"
         case operatorInfo = "OperatorInfo"
@@ -367,15 +367,30 @@ public struct User: Codable {
 
 // MARK: - OperatorInfo
 public struct OperatorInfo: Codable {
-    let websiteURL: String?
-    let comments: String?
-    let phonePrimaryContact: String?
-    let phoneSecondaryContact: String?
-    let isPrivateIndividual: Bool?
-    let addressInfo, bookingURL, contactEmail, faultReportEmail: String?
-    let isRestrictedEdit: Bool?
-    let id: Int?
-    let title: String?
+    public init(websiteURL: String?, comments: String?, phonePrimaryContact: String?, phoneSecondaryContact: String?, isPrivateIndividual: Bool?, addressInfo: String?, bookingURL: String?, contactEmail: String?, faultReportEmail: String?, isRestrictedEdit: Bool?, id: Int?, title: String?) {
+        self.websiteURL = websiteURL
+        self.comments = comments
+        self.phonePrimaryContact = phonePrimaryContact
+        self.phoneSecondaryContact = phoneSecondaryContact
+        self.isPrivateIndividual = isPrivateIndividual
+        self.addressInfo = addressInfo
+        self.bookingURL = bookingURL
+        self.contactEmail = contactEmail
+        self.faultReportEmail = faultReportEmail
+        self.isRestrictedEdit = isRestrictedEdit
+        self.id = id
+        self.title = title
+    }
+    
+    public let websiteURL: String?
+    public let comments: String?
+    public let phonePrimaryContact: String?
+    public let phoneSecondaryContact: String?
+    public let isPrivateIndividual: Bool?
+    public let addressInfo, bookingURL, contactEmail, faultReportEmail: String?
+    public let isRestrictedEdit: Bool?
+    public let id: Int?
+    public let title: String?
 
     enum CodingKeys: String, CodingKey {
         case websiteURL = "WebsiteURL"
