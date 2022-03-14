@@ -43,7 +43,7 @@ final public class ChargersViewModel: ObservableObject {
         self.client = client
     }
     
-    public func loadChargePoints(with coordinate: CLLocationCoordinate2D) {
+    public func loadChargers(with coordinate: CLLocationCoordinate2D) {
         isProcessing = true
         
         cancellables = client.getPublisher(from: baseAPIURL, with: coordinate)

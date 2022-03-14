@@ -68,7 +68,7 @@ class OpenChargeViewModelTests: XCTestCase {
         
         let stubCoordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
 
-        sut?.loadChargePoints(with: stubCoordinate)
+        sut?.loadChargers(with: stubCoordinate)
         sut = nil
         
         XCTAssertEqual(sut?.cancellables, nil)

@@ -103,7 +103,7 @@ struct ContentView: View {
                         }
                         
                         Button {
-                            chargersViewModel.loadChargePoints(with: locationViewModel.region.center)
+                            chargersViewModel.loadChargers(with: locationViewModel.region.center)
                         } label: {
                             Image("Search")
                                 .resizable()
@@ -141,7 +141,7 @@ struct ContentView: View {
         .alert(item: $chargersViewModel.networkError) { networkError in
             Alert(title: Text(networkError.title), message: Text(networkError.message),
                   primaryButton: .default(Text("Retry"), action: {
-                chargersViewModel.loadChargePoints(with: locationViewModel.region.center)
+                chargersViewModel.loadChargers(with: locationViewModel.region.center)
             }), secondaryButton: .default(Text("Cancel")))
         }
         .sheet(isPresented: $isChargerTapped, onDismiss: {
@@ -161,7 +161,7 @@ struct ContentView: View {
     
     var EmptyRowButton: some View {
         Button {
-            chargersViewModel.loadChargePoints(with: locationViewModel.region.center)
+            chargersViewModel.loadChargers(with: locationViewModel.region.center)
         } label: {
             HStack(alignment: .center) {
                 Text("Tap here to retrieve charger points")
