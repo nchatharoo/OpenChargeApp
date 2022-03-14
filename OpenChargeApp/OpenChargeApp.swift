@@ -10,11 +10,13 @@ import SwiftUI
 @main
 struct OpenChargeApp: App {
     @StateObject private var locationViewModel = LocationViewModel()
-    @StateObject private var chargerViewModel = ChargersViewModel(client: URLSessionHTTPClient())
+    @StateObject private var chargersViewModel = ChargersViewModel(client: URLSessionHTTPClient())
     
     var body: some Scene {
         WindowGroup {
-            ContentView(locationViewModel: locationViewModel, chargersViewModel: chargerViewModel)
+            ContentView()
+                .environmentObject(locationViewModel)
+                .environmentObject(chargersViewModel)
         }
     }
 }

@@ -8,8 +8,8 @@ import MapKit
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var locationViewModel: LocationViewModel
-    @ObservedObject var chargersViewModel: ChargersViewModel
+    @EnvironmentObject var locationViewModel: LocationViewModel
+    @EnvironmentObject var chargersViewModel: ChargersViewModel
     
     @State private var userTrackingMode: MapUserTrackingMode = .follow
     
@@ -175,9 +175,7 @@ struct ContentView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static var locationViewModel = LocationViewModel()
-    static var openchargeViewModel = ChargersViewModel(client: URLSessionHTTPClient())
     static var previews: some View {
-        ContentView(locationViewModel: locationViewModel, chargersViewModel: openchargeViewModel)
+        ContentView()
     }
 }
