@@ -98,6 +98,8 @@ public class ChargerViewModel: ObservableObject {
         return connectionType
     }
     
+    //MARK: statusType
+    
     func statusTitle() -> String {
         guard let statusType = charger.connections?.first?.statusType?.title else {
             return "Unknown"
@@ -112,6 +114,8 @@ public class ChargerViewModel: ObservableObject {
         return statusIsOperational
     }
     
+    //MARK: level
+
     func levelTitle() -> String {
         guard let levelTitle = charger.connections?.first?.level?.title else {
             return "Unknown"
@@ -126,6 +130,8 @@ public class ChargerViewModel: ObservableObject {
         return levelComments
     }
     
+    //MARK: connections power
+
     func amps() -> String {
         guard let amps = charger.connections?.first?.amps else {
             return ""
@@ -146,13 +152,17 @@ public class ChargerViewModel: ObservableObject {
         }
         return "\(powerKW) kW"
     }
-        
+    
+    //MARK: currentType
+
     func currentTypeTitle() -> String {
         guard let currentTypeTitle = charger.connections?.first?.currentType?.title else {
             return ""
         }
         return currentTypeTitle
     }
+
+    //MARK: quantity
     
     func quantity() -> String {
         guard let quantity = charger.connections?.first?.quantity else {

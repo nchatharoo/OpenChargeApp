@@ -188,19 +188,37 @@ public struct Country: Codable {
 
 // MARK: - Connection
 public struct Connection: Codable {
-    let id, connectionTypeID: Int?
-    let connectionType: ConnectionType?
-    let reference: String?
-    let statusTypeID: Int?
-    let statusType: StatusType?
-    let levelID: Int?
-    let level: Level?
-    let amps, voltage: Int?
-    let powerKW: Double?
-    let currentTypeID: Int?
-    let currentType: CurrentType?
-    let quantity: Int?
-    let comments: String?
+    public init(id: Int?, connectionTypeID: Int?, connectionType: ConnectionType?, reference: String?, statusTypeID: Int?, statusType: StatusType?, levelID: Int?, level: Level?, amps: Int?, voltage: Int?, powerKW: Double?, currentTypeID: Int?, currentType: CurrentType?, quantity: Int?, comments: String?) {
+        self.id = id
+        self.connectionTypeID = connectionTypeID
+        self.connectionType = connectionType
+        self.reference = reference
+        self.statusTypeID = statusTypeID
+        self.statusType = statusType
+        self.levelID = levelID
+        self.level = level
+        self.amps = amps
+        self.voltage = voltage
+        self.powerKW = powerKW
+        self.currentTypeID = currentTypeID
+        self.currentType = currentType
+        self.quantity = quantity
+        self.comments = comments
+    }
+    
+    public let id, connectionTypeID: Int?
+    public let connectionType: ConnectionType?
+    public let reference: String?
+    public let statusTypeID: Int?
+    public let statusType: StatusType?
+    public let levelID: Int?
+    public let level: Level?
+    public let amps, voltage: Int?
+    public let powerKW: Double?
+    public let currentTypeID: Int?
+    public let currentType: CurrentType?
+    public let quantity: Int?
+    public let comments: String?
 
     enum CodingKeys: String, CodingKey {
         case id = "ID"
@@ -222,11 +240,19 @@ public struct Connection: Codable {
 }
 
 // MARK: - ConnectionType
-struct ConnectionType: Codable {
-    let formalName: String?
-    let isDiscontinued, isObsolete: Bool?
-    let id: Int?
-    let title: String?
+public struct ConnectionType: Codable {
+    public init(formalName: String?, isDiscontinued: Bool?, isObsolete: Bool?, id: Int?, title: String?) {
+        self.formalName = formalName
+        self.isDiscontinued = isDiscontinued
+        self.isObsolete = isObsolete
+        self.id = id
+        self.title = title
+    }
+    
+    public let formalName: String?
+    public let isDiscontinued, isObsolete: Bool?
+    public let id: Int?
+    public let title: String?
 
     enum CodingKeys: String, CodingKey {
         case formalName = "FormalName"
@@ -238,10 +264,16 @@ struct ConnectionType: Codable {
 }
 
 // MARK: - CurrentType
-struct CurrentType: Codable {
-    let currentTypeDescription: String?
-    let id: Int?
-    let title: String?
+public struct CurrentType: Codable {
+    public init(currentTypeDescription: String?, id: Int?, title: String?) {
+        self.currentTypeDescription = currentTypeDescription
+        self.id = id
+        self.title = title
+    }
+    
+    public let currentTypeDescription: String?
+    public let id: Int?
+    public let title: String?
 
     enum CodingKeys: String, CodingKey {
         case currentTypeDescription = "Description"
@@ -251,11 +283,18 @@ struct CurrentType: Codable {
 }
 
 // MARK: - Level
-struct Level: Codable {
-    let comments: String?
-    let isFastChargeCapable: Bool?
-    let id: Int?
-    let title: String?
+public struct Level: Codable {
+    public init(comments: String?, isFastChargeCapable: Bool?, id: Int?, title: String?) {
+        self.comments = comments
+        self.isFastChargeCapable = isFastChargeCapable
+        self.id = id
+        self.title = title
+    }
+    
+    public let comments: String?
+    public let isFastChargeCapable: Bool?
+    public let id: Int?
+    public let title: String?
 
     enum CodingKeys: String, CodingKey {
         case comments = "Comments"
@@ -267,9 +306,16 @@ struct Level: Codable {
 
 // MARK: - StatusType
 public struct StatusType: Codable {
-    let isOperational, isUserSelectable: Bool?
-    let id: Int?
-    let title: String?
+    public init(isOperational: Bool?, isUserSelectable: Bool?, id: Int?, title: String?) {
+        self.isOperational = isOperational
+        self.isUserSelectable = isUserSelectable
+        self.id = id
+        self.title = title
+    }
+    
+    public let isOperational, isUserSelectable: Bool?
+    public let id: Int?
+    public let title: String?
 
     enum CodingKeys: String, CodingKey {
         case isOperational = "IsOperational"
@@ -319,13 +365,13 @@ public struct DataProviderStatusType: Codable {
 
 // MARK: - MediaItem
 public struct MediaItem: Codable {
-    let id, chargePointID: Int?
-    let itemURL, itemThumbnailURL: String?
-    let comment: String?
-    let isEnabled, isVideo, isFeaturedItem, isExternalResource: Bool?
-//    let metadataValue: JSONNull?
-    let user: User?
-    let dateCreated: Date?
+    public let id, chargePointID: Int?
+    public let itemURL, itemThumbnailURL: String?
+    public let comment: String?
+    public let isEnabled, isVideo, isFeaturedItem, isExternalResource: Bool?
+//  public   let metadataValue: JSONNull?
+    public let user: User?
+    public let dateCreated: Date?
 
     enum CodingKeys: String, CodingKey {
         case id = "ID"
@@ -444,9 +490,17 @@ public struct SubmissionStatus: Codable {
 
 // MARK: - UsageType
 public struct UsageType: Codable {
-    let isPayAtLocation, isMembershipRequired, isAccessKeyRequired: Bool?
-    let id: Int?
-    let title: String?
+    public init(isPayAtLocation: Bool?, isMembershipRequired: Bool?, isAccessKeyRequired: Bool?, id: Int?, title: String?) {
+        self.isPayAtLocation = isPayAtLocation
+        self.isMembershipRequired = isMembershipRequired
+        self.isAccessKeyRequired = isAccessKeyRequired
+        self.id = id
+        self.title = title
+    }
+    
+    public let isPayAtLocation, isMembershipRequired, isAccessKeyRequired: Bool?
+    public let id: Int?
+    public let title: String?
 
     enum CodingKeys: String, CodingKey {
         case isPayAtLocation = "IsPayAtLocation"
