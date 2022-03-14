@@ -7,7 +7,7 @@
 
 import Foundation
 
-public typealias Charge = [Charger]
+public typealias Chargers = [Charger]
 
 // MARK: - ChargePoint
 public struct Charger: Codable, Equatable, Identifiable {

@@ -20,8 +20,8 @@ final public class ChargersViewModel: ObservableObject {
     let client: HTTPClient
     private let baseAPIURL = URL(string: "https://api.openchargemap.io/v3/poi/")!
     public var cancellables: AnyCancellable? = nil
-    @Published private var chargePoints = Charge()
-    @Published public var filteredChargePoints = Charge()
+    @Published private var chargePoints = Chargers()
+    @Published public var filteredChargePoints = Chargers()
 
     @Published var isProcessing = false
     @Published var networkError: NetworkError?
@@ -50,7 +50,7 @@ final public class ChargersViewModel: ObservableObject {
             .tryMap { (data: Data, response: HTTPURLResponse) in
                 data
             }
-            .decode(type: Charge.self, decoder: jsonDecoder)
+            .decode(type: Chargers.self, decoder: jsonDecoder)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { [weak self] completion in
                 guard let self = self else { return }
