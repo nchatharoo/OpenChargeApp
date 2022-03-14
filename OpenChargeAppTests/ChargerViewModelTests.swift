@@ -21,7 +21,7 @@ class ChargerViewModelTests: XCTestCase {
     func test_operatorInfoTitle() {
         let sut = makeSUT()
 
-        let operatorInfoTitle = sut.charger.operatorInfo?.title
+        let operatorInfoTitle = "any title"
         
         XCTAssertEqual(sut.charger.operatorInfo?.title, operatorInfoTitle)
     }
@@ -29,7 +29,7 @@ class ChargerViewModelTests: XCTestCase {
     func test_operatorInfoEmail() {
         let sut = makeSUT()
 
-        let operatorInfoEmail = sut.charger.operatorInfo?.contactEmail
+        let operatorInfoEmail: String? = nil
         
         XCTAssertEqual(sut.charger.operatorInfo?.contactEmail, operatorInfoEmail)
     }
@@ -37,7 +37,7 @@ class ChargerViewModelTests: XCTestCase {
     func test_operatorInfoPrimaryPhone() {
         let sut = makeSUT()
 
-        let operatorInfoPrimaryPhone = sut.charger.operatorInfo?.phonePrimaryContact
+        let operatorInfoPrimaryPhone = "0123456789"
         
         XCTAssertEqual(sut.charger.operatorInfo?.phonePrimaryContact, operatorInfoPrimaryPhone)
     }
@@ -45,7 +45,7 @@ class ChargerViewModelTests: XCTestCase {
     func test_operatorInfoBookingURL() {
         let sut = makeSUT()
 
-        let operatorInfoBookingURL = sut.charger.operatorInfo?.bookingURL
+        let operatorInfoBookingURL: String? = nil
         
         XCTAssertEqual(sut.charger.operatorInfo?.bookingURL, operatorInfoBookingURL)
     }
@@ -55,7 +55,7 @@ class ChargerViewModelTests: XCTestCase {
     func test_addressTitle() {
         let sut = makeSUT()
 
-        let addressTitle = sut.charger.addressInfo?.title
+        let addressTitle = "any address title"
         
         XCTAssertEqual(sut.charger.addressInfo?.title, addressTitle)
     }
@@ -64,7 +64,7 @@ class ChargerViewModelTests: XCTestCase {
     func test_addressLine() {
         let sut = makeSUT()
 
-        let addressLine = sut.charger.addressInfo?.addressLine1
+        let addressLine = "any address line"
         
         XCTAssertEqual(sut.charger.addressInfo?.addressLine1, addressLine)
     }
@@ -72,7 +72,7 @@ class ChargerViewModelTests: XCTestCase {
     func test_addressTown() {
         let sut = makeSUT()
 
-        let addressTown = sut.charger.addressInfo?.town
+        let addressTown = "any town"
         
         XCTAssertEqual(sut.charger.addressInfo?.town, addressTown)
     }
@@ -80,7 +80,7 @@ class ChargerViewModelTests: XCTestCase {
     func test_postcode() {
         let sut = makeSUT()
 
-        let postcode = sut.charger.addressInfo?.postcode
+        let postcode = "any postcode"
         
         XCTAssertEqual(sut.charger.addressInfo?.postcode, postcode)
     }
@@ -88,7 +88,7 @@ class ChargerViewModelTests: XCTestCase {
     func test_distance() {
         let sut = makeSUT()
 
-        let distance = sut.charger.addressInfo?.distance
+        let distance = 0.1
         
         XCTAssertEqual(sut.charger.addressInfo?.distance, distance)
     }
@@ -96,8 +96,8 @@ class ChargerViewModelTests: XCTestCase {
     func test_coordinate() {
         let sut = makeSUT()
 
-        let latitude = sut.charger.addressInfo?.latitude
-        let longitude = sut.charger.addressInfo?.longitude
+        let latitude = 0.0
+        let longitude = 0.0
         
         XCTAssertEqual(sut.charger.addressInfo?.latitude, latitude)
         XCTAssertEqual(sut.charger.addressInfo?.longitude, longitude)
@@ -108,7 +108,7 @@ class ChargerViewModelTests: XCTestCase {
     func test_connectionType() {
         let sut = makeSUT()
 
-        let connectionType = sut.charger.connections?.first?.connectionType?.title
+        let connectionType = "a connection title"
         
         XCTAssertEqual(sut.charger.connections?.first?.connectionType?.title, connectionType)
     }
@@ -118,7 +118,7 @@ class ChargerViewModelTests: XCTestCase {
     func test_statusTitle() {
         let sut = makeSUT()
 
-        let statusType = sut.charger.connections?.first?.statusType?.title
+        let statusType = "a status title"
         
         XCTAssertEqual(sut.charger.connections?.first?.statusType?.title, statusType)
     }
@@ -126,7 +126,7 @@ class ChargerViewModelTests: XCTestCase {
     func test_statusIsOperational() {
         let sut = makeSUT()
 
-        let statusIsOperational = sut.charger.connections?.first?.statusType?.isOperational
+        let statusIsOperational = true
         
         XCTAssertEqual(sut.charger.connections?.first?.statusType?.isOperational, statusIsOperational)
     }
@@ -136,7 +136,7 @@ class ChargerViewModelTests: XCTestCase {
     func test_levelTitle() {
         let sut = makeSUT()
 
-        let levelTitle = sut.charger.connections?.first?.level?.title
+        let levelTitle = "a level title"
         
         XCTAssertEqual(sut.charger.connections?.first?.level?.title, levelTitle)
     }
@@ -144,7 +144,7 @@ class ChargerViewModelTests: XCTestCase {
     func test_levelComments() {
         let sut = makeSUT()
 
-        let levelComments = sut.charger.connections?.first?.level?.comments
+        let levelComments: String? = "a level comment"
             
         XCTAssertEqual(sut.charger.connections?.first?.level?.comments, levelComments)
     }
@@ -154,7 +154,7 @@ class ChargerViewModelTests: XCTestCase {
     func test_amps() {
         let sut = makeSUT()
 
-        let amps = sut.charger.connections?.first?.amps
+        let amps = 10
             
         XCTAssertEqual(sut.charger.connections?.first?.amps, amps)
     }
@@ -162,7 +162,7 @@ class ChargerViewModelTests: XCTestCase {
     func test_voltage() {
         let sut = makeSUT()
 
-        let voltage = sut.charger.connections?.first?.voltage
+        let voltage = 10
         
         XCTAssertEqual(sut.charger.connections?.first?.voltage, voltage)
     }
@@ -170,7 +170,7 @@ class ChargerViewModelTests: XCTestCase {
     func test_powerKW() {
         let sut = makeSUT()
 
-        let powerKW = sut.charger.connections?.first?.powerKW
+        let powerKW = 10.0
         
         XCTAssertEqual(sut.charger.connections?.first?.powerKW, powerKW)
     }
@@ -180,7 +180,7 @@ class ChargerViewModelTests: XCTestCase {
     func test_currentTypeTitle() {
         let sut = makeSUT()
 
-        let currentTypeTitle = sut.charger.connections?.first?.currentType?.title
+        let currentTypeTitle = "a current type title"
         
         XCTAssertEqual(sut.charger.connections?.first?.currentType?.title, currentTypeTitle)
     }
@@ -190,7 +190,7 @@ class ChargerViewModelTests: XCTestCase {
     func test_quantity() {
         let sut = makeSUT()
 
-        let quantity = sut.charger.connections?.first?.quantity
+        let quantity = 2
             
         XCTAssertEqual(sut.charger.connections?.first?.quantity, quantity)
     }
@@ -200,7 +200,7 @@ class ChargerViewModelTests: XCTestCase {
     func test_numberOfPoints() {
         let sut = makeSUT()
 
-        let numberOfPoints = sut.charger.numberOfPoints
+        let numberOfPoints: Int? = nil
                 
         XCTAssertEqual(sut.charger.numberOfPoints, numberOfPoints)
     }
@@ -210,7 +210,7 @@ class ChargerViewModelTests: XCTestCase {
     func test_usageTypeTitle() {
         let sut = makeSUT()
 
-        let usageTypeTitle = sut.charger.usageType?.title
+        let usageTypeTitle = "a usage type title"
         
         XCTAssertEqual(sut.charger.usageType?.title, usageTypeTitle)
     }
@@ -218,7 +218,7 @@ class ChargerViewModelTests: XCTestCase {
     func test_isPayAtLocation() {
         let sut = makeSUT()
 
-        let isPayAtLocation = sut.charger.usageType?.isPayAtLocation
+        let isPayAtLocation = true
         
         XCTAssertEqual(sut.charger.usageType?.isPayAtLocation, isPayAtLocation)
     }
@@ -226,7 +226,7 @@ class ChargerViewModelTests: XCTestCase {
     func test_isMembershipRequired() {
         let sut = makeSUT()
 
-        let isMembershipRequired = sut.charger.usageType?.isMembershipRequired
+        let isMembershipRequired = false
         
         XCTAssertEqual(sut.charger.usageType?.isMembershipRequired, isMembershipRequired)
     }
@@ -234,7 +234,7 @@ class ChargerViewModelTests: XCTestCase {
     func test_isAccessKeyRequired() {
         let sut = makeSUT()
 
-        let isAccessKeyRequired = sut.charger.usageType?.isAccessKeyRequired
+        let isAccessKeyRequired = true
         
         XCTAssertEqual(sut.charger.usageType?.isAccessKeyRequired, isAccessKeyRequired)
     }
@@ -244,7 +244,7 @@ class ChargerViewModelTests: XCTestCase {
     func test_itemThumbnailURL() {
         let sut = makeSUT()
 
-        let itemThumbnailURL = sut.charger.mediaItems?.first?.itemThumbnailURL
+        let itemThumbnailURL: String? = nil
         
         XCTAssertEqual(sut.charger.mediaItems?.first?.itemThumbnailURL, itemThumbnailURL)
     }
@@ -254,7 +254,7 @@ class ChargerViewModelTests: XCTestCase {
     func test_usageCost() {
         let sut = makeSUT()
 
-        let usageCost = sut.charger.usageCost
+        let usageCost = "a usage cost"
         
         XCTAssertEqual(sut.charger.usageCost, usageCost)
     }
@@ -271,7 +271,12 @@ class ChargerViewModelTests: XCTestCase {
     
     private func uniqueCharger() -> Charger {
         return Charger(dataProvider: nil,
-                       operatorInfo: OperatorInfo(websiteURL: "http://a-url.com", comments: "any comment", phonePrimaryContact: "0123456789", phoneSecondaryContact: "0123456789", isPrivateIndividual: nil, addressInfo: nil, bookingURL: nil, contactEmail: nil, faultReportEmail: nil, isRestrictedEdit: nil, id: nil, title: "any title"), usageType: UsageType(isPayAtLocation: true, isMembershipRequired: false, isAccessKeyRequired: true, id: nil, title: "a usage type title"),
+                       operatorInfo: OperatorInfo(websiteURL: "http://a-url.com", comments: "any comment", phonePrimaryContact: "0123456789", phoneSecondaryContact: "0123456789", isPrivateIndividual: nil, addressInfo: nil, bookingURL: nil, contactEmail: nil, faultReportEmail: nil, isRestrictedEdit: nil, id: nil, title: "any title"),
+                       usageType: UsageType(isPayAtLocation: true,
+                                            isMembershipRequired: false,
+                                            isAccessKeyRequired: true,
+                                            id: nil,
+                                            title: "a usage type title"),
                        statusType: nil,
                        submissionStatus: nil,
                        userComments: nil,
@@ -289,7 +294,7 @@ class ChargerViewModelTests: XCTestCase {
                        usageTypeID: nil,
                        usageCost: "a usage cost",
                        addressInfo: AddressInfo(id: nil, title: "any address title", addressLine1: "any address line", addressLine2: nil, town: "any town", stateOrProvince: "any state", postcode: "any postcode", countryID: nil, country: nil, latitude: 0.0, longitude: 0.0, contactTelephone1: "0123456789", contactTelephone2: nil, contactEmail: nil, accessComments: nil, relatedURL: nil, distance: 0.1, distanceUnit: nil),
-                       connections: [Connection(id: nil, connectionTypeID: nil, connectionType: ConnectionType(formalName: "a formalName", isDiscontinued: nil, isObsolete: nil, id: nil, title: "a connection title"), reference: nil, statusTypeID: nil, statusType: StatusType(isOperational: true, isUserSelectable: true, id: nil, title: "a status type"), levelID: nil, level: Level(comments: "a level comment", isFastChargeCapable: true, id: nil, title: "a level title"), amps: 10, voltage: 10, powerKW: 10.0, currentTypeID: nil, currentType: CurrentType(currentTypeDescription: "a current type description", id: nil, title: "a current type title"), quantity: 2, comments: "a current type comment")],
+                       connections: [Connection(id: nil, connectionTypeID: nil, connectionType: ConnectionType(formalName: "a formalName", isDiscontinued: nil, isObsolete: nil, id: nil, title: "a connection title"), reference: nil, statusTypeID: nil, statusType: StatusType(isOperational: true, isUserSelectable: true, id: nil, title: "a status title"), levelID: nil, level: Level(comments: "a level comment", isFastChargeCapable: true, id: nil, title: "a level title"), amps: 10, voltage: 10, powerKW: 10.0, currentTypeID: nil, currentType: CurrentType(currentTypeDescription: "a current type description", id: nil, title: "a current type title"), quantity: 2, comments: "a current type comment")],
                        numberOfPoints: nil,
                        generalComments: nil,
                        datePlanned: nil,
