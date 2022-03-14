@@ -118,3 +118,6 @@ OpenChargeApp/Views/Charger/._ChargerScrollView.swift
 ._ScrollViewOffset.swift
 ._ChargerViewModel.swift
 ._ChargerViewModelTests.swift
+OpenChargeApp/Model/._ChargerFilter.swift
+OpenChargeApp/Views/._FilterView.swift
+OpenChargeApp/Views/._MapView.swift
