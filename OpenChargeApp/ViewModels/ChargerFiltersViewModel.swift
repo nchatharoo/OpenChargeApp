@@ -7,12 +7,13 @@
 
 import Foundation
 
-struct ChargerFilter: Equatable {
-    var usageType: ChargerUsage = .all
-    var powerKW: Double = 0.0
-    var showIsOperational: Bool = false
-    var connectionIndex: Int = 0
-    var connectionType = [
+class ChargerFiltersViewModel: ObservableObject {
+    
+    @Published var usageType: ChargerUsage = .all
+    @Published var powerKW: Double = 0.0
+    @Published var showIsOperational: Bool = false
+    @Published var connectionIndex: Int = 0
+    @Published var connectionType = [
         "Avcon Connector",
         "BS1363 3 Pin 13 Amp",
         "Blue Commando (2P+E)",

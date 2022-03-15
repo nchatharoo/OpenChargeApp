@@ -9,42 +9,40 @@ import SwiftUI
 
 struct FilterView: View {
     @EnvironmentObject var chargersViewModel: ChargersViewModel
-    
-    @State private var filters: ChargerFilter = ChargerFilter()
-    
-    @State private var powerKw: Double = 0
-    @State private var selectedUsage: ChargerUsage = .all
-    @State private var showIsOperational: Bool = false
+    @EnvironmentObject var filters: ChargerFiltersViewModel
 
     var body: some View {
         VStack {
-            Text("Select the desired power: \(powerKw, specifier: "%.1f")")
+            Text("Select the desired power: \(filters.powerKW, specifier: "%.1f")")
             HStack {
                 Image(systemName: "bolt.circle.fill")
                     .font(.title)
-                Slider(value: $powerKw, in: 0...650) {
+                
+                Slider(value: $filters.powerKW, in: 0...650) {
                     Text("Power")
                 } minimumValueLabel: {
                     Text("0")
                 } maximumValueLabel: {
                     Text("650")
-                } onEditingChanged: { _ in
-                    filters.powerKW = powerKw
                 }
                 .accentColor(Color.green)
+                .onReceive(filters.$powerKW, perform: { _ in
+                    chargersViewModel.filterCharger(with: filters)
+                })
+                
                 Image(systemName: "bolt.circle.fill")
                     .font(.largeTitle)
             }
             Text("\(chargersViewModel.filteredChargePoints.count)")
                 
-            Picker("", selection: $selectedUsage) {
+            Picker("", selection: $filters.usageType) {
                 Text("All").tag(ChargerUsage.all)
                 Text("Pay at location").tag(ChargerUsage.isPayAtLocation)
                 Text("Membership required").tag(ChargerUsage.isMembershipRequired)
                 Text("Access key required").tag(ChargerUsage.isAccessKeyRequired)
             }
-            .onChange(of: selectedUsage, perform: { newValue in
-                filters.usageType = newValue
+            .onChange(of: filters.usageType, perform: { _ in
+                chargersViewModel.filterCharger(with: filters)
             })
             .pickerStyle(.segmented)
                                 
@@ -58,13 +56,10 @@ struct FilterView: View {
                 }
             }
             
-            Toggle("Show only operationnal", isOn: $showIsOperational)
+            Toggle("Show only operationnal", isOn: $filters.showIsOperational)
             
         }
-        .onChange(of: showIsOperational, perform: { newValue in
-            filters.showIsOperational = newValue
-        })
-        .onChange(of: filters, perform: { newValue in
+        .onReceive(filters.$showIsOperational, perform: { _ in
             chargersViewModel.filterCharger(with: filters)
         })
         .padding()

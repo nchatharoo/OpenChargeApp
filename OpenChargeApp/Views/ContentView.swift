@@ -10,7 +10,8 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var locationViewModel: LocationViewModel
     @EnvironmentObject var chargersViewModel: ChargersViewModel
-    
+    @EnvironmentObject var filters: ChargerFiltersViewModel
+
     @State private var userTrackingMode: MapUserTrackingMode = .follow
     
     @State private var charger: Charger?
@@ -155,6 +156,7 @@ struct ContentView: View {
         }, content: {
             FilterView()
                 .environmentObject(chargersViewModel)
+                .environmentObject(filters)
         })
         .ignoresSafeArea()
     }
