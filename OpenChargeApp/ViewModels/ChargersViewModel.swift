@@ -68,7 +68,7 @@ final public class ChargersViewModel: ObservableObject {
     func filterCharger(with filters: ChargerFiltersViewModel) {
         _ = $chargePoints
             .map { charger in
-                var filtered = charger.filter({ filters.powerKW == 0 || $0.connections?.first?.powerKW ?? 0.0 < filters.powerKW })
+                var filtered = charger.filter({ filters.powerKW == 0 || $0.connections?.first?.powerKW ?? 0.0 > filters.powerKW })
                 
                 switch filters.usageType {
                 case .isPayAtLocation: filtered.removeAll(where: { $0.usageType?.isPayAtLocation ?? false })
