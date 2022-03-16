@@ -265,10 +265,10 @@
 		8E9E73CC26E0B66600CFEC24 /* OpenChargeAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				8EA3097027E1F96200B22600 /* ViewModel */,
 				8E69AC9C26EB8A4A00485CC2 /* API */,
 				8E69AC9D26EB8A9C00485CC2 /* Location */,
 				8E9E73CF26E0B66600CFEC24 /* Info.plist */,
-				8E7AA43C27DB42F400CF0864 /* ChargerViewModelTests.swift */,
 			);
 			path = OpenChargeAppTests;
 			sourceTree = "<group>";
@@ -289,6 +289,14 @@
 				8E66781426EFDACE0008D7D2 /* URLSessionHTTPClient.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		8EA3097027E1F96200B22600 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8E7AA43C27DB42F400CF0864 /* ChargerViewModelTests.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
