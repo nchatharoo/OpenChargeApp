@@ -20,21 +20,8 @@ struct ChargerView: View {
     
     var body: some View {
         VStack {
-            VStack {
+            VStack(spacing: 5) {
                 HStack {
-                    AsyncImage(url: URL(string: chargerViewModel.itemThumbnailURL())) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(1, contentMode: .fit)
-                            .frame(width: 50, height: 50)
-                        
-                    } placeholder: {
-                        Image(systemName: "bolt.car")
-                            .resizable()
-                            .aspectRatio(1, contentMode: .fit)
-                            .frame(width: 50, height: 50)
-                    }
-                    
                     Text(chargerViewModel.operatorInfoTitle())
                         .font(.largeTitle)
                         .fontWeight(.bold)
@@ -46,7 +33,7 @@ struct ChargerView: View {
                 }
             }
             
-            VStack {
+            VStack(alignment: .leading) {
                 Text(chargerViewModel.addressTitle())
                     .fontWeight(.bold)
                 Text((chargerViewModel.addressLine()) + " " + (chargerViewModel.addressTown()))
@@ -54,14 +41,12 @@ struct ChargerView: View {
                 Text(chargerViewModel.postcode())
                     .fontWeight(.thin)
 
-                HStack {
-                    Image(systemName: "mappin")
-                    Text("\(chargerViewModel.distance(), specifier: "%.2f") km")
-                }
-                .foregroundColor(.green)
+                Text("\(chargerViewModel.distance(), specifier: "%.2f") km")
             }
             VStack {
-                Text("\(chargerViewModel.connectionType())")
+                Text("Connector: \(chargerViewModel.connectionType())")
+                Text("Type: \(chargerViewModel.currentTypeTitle())")
+
                 Text("Status: \(chargerViewModel.statusTitle())")
                     .foregroundColor(chargerViewModel.statusIsOperational() ? .green : .red)
             }
@@ -73,10 +58,7 @@ struct ChargerView: View {
                 Text(chargerViewModel.powerKW())
             }
             VStack {
-                Text("Type: \(chargerViewModel.currentTypeTitle())")
-            }
-            VStack {
-                Text(chargerViewModel.quantity())
+                Text("Type: \(chargerViewModel.currentTypeTitle()) x \(Text(chargerViewModel.quantity()))")
             }
             VStack {
                 Text("Number of bays: \(chargerViewModel.numberOfPoints())")
@@ -86,20 +68,39 @@ struct ChargerView: View {
             }
             VStack {
                 Text(chargerViewModel.usageTypeTitle())
+                
                 HStack {
-                    Image("Pay")
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                        .foregroundColor(chargerViewModel.isPayAtLocation() ? .yellow : .gray)
-                    Image("Member")
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                        .foregroundColor(chargerViewModel.isMembershipRequired() ? .yellow : .gray)
-                    Image("Key")
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                        .foregroundColor(chargerViewModel.isAccessKeyRequired() ? .yellow : .gray)
+                    VStack {
+                        Image("Pay")
+                            .renderingMode(.template)
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .foregroundColor(chargerViewModel.isPayAtLocation() ? .secondary : .primary)
+                        Text("Payment")            .fontWeight(.thin)
+                            .font(.footnote)
+                    }
+                    
+                    VStack {
+                        Image("Member")
+                            .renderingMode(.template)
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .foregroundColor(chargerViewModel.isMembershipRequired() ? .secondary : .primary)
+                        Text("Membership")         .fontWeight(.thin)
+                            .font(.footnote)
+                    }
+                    
+                    VStack {
+                        Image("Key")
+                            .renderingMode(.template)
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .foregroundColor(chargerViewModel.isAccessKeyRequired() ? .secondary : .primary)
+                        Text("Access key")         .fontWeight(.thin)
+                            .font(.footnote)
+                    }
                 }
+
             }
             VStack {
                 directionsButton
@@ -139,6 +140,8 @@ struct ChargerView: View {
         } label: {
             Image("Mail")
                 .renderingMode(.template)
+                .resizable()
+                .frame(width: 30, height: 30)
                 .foregroundColor(chargerViewModel.operatorInfoEmail() == nil ? .secondary : .primary)
         }
         .disabled(chargerViewModel.operatorInfoEmail() == nil)
@@ -150,6 +153,8 @@ struct ChargerView: View {
         } label: {
             Image("Phone")
                 .renderingMode(.template)
+                .resizable()
+                .frame(width: 30, height: 30)
                 .foregroundColor(chargerViewModel.operatorInfoPrimaryPhone() == nil ? .secondary : .primary)
         }.disabled(chargerViewModel.operatorInfoPrimaryPhone() == nil)
     }
@@ -160,7 +165,51 @@ struct ChargerView: View {
         } label: {
             Image("Web")
                 .renderingMode(.template)
+                .resizable()
+                .frame(width: 30, height: 30)
                 .foregroundColor(chargerViewModel.operatorInfoBookingURL() == nil ? .secondary : .primary)
         }.disabled(chargerViewModel.operatorInfoBookingURL() == nil)
+    }
+}
+
+struct ChargerView_Previews: PreviewProvider {
+    static let charger = Charger(dataProvider: nil,
+                       operatorInfo: OperatorInfo(websiteURL: "http://a-url.com", comments: "any comment", phonePrimaryContact: "0123456789", phoneSecondaryContact: "0123456789", isPrivateIndividual: nil, addressInfo: nil, bookingURL: nil, contactEmail: nil, faultReportEmail: nil, isRestrictedEdit: nil, id: nil, title: "any title"),
+                       usageType: UsageType(isPayAtLocation: true,
+                                            isMembershipRequired: false,
+                                            isAccessKeyRequired: true,
+                                            id: nil,
+                                            title: "Public - Membership Required"),
+                       statusType: nil,
+                       submissionStatus: nil,
+                       userComments: nil,
+                       percentageSimilarity: nil,
+                       mediaItems: nil,
+                       isRecentlyVerified: nil,
+                       dateLastVerified: nil,
+                       id: nil,
+                       uuid: UUID().uuidString,
+                       parentChargePointID: nil,
+                       dataProviderID: nil,
+                       dataProvidersReference: nil,
+                       operatorID: nil,
+                       operatorsReference: nil,
+                       usageTypeID: nil,
+                       usageCost: "a usage cost",
+                       addressInfo: AddressInfo(id: nil, title: "any address title", addressLine1: "any address line", addressLine2: nil, town: "any town", stateOrProvince: "any state", postcode: "any postcode", countryID: nil, country: nil, latitude: 0.0, longitude: 0.0, contactTelephone1: "0123456789", contactTelephone2: nil, contactEmail: nil, accessComments: nil, relatedURL: nil, distance: 0.1, distanceUnit: nil),
+                       connections: [Connection(id: nil, connectionTypeID: nil, connectionType: ConnectionType(formalName: "a formalName", isDiscontinued: nil, isObsolete: nil, id: nil, title: "GB-T AC - GB/T 20234.2 (Tethered Cable)"), reference: nil, statusTypeID: nil, statusType: StatusType(isOperational: true, isUserSelectable: true, id: nil, title: "Operational"), levelID: nil, level: Level(comments: "Over 2 kW, usually non-domestic socket types", isFastChargeCapable: true, id: nil, title: "Level 2 : Medium (Over 2kW)"), amps: 10, voltage: 10, powerKW: 10.0, currentTypeID: nil, currentType: CurrentType(currentTypeDescription: "a current type description", id: nil, title: "AC (Single-Phase)"), quantity: 2, comments: "a current type comment")],
+                       numberOfPoints: 4,
+                       generalComments: nil,
+                       datePlanned: nil,
+                       dateLastConfirmed: nil,
+                       statusTypeID: nil,
+                       dateLastStatusUpdate: Date(),
+                       dataQualityLevel: nil,
+                       dateCreated: Date(),
+                       submissionStatusTypeID: nil)
+
+    static var chargerViewModel = ChargerViewModel(charger: charger)
+    static var previews: some View {
+        ChargerView(chargerViewModel: chargerViewModel)
     }
 }
