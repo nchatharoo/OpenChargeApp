@@ -51,7 +51,7 @@ struct ContentView: View {
                 
             } else {
                 NavigationView {
-                    ScrollViewOffset {
+                    ChargersList {
                         if chargersViewModel.filteredChargePoints.isEmpty {
                             EmptyRowButton
                         }

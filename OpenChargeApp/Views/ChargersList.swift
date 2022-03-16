@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ScrollViewOffset<Content: View>: View {
+struct ChargersList<Content: View>: View {
     let content: () -> Content
     let onOffsetChange: (CGFloat) -> Void
     
