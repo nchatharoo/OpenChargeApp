@@ -34,17 +34,26 @@ struct FilterView: View {
                     .font(.largeTitle)
             }
             Text("\(chargersViewModel.filteredChargePoints.count)")
-                
-            Picker("", selection: $filters.usageType) {
-                Text("All").tag(ChargerUsage.all)
-                Text("Pay at location").tag(ChargerUsage.isPayAtLocation)
-                Text("Membership required").tag(ChargerUsage.isMembershipRequired)
-                Text("Access key required").tag(ChargerUsage.isAccessKeyRequired)
-            }
-            .onChange(of: filters.usageType, perform: { _ in
-                chargersViewModel.filterCharger(with: filters)
-            })
-            .pickerStyle(.segmented)
+                        
+            Toggle("Pay at location", isOn: $filters.isPayAtLocation)
+                .onReceive(filters.$isPayAtLocation, perform: { _ in
+                    chargersViewModel.filterCharger(with: filters)
+                })
+            
+            Toggle("Membership required", isOn: $filters.isMembershipRequired)
+                .onReceive(filters.$isMembershipRequired, perform: { _ in
+                    chargersViewModel.filterCharger(with: filters)
+                })
+            
+            Toggle("Access key required", isOn: $filters.isAccessKeyRequired)
+                .onReceive(filters.$isAccessKeyRequired, perform: { _ in
+                    chargersViewModel.filterCharger(with: filters)
+                })
+            
+            Toggle("Show only operationnal", isOn: $filters.showIsOperational)
+                .onReceive(filters.$showIsOperational, perform: { _ in
+                    chargersViewModel.filterCharger(with: filters)
+                })
                                 
             List {
                 ForEach(Array(filters.connectionType.enumerated()), id: \.1) { (index, type) in
@@ -58,11 +67,6 @@ struct FilterView: View {
             .onChange(of: filters.connectionIndex, perform: { _ in
                 chargersViewModel.filterCharger(with: filters)
             })
-            
-            Toggle("Show only operationnal", isOn: $filters.showIsOperational)
-                .onReceive(filters.$showIsOperational, perform: { _ in
-                    chargersViewModel.filterCharger(with: filters)
-                })
         }
         .padding()
     }

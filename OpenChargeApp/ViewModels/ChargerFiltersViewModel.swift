@@ -9,9 +9,12 @@ import Foundation
 
 class ChargerFiltersViewModel: ObservableObject {
     
-    @Published var usageType: ChargerUsage = .all
     @Published var powerKW: Double = 0.0
     @Published var showIsOperational: Bool = false
+    @Published var isPayAtLocation: Bool = false
+    @Published var isMembershipRequired: Bool = false
+    @Published var isAccessKeyRequired: Bool = false
+
     @Published var connectionIndex: Int = 0
     @Published var connectionType = [
         "Avcon Connector",
@@ -56,11 +59,4 @@ class ChargerFiltersViewModel: ObservableObject {
         "Wireless Charging",
         "XLR Plug (4 pin)",
     ]
-}
-
-enum ChargerUsage: String {
-    case all
-    case isPayAtLocation
-    case isMembershipRequired
-    case isAccessKeyRequired
 }
