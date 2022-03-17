@@ -60,11 +60,10 @@ struct FilterView: View {
             })
             
             Toggle("Show only operationnal", isOn: $filters.showIsOperational)
-            
+                .onReceive(filters.$showIsOperational, perform: { _ in
+                    chargersViewModel.filterCharger(with: filters)
+                })
         }
-        .onReceive(filters.$showIsOperational, perform: { _ in
-            chargersViewModel.filterCharger(with: filters)
-        })
         .padding()
     }
 }
