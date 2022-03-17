@@ -77,7 +77,8 @@ final public class ChargersViewModel: ObservableObject {
                 case .all: break
                 }
                 
-                filtered.removeAll(where: { $0.connections?.first?.connectionType?.title == filters.connectionType[filters.connectionIndex]
+                filtered.removeAll(where: {
+                    $0.connections?.first?.connectionType?.title == filters.connectionType[filters.connectionIndex]
                 })
                                 
                 if filters.showIsOperational {

@@ -55,6 +55,9 @@ struct FilterView: View {
                     }
                 }
             }
+            .onChange(of: filters.connectionIndex, perform: { _ in
+                chargersViewModel.filterCharger(with: filters)
+            })
             
             Toggle("Show only operationnal", isOn: $filters.showIsOperational)
             
