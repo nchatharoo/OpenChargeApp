@@ -164,7 +164,6 @@
 				8E1DBB4227D6504200D9277E /* FilterView.swift */,
 				8E1C011B27B67107001381AA /* SearchBarView.swift */,
 				8E5FBF3527BBCE4800241226 /* ProcessingView.swift */,
-				8E64D40227C7D955008BEB65 /* ChargersList.swift */,
 				8E73D23227C4186C007818B8 /* Charger */,
 			);
 			path = Views;
@@ -209,6 +208,7 @@
 		8E73D23227C4186C007818B8 /* Charger */ = {
 			isa = PBXGroup;
 			children = (
+				8E64D40227C7D955008BEB65 /* ChargersList.swift */,
 				8E73D23027C417A2007818B8 /* ChargerScrollView.swift */,
 				8E73D22E27C41781007818B8 /* ChargerView.swift */,
 				8E5FBF3B27BBEBC000241226 /* ChargerAnnotationView.swift */,

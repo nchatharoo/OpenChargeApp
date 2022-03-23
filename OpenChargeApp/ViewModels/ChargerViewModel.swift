@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import SwiftUI
 
 public class ChargerViewModel: ObservableObject {
     public let charger: Charger
@@ -91,8 +92,15 @@ public class ChargerViewModel: ObservableObject {
     
     //MARK: connectionType
     
-    func connectionType() -> String {
-        guard let connectionType = charger.connections?.first?.connectionType?.title else {
+    func connections() -> [Connection] {
+        guard let connections = charger.connections else {
+            return []
+        }
+        return connections
+    }
+    
+    func connectionType(_ connection: Connection) -> String {
+        guard let connectionType = connection.connectionType?.title else {
             return ""
         }
         return connectionType
@@ -116,15 +124,15 @@ public class ChargerViewModel: ObservableObject {
     
     //MARK: level
 
-    func levelTitle() -> String {
-        guard let levelTitle = charger.connections?.first?.level?.title else {
+    func levelTitle(_ connection: Connection) -> String {
+        guard let levelTitle = connection.level?.title else {
             return "Unknown"
         }
         return levelTitle
     }
     
-    func levelComments() -> String {
-        guard let levelComments = charger.connections?.first?.level?.comments else {
+    func levelComments(_ connection: Connection) -> String {
+        guard let levelComments = connection.level?.comments else {
             return ""
         }
         return levelComments
@@ -132,40 +140,63 @@ public class ChargerViewModel: ObservableObject {
     
     //MARK: connections power
 
-    func amps() -> String {
-        guard let amps = charger.connections?.first?.amps else {
-            return ""
+    func amps(_ connection: Connection) -> String {
+        guard let amps = connection.amps else {
+            return "-"
         }
         return "\(amps) amps"
     }
     
-    func voltage() -> String {
-        guard let voltage = charger.connections?.first?.voltage else {
-            return ""
+    func voltage(_ connection: Connection) -> String {
+        guard let voltage = connection.voltage else {
+            return "-"
         }
         return "\(voltage) V"
     }
     
-    func powerKW() -> String {
-        guard let powerKW = charger.connections?.first?.powerKW else {
-            return ""
+    func powerKW(_ connection: Connection) -> String {
+        guard let powerKW = connection.powerKW else {
+            return "-"
         }
         return "\(powerKW) kW"
     }
     
     //MARK: currentType
 
-    func currentTypeTitle() -> String {
-        guard let currentTypeTitle = charger.connections?.first?.currentType?.title else {
+    func currentTypeTitle(_ connection: Connection) -> String {
+        guard let currentTypeTitle = connection.currentType?.title else {
             return ""
         }
         return currentTypeTitle
     }
+    
+    func connectionTypeImage(_ connection: Connection) -> Image {
+        guard let connectionTypeID = connection.connectionTypeID else {
+            return Image("Unknown")
+        }
+        switch connectionTypeID {
+        case 1:
+            return Image("Type1_J1772")
+        case 2:
+            return Image("Chademo_type4")
+        case 25:
+            return Image("Type2_socket")
+        case 32:
+            return Image("Type1_CCS")
+        case 33:
+            return Image("Type2_CCS")
+        case 1036:
+            return Image("Type2_tethered")
+        default:
+            return Image("Unknown")
+        }
+    }
+
 
     //MARK: quantity
     
-    func quantity() -> String {
-        guard let quantity = charger.connections?.first?.quantity else {
+    func quantity(_ connection: Connection) -> String {
+        guard let quantity = connection.quantity else {
             return ""
         }
         return "\(quantity)"
