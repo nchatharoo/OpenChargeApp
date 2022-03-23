@@ -19,36 +19,59 @@ struct ChargerView: View {
     }
     
     var body: some View {
-        VStack {
-            VStack(spacing: 5) {
-                HStack {
-                    Text(chargerViewModel.operatorInfoTitle())
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                }
-                HStack {
-                    mailButton
-                    phoneButton
-                    websiteButton
-                }
+        VStack(alignment: .leading) {
+            VStack(alignment: .center) {
+                Text(chargerViewModel.operatorInfoTitle())
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+
+//                HStack {
+//                    mailButton
+//                    phoneButton
+//                    websiteButton
+//                }
             }
             
             VStack(alignment: .leading) {
-                Text(chargerViewModel.addressTitle())
-                    .fontWeight(.bold)
-                Text((chargerViewModel.addressLine()) + " " + (chargerViewModel.addressTown()))
-                    .fontWeight(.thin)
-                Text(chargerViewModel.postcode())
-                    .fontWeight(.thin)
+//                Text((chargerViewModel.addressLine()) + " " + (chargerViewModel.addressTown()))
+//                    .fontWeight(.thin)
+//                Text(chargerViewModel.postcode())
+//                    .fontWeight(.thin)
+                HStack {
+                    Image("Location")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 20, height: 20)
 
-                Text("\(chargerViewModel.distance(), specifier: "%.2f") km")
+                    Text(chargerViewModel.addressLine())
+
+                    Text("\(chargerViewModel.distance(), specifier: "%.2f") km")
+                        .font(.system(size: 14, weight: .light))
+                }
+                
+                HStack {
+                    Image("Status")
+                        .resizable()
+                        .renderingMode(.template)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 20, height: 20)
+
+                    Text("\(chargerViewModel.statusTitle().uppercased())")
+                }
+                .foregroundColor(chargerViewModel.statusIsOperational() ? .green : .red)
             }
             VStack {
-                Text("Connector: \(chargerViewModel.connectionType())")
-                Text("Type: \(chargerViewModel.currentTypeTitle())")
-
-                Text("Status: \(chargerViewModel.statusTitle())")
-                    .foregroundColor(chargerViewModel.statusIsOperational() ? .green : .red)
+                VStack {
+                    Text("Type: \(chargerViewModel.currentTypeTitle())")
+                        .fontWeight(.bold)
+                    Text("Connector: ")
+                    Text("\(chargerViewModel.connectionType())")
+                }
+                .padding()
+                .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(Color.green, lineWidth: 1)
+                    )
             }
             VStack {
                 Text("Level: \(chargerViewModel.levelTitle())")
@@ -76,7 +99,8 @@ struct ChargerView: View {
                             .resizable()
                             .frame(width: 24, height: 24)
                             .foregroundColor(chargerViewModel.isPayAtLocation() ? .secondary : .primary)
-                        Text("Payment")            .fontWeight(.thin)
+                        Text("Payment")
+                            .fontWeight(.thin)
                             .font(.footnote)
                     }
                     
@@ -86,7 +110,8 @@ struct ChargerView: View {
                             .resizable()
                             .frame(width: 24, height: 24)
                             .foregroundColor(chargerViewModel.isMembershipRequired() ? .secondary : .primary)
-                        Text("Membership")         .fontWeight(.thin)
+                        Text("Membership")
+                            .fontWeight(.thin)
                             .font(.footnote)
                     }
                     
