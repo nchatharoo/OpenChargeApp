@@ -22,7 +22,7 @@ struct ChargerView: View {
                 Text(chargerViewModel.operatorInfoTitle())
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                    .padding([.top, .horizontal])
+                    .padding(.top)
             
                 MapView(directions: $directions)
                     .cornerRadius(20)
@@ -70,7 +70,7 @@ struct ChargerView: View {
                 .foregroundColor(chargerViewModel.statusIsOperational() ? .green : .red)
             }
             .font(.system(.subheadline))
-            .padding([.top, .horizontal])
+            .padding(.top)
 
             GeometryReader { geometry in
 
@@ -115,10 +115,7 @@ struct ChargerView: View {
     
     var directionsButton: some View {
         Button {
-            let latitude = chargerViewModel.coordinate().latitude
-            let longitude = chargerViewModel.coordinate().longitude
-            let url = URL(string: "http://maps.apple.com/?ll=\(latitude.description),\(longitude.description)")
-            UIApplication.shared.open(url!)
+            redirectToAppleMaps()
         } label: {
             Text("Directions")
                 .frame(maxWidth: 300)
@@ -127,6 +124,17 @@ struct ChargerView: View {
                 .clipShape(Capsule())
                 .foregroundColor(Color.white)
         }
+    }
+    
+    private func redirectToAppleMaps() {
+        let sourceLat = locationViewModel.region.center.latitude
+        let sourceLong = locationViewModel.region.center.longitude
+        
+        let destinationLat = chargerViewModel.coordinate().latitude
+        let destinationLong = chargerViewModel.coordinate().longitude
+        
+        let url = URL(string: "http://maps.apple.com/?saddr=\(sourceLat.description),\(sourceLong.description)&daddr=\(destinationLat.description),\(destinationLong.description)&dirflg=d")
+        UIApplication.shared.open(url!)
     }
 }
 
