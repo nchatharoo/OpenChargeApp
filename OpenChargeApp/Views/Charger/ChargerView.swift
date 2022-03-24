@@ -12,19 +12,27 @@ struct ChargerView: View {
     let chargerViewModel: ChargerViewModel
     
     @State private var directions: [String] = []
-    @State private var showDirections = false
     
     init(chargerViewModel: ChargerViewModel) {
         self.chargerViewModel = chargerViewModel
     }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(chargerViewModel.operatorInfoTitle())
-                .font(.largeTitle)
-                .fontWeight(.bold)
+        VStack(alignment: .leading, spacing: 8) {
+                Text(chargerViewModel.operatorInfoTitle())
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .padding([.top, .horizontal])
+            
+                MapView(directions: $directions)
+                    .cornerRadius(20)
+                    .shadow(color: .primary.opacity(0.3), radius: 3)
+                    .disabled(true)
+                    .environmentObject(locationViewModel)
+                    .environmentObject(chargerViewModel)
             
             VStack(alignment: .leading) {
+                
                 HStack(alignment: .center) {
                     Image("Location")
                         .resizable()
@@ -34,7 +42,7 @@ struct ChargerView: View {
                     Text(chargerViewModel.addressTitle())
                     
                     Text("\(chargerViewModel.distance(), specifier: "%.2f") km")
-                        .font(.caption)
+                        .font(.system(.footnote))
                         .fontWeight(.light)
                 }
                 
@@ -48,6 +56,8 @@ struct ChargerView: View {
                     Text("\(chargerViewModel.usageCost())")
                 }
                 
+                Text(chargerViewModel.usageTypeTitle())
+
                 HStack(alignment: .center) {
                     Image("Status")
                         .resizable()
@@ -59,14 +69,20 @@ struct ChargerView: View {
                 }
                 .foregroundColor(chargerViewModel.statusIsOperational() ? .green : .red)
             }
-            List {
+            .font(.system(.subheadline))
+            .padding([.top, .horizontal])
+
+            GeometryReader { geometry in
+
+            ScrollView(.vertical, showsIndicators: false) {
                 ForEach(chargerViewModel.connections(), id: \.id) { connection in
-                    VStack {
                         HStack(alignment: .center) {
                             chargerViewModel.connectionTypeImage(connection)
                                 .resizable()
                                 .renderingMode(.template)
                                 .frame(width: 70, height: 70)
+                                                        
+                            Spacer()
                             
                             VStack(alignment: .leading, spacing: 5) {
                                 Text("\(chargerViewModel.connectionType(connection))")
@@ -84,35 +100,25 @@ struct ChargerView: View {
                                 .font(.system(.footnote))
                             }
                         }
+                        .padding([.top, .horizontal])
                     }
+                .frame(width: geometry.size.width)
                 }
-                .listRowSeparator(.hidden)
             }
-            .listStyle(PlainListStyle())
-
-            Text(chargerViewModel.usageTypeTitle())
+            .padding(.bottom)
             
             directionsButton
+                .padding(.bottom)
         }
-        .background(Color.white)
-        .sheet(isPresented: $showDirections, content: {
-            VStack {
-                MapView(directions: $directions)
-                    .environmentObject(locationViewModel)
-                    .environmentObject(chargerViewModel)
-                Button {
-                    self.showDirections.toggle()
-                } label: {
-                    Text("Dismiss")
-                }
-            }
-        })
         .padding(.horizontal)
     }
     
     var directionsButton: some View {
         Button {
-            self.showDirections.toggle()
+            let latitude = chargerViewModel.coordinate().latitude
+            let longitude = chargerViewModel.coordinate().longitude
+            let url = URL(string: "http://maps.apple.com/?ll=\(latitude.description),\(longitude.description)")
+            UIApplication.shared.open(url!)
         } label: {
             Text("Directions")
                 .frame(maxWidth: 300)
@@ -149,8 +155,7 @@ struct ChargerView_Previews: PreviewProvider {
                                  usageTypeID: nil,
                                  usageCost: "£0.073/minute; min £1.38; other tariffs available",
                                  addressInfo: AddressInfo(id: nil, title: "any address title", addressLine1: "any address line", addressLine2: nil, town: "any town", stateOrProvince: "any state", postcode: "any postcode", countryID: nil, country: nil, latitude: 0.0, longitude: 0.0, contactTelephone1: "0123456789", contactTelephone2: nil, contactEmail: nil, accessComments: nil, relatedURL: nil, distance: 0.1, distanceUnit: nil),
-                                 connections: [Connection(id: nil, connectionTypeID: 2, connectionType: ConnectionType(formalName: "a formalName", isDiscontinued: nil, isObsolete: nil, id: nil, title: "GB-T AC - GB/T 20234.2 (Tethered Cable)"), reference: nil, statusTypeID: nil, statusType: StatusType(isOperational: true, isUserSelectable: true, id: nil, title: "Operational"), levelID: nil, level: Level(comments: "Over 2 kW, usually non-domestic socket types", isFastChargeCapable: true, id: nil, title: "Level 2 : Medium (Over 2kW)"), amps: 10, voltage: 10, powerKW: 10.0, currentTypeID: nil, currentType: CurrentType(currentTypeDescription: "a current type description", id: nil, title: "AC (Single-Phase)"), quantity: 2, comments: "a current type comment"),
-                                               Connection(id: nil, connectionTypeID: 1, connectionType: ConnectionType(formalName: "a formalName", isDiscontinued: nil, isObsolete: nil, id: nil, title: "GB-T AC - GB/T 20234.2 (Tethered Cable)"), reference: nil, statusTypeID: nil, statusType: StatusType(isOperational: true, isUserSelectable: true, id: nil, title: "Operational"), levelID: nil, level: Level(comments: "Over 2 kW, usually non-domestic socket types", isFastChargeCapable: true, id: nil, title: "Level 2 : Medium (Over 2kW)"), amps: 10, voltage: 10, powerKW: 10.0, currentTypeID: nil, currentType: CurrentType(currentTypeDescription: "a current type description", id: nil, title: "AC (Single-Phase)"), quantity: 2, comments: "a current type comment")],
+                                 connections: [Connection(id: nil, connectionTypeID: 2, connectionType: ConnectionType(formalName: "a formalName", isDiscontinued: nil, isObsolete: nil, id: nil, title: "GB-T AC - GB/T 20234.2 (Tethered Cable)"), reference: nil, statusTypeID: nil, statusType: StatusType(isOperational: true, isUserSelectable: true, id: nil, title: "Operational"), levelID: nil, level: Level(comments: "Over 2 kW, usually non-domestic socket types", isFastChargeCapable: true, id: nil, title: "Level 2 : Medium (Over 2kW)"), amps: 10, voltage: 10, powerKW: 10.0, currentTypeID: nil, currentType: CurrentType(currentTypeDescription: "a current type description", id: nil, title: "AC (Single-Phase)"), quantity: 2, comments: "a current type comment")],
                                  numberOfPoints: 4,
                                  generalComments: nil,
                                  datePlanned: nil,
@@ -162,7 +167,11 @@ struct ChargerView_Previews: PreviewProvider {
                                  submissionStatusTypeID: nil)
     
     static var chargerViewModel = ChargerViewModel(charger: charger)
+    static var locationViewModel = LocationViewModel()
     static var previews: some View {
         ChargerView(chargerViewModel: chargerViewModel)
+            .environmentObject(locationViewModel)
+            .environmentObject(chargerViewModel)
+
     }
 }

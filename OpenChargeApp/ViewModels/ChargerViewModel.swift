@@ -215,7 +215,7 @@ public class ChargerViewModel: ObservableObject {
     
     func usageTypeTitle() -> String {
         guard let usageTypeTitle = charger.usageType?.title else {
-            return ""
+            return "N/A"
         }
         return usageTypeTitle
     }
