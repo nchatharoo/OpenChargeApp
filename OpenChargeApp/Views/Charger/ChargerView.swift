@@ -39,7 +39,7 @@ struct ChargerView: View {
                 }
                 
                 HStack(alignment: .center) {
-                    Image(systemName: "wallet.pass")
+                    Image("Wallet")
                         .resizable()
                         .renderingMode(.template)
                         .aspectRatio(contentMode: .fit)
