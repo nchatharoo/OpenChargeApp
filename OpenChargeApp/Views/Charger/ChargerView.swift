@@ -133,8 +133,15 @@ struct ChargerView: View {
         let destinationLat = chargerViewModel.coordinate().latitude
         let destinationLong = chargerViewModel.coordinate().longitude
         
-        let url = URL(string: "http://maps.apple.com/?saddr=\(sourceLat.description),\(sourceLong.description)&daddr=\(destinationLat.description),\(destinationLong.description)&dirflg=d")
-        UIApplication.shared.open(url!)
+        let googleMapsURL = URL(string:"comgooglemaps://?saddr=&daddr=\(destinationLat.description),\(destinationLong.description)&directionsmode=driving")!
+        
+        let appleMapsURL = URL(string: "http://maps.apple.com/?saddr=\(sourceLat.description),\(sourceLong.description)&daddr=\(destinationLat.description),\(destinationLong.description)&dirflg=d")!
+        
+        if UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!) {
+            UIApplication.shared.open(googleMapsURL)
+        } else {
+            UIApplication.shared.open(appleMapsURL)
+        }
     }
 }
 
