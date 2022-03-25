@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "Lightning-alt.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Lightning-alt.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
