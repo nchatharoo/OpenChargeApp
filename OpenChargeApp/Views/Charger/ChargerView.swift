@@ -19,17 +19,17 @@ struct ChargerView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-                Text(chargerViewModel.operatorInfoTitle())
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .padding(.top)
+            Text(chargerViewModel.operatorInfoTitle())
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .padding(.top)
             
-                MapView(directions: $directions)
-                    .cornerRadius(20)
-                    .shadow(color: .primary.opacity(0.3), radius: 3)
-                    .disabled(true)
-                    .environmentObject(locationViewModel)
-                    .environmentObject(chargerViewModel)
+            MapView(directions: $directions)
+                .cornerRadius(20)
+                .shadow(color: .primary.opacity(0.3), radius: 3)
+                .disabled(true)
+                .environmentObject(locationViewModel)
+                .environmentObject(chargerViewModel)
             
             VStack(alignment: .leading) {
                 
@@ -77,10 +77,19 @@ struct ChargerView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 ForEach(chargerViewModel.connections(), id: \.id) { connection in
                         HStack(alignment: .center) {
-                            chargerViewModel.connectionTypeImage(connection)
-                                .resizable()
-                                .renderingMode(.template)
+                            ZStack {
+                                chargerViewModel.connectionTypeImage(connection)
+                                    .resizable()
+                                    .renderingMode(.template)
                                 .frame(width: 70, height: 70)
+                                Circle()
+                                    .fill(Color.red)
+                                    .overlay(Text((chargerViewModel.quantity(connection)))
+                                                .foregroundColor(.white)
+                                                .font(.system(.footnote)))
+                                    .frame(width: 20, height: 20)
+                                    .offset(x: 30, y: -30)
+                            }
                                                         
                             Spacer()
                             
@@ -115,7 +124,7 @@ struct ChargerView: View {
     
     var directionsButton: some View {
         Button {
-            redirectToAppleMaps()
+            openUserMaps()
         } label: {
             Text("Directions")
                 .frame(maxWidth: 300)
@@ -125,8 +134,8 @@ struct ChargerView: View {
                 .foregroundColor(Color.white)
         }
     }
-    
-    private func redirectToAppleMaps() {
+
+    private func openUserMaps() {
         let sourceLat = locationViewModel.region.center.latitude
         let sourceLong = locationViewModel.region.center.longitude
         
