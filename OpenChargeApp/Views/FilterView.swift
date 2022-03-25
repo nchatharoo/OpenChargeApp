@@ -13,36 +13,14 @@ struct FilterView: View {
 
     var body: some View {
         VStack {
+            //MARK: Debug only
 //            Text("\(chargersViewModel.filteredChargePoints.count)")
 
-            Text("Select the desired power: \(filters.powerKW, specifier: "%.1f")")
-            HStack {
-                Image("Status")
-                    .resizable()
-                    .renderingMode(.template)
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 20, height: 20)
-                    .foregroundColor(.green)
-
-                Slider(value: $filters.powerKW, in: 0...650) {
-                    Text("Power")
-                } minimumValueLabel: {
-                    Text("0")
-                } maximumValueLabel: {
-                    Text("650")
-                }
-                .accentColor(Color.green)
+            PowerSlider()
+                .environmentObject(filters)
                 .onReceive(filters.$powerKW, perform: { _ in
                     chargersViewModel.filterCharger(with: filters)
                 })
-                
-                Image("Status")
-                    .resizable()
-                    .renderingMode(.template)
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 40, height: 40)
-                    .foregroundColor(.green)
-            }
                         
             Toggle("Pay at location", isOn: $filters.isPayAtLocation)
                 .onReceive(filters.$isPayAtLocation, perform: { _ in
@@ -78,6 +56,38 @@ struct FilterView: View {
             })
         }
         .padding()
+    }
+}
+
+struct PowerSlider: View {
+    @EnvironmentObject var filters: ChargerFiltersViewModel
+
+    var body: some View {
+        Text("Select the desired power: \(filters.powerKW, specifier: "%.1f")")
+        HStack {
+            Image("Status")
+                .resizable()
+                .renderingMode(.template)
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 20, height: 20)
+                .foregroundColor(.green)
+
+            Slider(value: $filters.powerKW, in: 0...650) {
+                Text("Power")
+            } minimumValueLabel: {
+                Text("0")
+            } maximumValueLabel: {
+                Text("650")
+            }
+            .accentColor(Color.green)
+            
+            Image("Status")
+                .resizable()
+                .renderingMode(.template)
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 40, height: 40)
+                .foregroundColor(.green)
+        }
     }
 }
 
