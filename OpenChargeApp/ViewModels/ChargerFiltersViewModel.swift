@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class ChargerFiltersViewModel: ObservableObject {
     
@@ -16,18 +17,16 @@ class ChargerFiltersViewModel: ObservableObject {
     @Published var isAccessKeyRequired: Bool = false
 
     @Published var connectionIndex: Int = 0
+    @Published var isSelected = false
     @Published var connectionType = [
-        "Avcon Connector",
+        /*"Avcon Connector",
         "BS1363 3 Pin 13 Amp",
         "Blue Commando (2P+E)",
-        "CCS (Type 1)",
-        "CCS (Type 2)",
         "CEE 3 Pin",
         "CEE 5 Pin",
         "CEE 7/4 - Schuko - Type F",
         "CEE 7/5",
         "CEE+ 7 Pin",
-        "CHAdeMO",
         "Europlug 2-Pin (CEE 7/16)",
         "GB-T AC - GB/T 20234.2 (Socket)",
         "GB-T AC - GB/T 20234.2 (Tethered Cable)",
@@ -50,13 +49,33 @@ class ChargerFiltersViewModel: ObservableObject {
         "Tesla (Roadster)",
         "Tesla Battery Swap",
         "Tesla Supercharger",
-        "Three Phase 5-Pin (AS/NZ 3123)",
+        "Three Phase 5-Pin (AS/NZ 3123)",*/
+        "CCS (Type 1)",
+        "CCS (Type 2)",
         "Type 1 (J1772)",
         "Type 2 (Socket Only)",
         "Type 2 (Tethered Connector)",
-        "Type I (AS 3112)",
-        "(Unknown)",
-        "Wireless Charging",
-        "XLR Plug (4 pin)",
+        "CHAdeMO",
+        "Other types",
     ]
+    
+    func connectionTypeImage(_ connectionType: String) -> Image {
+        switch connectionType {
+        case "Type 1 (J1772)":
+            return Image("Type1_J1772")
+        case "CHAdeMO":
+            return Image("Chademo_type4")
+        case "Type 2 (Socket Only)":
+            return Image("Type2_socket")
+        case "CCS (Type 1)":
+            return Image("Type1_CCS")
+        case "CCS (Type 2)":
+            return Image("Type2_CCS")
+        case "Type 2 (Tethered Connector)":
+            return Image("Type2_tethered")
+        default:
+            return Image("Unknown")
+        }
+    }
+
 }

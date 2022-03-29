@@ -10,7 +10,11 @@ import SwiftUI
 struct FilterView: View {
     @EnvironmentObject var chargersViewModel: ChargersViewModel
     @EnvironmentObject var filters: ChargerFiltersViewModel
-
+    
+    private var columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
+    
+    @State private var selected = [false]
+    
     var body: some View {
         VStack {
             //MARK: Debug only
@@ -42,12 +46,28 @@ struct FilterView: View {
                     chargersViewModel.filterCharger(with: filters)
                 })
                                 
-            List {
-                ForEach(Array(filters.connectionType.enumerated()), id: \.1) { (index, type) in
-                    Button {
-                        filters.connectionIndex = index
-                    } label: {
-                        Text(type)
+            ScrollView {
+                LazyVGrid(columns: columns) {
+                    ForEach(Array(filters.connectionType.enumerated()), id: \.1) { (index, type) in
+                        Button {
+                            filters.connectionIndex = index
+                        } label: {
+                            VStack {
+                                ZStack {
+                                    filters.connectionTypeImage(type)
+                                        .resizable()
+                                        .renderingMode(.template)
+                                        .aspectRatio(1, contentMode: .fit)
+                                        .frame(width: 70, height: 70)
+                                }
+                                Text(type)
+                                    .font(.system(.footnote))
+                            }
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(filters.isSelected ? .green : .clear, lineWidth: 1)
+                            )
+                        }
                     }
                 }
             }
