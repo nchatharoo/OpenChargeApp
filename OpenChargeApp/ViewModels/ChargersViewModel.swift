@@ -86,10 +86,6 @@ final public class ChargersViewModel: ObservableObject {
                     filtered.removeAll(where: { $0.statusType?.isOperational ?? false })
                 }
                 
-                filtered.removeAll(where: {
-                    $0.connections?.first?.connectionType?.title == filters.connectionType[filters.connectionIndex]
-                })
-                
                 return filtered
             }
             .sink(receiveValue: { charger in

@@ -197,7 +197,7 @@ public class ChargerViewModel: ObservableObject {
     
     func quantity(_ connection: Connection) -> String {
         guard let quantity = connection.quantity else {
-            return ""
+            return "?"
         }
         return "\(quantity)"
     }
@@ -206,7 +206,7 @@ public class ChargerViewModel: ObservableObject {
     
     func numberOfPoints() -> String {
         guard let numberOfPoints = charger.numberOfPoints else {
-            return ""
+            return "?"
         }
         return "\(numberOfPoints)"
     }
