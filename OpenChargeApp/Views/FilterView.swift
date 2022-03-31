@@ -30,6 +30,16 @@ struct FilterView: View {
                     .renderingMode(.template)
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 20, height: 20)
+                    .padding(6)
+                    .background(
+                        ZStack {
+                            Circle()
+                                .stroke(Color.primary.opacity(0.2), lineWidth: 1)
+                            Circle()
+                                .foregroundStyle(.ultraThinMaterial)
+                        }
+                    )
+
                 Toggle("Pay at location", isOn: $filters.isPayAtLocation)
                     .onReceive(filters.$isPayAtLocation, perform: { _ in
                         chargersViewModel.filterCharger(with: filters)
@@ -42,6 +52,15 @@ struct FilterView: View {
                     .renderingMode(.template)
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 20, height: 20)
+                    .padding(6)
+                    .background(
+                        ZStack {
+                            Circle()
+                                .stroke(Color.primary.opacity(0.2), lineWidth: 1)
+                            Circle()
+                                .foregroundStyle(.ultraThinMaterial)
+                        }
+                    )
                 
                 Toggle("Membership required", isOn: $filters.isMembershipRequired)
                     .onReceive(filters.$isMembershipRequired, perform: { _ in
@@ -55,6 +74,15 @@ struct FilterView: View {
                     .renderingMode(.template)
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 20, height: 20)
+                    .padding(6)
+                    .background(
+                        ZStack {
+                            Circle()
+                                .stroke(Color.primary.opacity(0.2), lineWidth: 1)
+                            Circle()
+                                .foregroundStyle(.ultraThinMaterial)
+                        }
+                    )
 
                 Toggle("Access key required", isOn: $filters.isAccessKeyRequired)
                     .onReceive(filters.$isAccessKeyRequired, perform: { _ in
@@ -68,6 +96,15 @@ struct FilterView: View {
                     .renderingMode(.template)
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 20, height: 20)
+                    .padding(6)
+                    .background(
+                        ZStack {
+                            Circle()
+                                .stroke(Color.primary.opacity(0.2), lineWidth: 1)
+                            Circle()
+                                .foregroundStyle(.ultraThinMaterial)
+                        }
+                    )
 
                 Toggle("Show only operationnal", isOn: $filters.showIsOperational)
                     .onReceive(filters.$showIsOperational, perform: { _ in

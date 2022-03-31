@@ -36,6 +36,7 @@ struct ChargerView: View {
                 HStack(alignment: .center) {
                     Image("Location")
                         .resizable()
+                        .renderingMode(.template)
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 20, height: 20)
                     

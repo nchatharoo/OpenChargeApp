@@ -9,21 +9,29 @@ import SwiftUI
 
 struct ChargerAnnotationView: View {
     let levelID: Int
-    
+    @State private var isPressed: Bool = false
+
     var body: some View {
         VStack(spacing: 0) {
-            Image(systemName: "bolt.circle.fill")
-                .font(.title)
+            Image("Status")
+                .resizable()
+                .renderingMode(.template)
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 30, height: 30)
+                .padding(2)
+                .background(
+                    ZStack {
+                        Circle()
+                            .stroke(chargerColor(for: levelID).opacity(0.2), lineWidth: 1)
+                        Circle()
+                            .foregroundStyle(.ultraThinMaterial)
+                    }
+                )
                 .foregroundColor(chargerColor(for: levelID))
-            
-            Image(systemName: "arrowtriangle.down.fill")
-                .font(.caption)
-                .foregroundColor(chargerColor(for: levelID))
-                .offset(x: 0, y: -5)
         }
     }
     
-    func chargerColor(for levelID: Int) -> Color {
+    private func chargerColor(for levelID: Int) -> Color {
         switch levelID {
         case 0:
             return .red

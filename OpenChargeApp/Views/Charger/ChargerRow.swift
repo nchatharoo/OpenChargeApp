@@ -12,19 +12,20 @@ struct ChargerRow: View {
 
     var body: some View {
         HStack(alignment: .center) {
-            VStack(alignment: .center) {
-                ChargerAnnotationView(levelID: charger.connections?.first?.levelID ?? 0)
-            }
+            ChargerAnnotationView(levelID: charger.connections?.first?.levelID ?? 0)
 
             VStack(alignment: .leading) {
                 Text("\(charger.addressInfo?.title ?? "")")
                     .fontWeight(.semibold)
+                    .lineLimit(1)
+                
                 Text("\(charger.addressInfo?.distance ?? 0.0, specifier: "%.2f") km")
-                    .font(.callout)
+                    .font(.system(.callout))
             }
             Spacer()
             Image("Caret")
         }
         .foregroundColor(Color.primary)
+        .padding(10)
     }
 }

@@ -36,14 +36,13 @@ struct ContentView: View {
                         annotationItems: chargersViewModel.filteredChargePoints,
                         annotationContent: { charger in
                         MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: (charger.addressInfo?.latitude)!, longitude: (charger.addressInfo?.longitude)!)) {
-                            ChargerAnnotationView(levelID: charger.connections?.first?.levelID ?? 0)
-                                .onTapGesture(perform: {
-                                    self.charger = charger
-                                    withAnimation {
-                                        isSheetPresented.toggle()
-                                        isChargerTapped.toggle()
-                                    }
-                                })
+                            Button {
+                                self.charger = charger
+                                isSheetPresented.toggle()
+                                isChargerTapped.toggle()
+                            } label: {
+                                ChargerAnnotationView(levelID: charger.connections?.first?.levelID ?? 0)
+                            }
                         }
                     })
                 }
@@ -80,7 +79,9 @@ struct ContentView: View {
                 
                 ZStack {
                     Rectangle()
-                        .fill(Color.white)
+//                        .fill(Color.neuBackground)
+                        .background(LinearGradient(gradient: Gradient(colors: [.white.opacity(0.2), .blue.opacity(0.1)]), startPoint: .top, endPoint: .bottom))
+                        .foregroundStyle(.ultraThinMaterial)
                         .frame(height: 90)
                         .cornerRadius(35)
                     
@@ -91,6 +92,8 @@ struct ContentView: View {
                         } label: {
                             Image("Map")
                                 .resizable()
+                                .renderingMode(.template)
+                                .foregroundColor(.primary)
                                 .frame(width: 24, height: 24)
                         }
                         
@@ -100,6 +103,8 @@ struct ContentView: View {
                         } label: {
                             Image("List")
                                 .resizable()
+                                .renderingMode(.template)
+                                .foregroundColor(.primary)
                                 .frame(width: 24, height: 24)
                         }
                         
@@ -108,6 +113,8 @@ struct ContentView: View {
                         } label: {
                             Image("Search")
                                 .resizable()
+                                .renderingMode(.template)
+                                .foregroundColor(.primary)
                                 .frame(width: 24, height: 24)
                         }
                         .disabled(chargersViewModel.isProcessing)
@@ -120,6 +127,8 @@ struct ContentView: View {
                         } label: {
                             Image("Filters")
                                 .resizable()
+                                .renderingMode(.template)
+                                .foregroundColor(.primary)
                                 .frame(width: 24, height: 24)
                         }
                     }
@@ -148,9 +157,9 @@ struct ContentView: View {
         .sheet(isPresented: $isChargerTapped, onDismiss: {
             isSheetPresented.toggle()
         }, content: {
-//            ChargerScrollView(chargers:chargersViewModel.filteredChargePoints, charger: charger!)
-//                .environmentObject(locationViewModel)
-            ChargerView(chargerViewModel: ChargerViewModel(charger: charger!))
+            if let charger = charger {
+                ChargerView(chargerViewModel: ChargerViewModel(charger: charger))
+            }
         })
         .sheet(isPresented: $isFilterTapped, onDismiss: {
             isSheetPresented.toggle()
