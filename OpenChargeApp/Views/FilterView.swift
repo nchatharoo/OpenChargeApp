@@ -135,6 +135,15 @@ struct PowerSlider: View {
                         .frame(width: 20, height: 20)
                         .foregroundColor(.green)
                 })
+                    .padding(6)
+                    .background(
+                        ZStack {
+                            Circle()
+                                .stroke(Color.primary.opacity(0.2), lineWidth: 1)
+                            Circle()
+                                .foregroundStyle(.ultraThinMaterial)
+                        }
+                    )
 
                 Slider(value: $filters.powerKW, in: 0...650) {
                     Text("Power")
@@ -148,13 +157,24 @@ struct PowerSlider: View {
                 Button (action: {
                     filters.powerKW += 1
                 }, label: {
-                    Image("Status")
-                        .resizable()
-                        .renderingMode(.template)
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 40, height: 40)
-                        .foregroundColor(.green)
+                    ZStack {
+                        Image("Status")
+                            .resizable()
+                            .renderingMode(.template)
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(.green)
+                    }
                 })
+                    .padding(6)
+                    .background(
+                        ZStack {
+                            Circle()
+                                .stroke(Color.primary.opacity(0.2), lineWidth: 1)
+                            Circle()
+                                .foregroundStyle(.ultraThinMaterial)
+                        }
+                    )
             }
         }
     }
