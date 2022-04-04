@@ -15,7 +15,7 @@ struct FilterView: View {
         VStack(alignment: .leading, spacing: 20) {
 
             VStack(alignment: .leading, spacing: 0) {
-                Text("Chargers available: ")
+                Text("Chargers available")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                 Text("\(chargersViewModel.filteredChargePoints.count)")
@@ -46,7 +46,7 @@ struct FilterView: View {
                         }
                     )
 
-                Toggle("Show free charger", isOn: $filters.isPayAtLocation)
+                Toggle("Show free chargers", isOn: $filters.isPayAtLocation)
                     .onReceive(filters.$isPayAtLocation, perform: { _ in
                         chargersViewModel.filterCharger(with: filters)
                     })
@@ -68,7 +68,7 @@ struct FilterView: View {
                         }
                     )
                 
-                Toggle("Show public charger", isOn: $filters.isMembershipRequired)
+                Toggle("Show public chargers", isOn: $filters.isMembershipRequired)
                     .onReceive(filters.$isMembershipRequired, perform: { _ in
                         chargersViewModel.filterCharger(with: filters)
                     })
@@ -127,8 +127,12 @@ struct PowerSlider: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Select the desired power: \(filters.powerKW, specifier: "%.1f") kW")
-                .font(.system(.body))
+            HStack {
+                Text("Choose the desired power")
+                    .font(.system(.body))
+                Text("\(filters.powerKW, specifier: "%.1f") kW")
+                    .font(.system(.body))
+            }
             
             HStack {
                 Button (action: {

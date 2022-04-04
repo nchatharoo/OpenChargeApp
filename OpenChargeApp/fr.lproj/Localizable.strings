@@ -1,0 +1,18 @@
+/* 
+  Localizable.strings
+  OpenChargeApp
+
+  Created by Nadheer on 04/04/2022.
+  
+*/
+
+"Map" = "Carte";
+"Around you" = "Autour de vous";
+"Find" = "Recherchez";
+"Filters" = "Filtres";
+"Tap here to retrieve charger points" = "Tapez ici pour rechercher les bornes";
+"Chargers available" = "Bornes disponibles: ";
+"Show free chargers" = "Montrer les bornes gratuites";
+"Show public chargers" = "Montrer les bornes publiques";
+"Show with membership" = "Montrer les bornes avec adhésion";
+"Choose the desired power" = "Puissance souhaitée: ";

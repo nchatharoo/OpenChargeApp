@@ -70,7 +70,7 @@ struct ContentView: View {
                         scrollOffset = $0
                     }
                     .padding(.horizontal)
-                    .navigationTitle("Near you")
+                    .navigationTitle("Around you")
                 }
                 .opacity(isListTapped ? 1 : 0)
                 .animation(.spring(), value: isListTapped)
@@ -86,7 +86,7 @@ struct ContentView: View {
                         .frame(height: 90)
                         .cornerRadius(35)
                     
-                    HStack(spacing: 40) {
+                    HStack(alignment: .center, spacing: 20) {
                         Button {
                             isMapTapped = true
                             isListTapped = false
@@ -98,7 +98,7 @@ struct ContentView: View {
                                     .foregroundColor(.primary)
                                     .frame(width: 24, height: 24)
                                 
-                                Text("Map")
+                                Text(LocalizedStringKey("Map"))
                                     .foregroundColor(.primary)
                                     .font(.system(.footnote))
                             }
@@ -114,9 +114,10 @@ struct ContentView: View {
                                     .renderingMode(.template)
                                     .foregroundColor(.primary)
                                     .frame(width: 24, height: 24)
-                                Text("Near you")
+                                Text("Around you")
                                     .foregroundColor(.primary)
                                     .font(.system(.footnote))
+                                    .lineLimit(1)
                             }
                         }
                         

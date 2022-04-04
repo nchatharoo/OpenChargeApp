@@ -32,6 +32,7 @@
 		8E6BEDBE27957989009DDF94 /* ChargersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6BEDBD27957989009DDF94 /* ChargersViewModel.swift */; };
 		8E73D22F27C41781007818B8 /* ChargerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E73D22E27C41781007818B8 /* ChargerView.swift */; };
 		8E7AA43D27DB42F400CF0864 /* ChargerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7AA43C27DB42F400CF0864 /* ChargerViewModelTests.swift */; };
+		8E84701627FAF784006C1178 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E84701827FAF784006C1178 /* Localizable.strings */; };
 		8E9E73BC26E0B66300CFEC24 /* OpenChargeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73BB26E0B66300CFEC24 /* OpenChargeApp.swift */; };
 		8E9E73BE26E0B66400CFEC24 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E73BD26E0B66400CFEC24 /* ContentView.swift */; };
 		8E9E73C026E0B66500CFEC24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9E73BF26E0B66500CFEC24 /* Assets.xcassets */; };
@@ -84,6 +85,8 @@
 		8E6BEDBD27957989009DDF94 /* ChargersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargersViewModel.swift; sourceTree = "<group>"; };
 		8E73D22E27C41781007818B8 /* ChargerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargerView.swift; sourceTree = "<group>"; };
 		8E7AA43C27DB42F400CF0864 /* ChargerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargerViewModelTests.swift; sourceTree = "<group>"; };
+		8E84701727FAF784006C1178 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8E84701927FAF787006C1178 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8E9E73B826E0B66300CFEC24 /* OpenChargeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenChargeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E9E73BB26E0B66300CFEC24 /* OpenChargeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChargeApp.swift; sourceTree = "<group>"; };
 		8E9E73BD26E0B66400CFEC24 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -244,6 +247,7 @@
 				8E9E73E826E10AA400CFEC24 /* API */,
 				8E69AC9926EB7A8200485CC2 /* Location */,
 				8E9E73BF26E0B66500CFEC24 /* Assets.xcassets */,
+				8E84701827FAF784006C1178 /* Localizable.strings */,
 				8E588E3227F7492200551A19 /* Launch Screen.storyboard */,
 				8E9E73C426E0B66600CFEC24 /* Info.plist */,
 				8E9E73C126E0B66600CFEC24 /* Preview Content */,
@@ -384,6 +388,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = 8E9E73AF26E0B66300CFEC24;
 			productRefGroup = 8E9E73B926E0B66300CFEC24 /* Products */;
@@ -403,6 +408,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E588E3327F7492200551A19 /* Launch Screen.storyboard in Resources */,
+				8E84701627FAF784006C1178 /* Localizable.strings in Resources */,
 				8E9E73C326E0B66600CFEC24 /* Preview Assets.xcassets in Resources */,
 				8E9E73C026E0B66500CFEC24 /* Assets.xcassets in Resources */,
 			);
@@ -489,6 +495,18 @@
 			targetProxy = 8E9E73D526E0B66600CFEC24 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8E84701827FAF784006C1178 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8E84701727FAF784006C1178 /* en */,
+				8E84701927FAF787006C1178 /* fr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		8E9E73DB26E0B66600CFEC24 /* Debug */ = {
