@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  OpenChargeApp
+
+  Created by Nadheer on 04/04/2022.
+  
+*/
+
+"NSLocationWhenInUseUsageDescription" = "We need your location in order to display the charging stations";
