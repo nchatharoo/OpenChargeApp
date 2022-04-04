@@ -70,7 +70,7 @@ struct ContentView: View {
                         scrollOffset = $0
                     }
                     .padding(.horizontal)
-                    .navigationTitle("Charging stations")
+                    .navigationTitle("Near you")
                 }
                 .opacity(isListTapped ? 1 : 0)
                 .animation(.spring(), value: isListTapped)
@@ -86,37 +86,53 @@ struct ContentView: View {
                         .frame(height: 90)
                         .cornerRadius(35)
                     
-                    HStack(spacing: 60) {
+                    HStack(spacing: 40) {
                         Button {
                             isMapTapped = true
                             isListTapped = false
                         } label: {
-                            Image("Map")
-                                .resizable()
-                                .renderingMode(.template)
-                                .foregroundColor(.primary)
-                                .frame(width: 24, height: 24)
+                            VStack(spacing: 0) {
+                                Image("Map")
+                                    .resizable()
+                                    .renderingMode(.template)
+                                    .foregroundColor(.primary)
+                                    .frame(width: 24, height: 24)
+                                
+                                Text("Map")
+                                    .foregroundColor(.primary)
+                                    .font(.system(.footnote))
+                            }
                         }
                         
                         Button {
                             isMapTapped = false
                             isListTapped = true
                         } label: {
-                            Image("List")
-                                .resizable()
-                                .renderingMode(.template)
-                                .foregroundColor(.primary)
-                                .frame(width: 24, height: 24)
+                            VStack(spacing: 0) {
+                                Image("List")
+                                    .resizable()
+                                    .renderingMode(.template)
+                                    .foregroundColor(.primary)
+                                    .frame(width: 24, height: 24)
+                                Text("Near you")
+                                    .foregroundColor(.primary)
+                                    .font(.system(.footnote))
+                            }
                         }
                         
                         Button {
                             chargersViewModel.loadChargers(with: locationViewModel.region.center)
                         } label: {
-                            Image("Search")
-                                .resizable()
-                                .renderingMode(.template)
-                                .foregroundColor(.primary)
-                                .frame(width: 24, height: 24)
+                            VStack(spacing: 0) {
+                                Image("Search")
+                                    .resizable()
+                                    .renderingMode(.template)
+                                    .foregroundColor(.primary)
+                                    .frame(width: 24, height: 24)
+                                Text("Find")
+                                    .foregroundColor(.primary)
+                                    .font(.system(.footnote))
+                            }
                         }
                         .disabled(chargersViewModel.isProcessing)
                         
@@ -126,11 +142,16 @@ struct ContentView: View {
                                 isFilterTapped.toggle()
                             }
                         } label: {
-                            Image("Filters")
-                                .resizable()
-                                .renderingMode(.template)
-                                .foregroundColor(.primary)
-                                .frame(width: 24, height: 24)
+                            VStack(spacing: 0) {
+                                Image("Filters")
+                                    .resizable()
+                                    .renderingMode(.template)
+                                    .foregroundColor(.primary)
+                                    .frame(width: 24, height: 24)
+                                Text("Filters")
+                                    .foregroundColor(.primary)
+                                    .font(.system(.footnote))
+                            }
                         }
                     }
                 }
@@ -180,6 +201,7 @@ struct ContentView: View {
                 Text("Tap here to retrieve charger points")
                 Spacer()
                 Image("Caret")
+                    .renderingMode(.template)
             }
         }
         .padding(.horizontal)

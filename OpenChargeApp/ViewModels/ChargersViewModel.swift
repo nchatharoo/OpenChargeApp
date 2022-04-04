@@ -71,20 +71,20 @@ final public class ChargersViewModel: ObservableObject {
                 var filtered = charger.filter({ filters.powerKW == 0 || $0.connections?.first?.powerKW ?? 0.0 > filters.powerKW })
                 
                 if filters.isPayAtLocation {
-                    filtered.removeAll(where: { $0.usageType?.isPayAtLocation ?? false })
+                    filtered.removeAll(where: { $0.usageType?.isPayAtLocation == false })
                 }
                 
                 if filters.isMembershipRequired {
-                    filtered.removeAll(where: { $0.usageType?.isMembershipRequired ?? false })
+                    filtered.removeAll(where: { $0.usageType?.isMembershipRequired == false })
                 }
                 
                 if filters.isAccessKeyRequired {
-                    filtered.removeAll(where: { $0.usageType?.isAccessKeyRequired ?? false })
+                    filtered.removeAll(where: { $0.usageType?.isAccessKeyRequired == false })
                 }
                                 
-                if filters.showIsOperational {
-                    filtered.removeAll(where: { $0.statusType?.isOperational ?? false })
-                }
+//                if filters.showIsOperational {
+//                    filtered.removeAll(where: { $0.statusType?.isOperational ?? false })
+//                }
                 
                 return filtered
             }

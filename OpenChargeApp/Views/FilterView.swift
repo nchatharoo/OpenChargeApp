@@ -14,9 +14,15 @@ struct FilterView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
 
-            Text("Current chargers displayed: \(chargersViewModel.filteredChargePoints.count)")
-                .font(.largeTitle)
-                .fontWeight(.bold)
+            VStack(alignment: .leading, spacing: 0) {
+                Text("Chargers available: ")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                Text("\(chargersViewModel.filteredChargePoints.count)")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .foregroundColor(chargersViewModel.filteredChargePoints.count == 0 ? .primary : .green)
+            }
             
             PowerSlider()
                 .environmentObject(filters)
@@ -40,7 +46,7 @@ struct FilterView: View {
                         }
                     )
 
-                Toggle("Pay at location", isOn: $filters.isPayAtLocation)
+                Toggle("Show free charger", isOn: $filters.isPayAtLocation)
                     .onReceive(filters.$isPayAtLocation, perform: { _ in
                         chargersViewModel.filterCharger(with: filters)
                     })
@@ -62,7 +68,7 @@ struct FilterView: View {
                         }
                     )
                 
-                Toggle("Membership required", isOn: $filters.isMembershipRequired)
+                Toggle("Show public charger", isOn: $filters.isMembershipRequired)
                     .onReceive(filters.$isMembershipRequired, perform: { _ in
                         chargersViewModel.filterCharger(with: filters)
                     })
@@ -84,33 +90,33 @@ struct FilterView: View {
                         }
                     )
 
-                Toggle("Access key required", isOn: $filters.isAccessKeyRequired)
+                Toggle("Show with membership", isOn: $filters.isAccessKeyRequired)
                     .onReceive(filters.$isAccessKeyRequired, perform: { _ in
                         chargersViewModel.filterCharger(with: filters)
                     })
             }
             
-            HStack {
-                Image("Status")
-                    .resizable()
-                    .renderingMode(.template)
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 20, height: 20)
-                    .padding(6)
-                    .background(
-                        ZStack {
-                            Circle()
-                                .stroke(Color.primary.opacity(0.2), lineWidth: 1)
-                            Circle()
-                                .foregroundStyle(.ultraThinMaterial)
-                        }
-                    )
-
-                Toggle("Show only operationnal", isOn: $filters.showIsOperational)
-                    .onReceive(filters.$showIsOperational, perform: { _ in
-                        chargersViewModel.filterCharger(with: filters)
-                    })
-            }
+//            HStack {
+//                Image("Status")
+//                    .resizable()
+//                    .renderingMode(.template)
+//                    .aspectRatio(contentMode: .fit)
+//                    .frame(width: 20, height: 20)
+//                    .padding(6)
+//                    .background(
+//                        ZStack {
+//                            Circle()
+//                                .stroke(Color.primary.opacity(0.2), lineWidth: 1)
+//                            Circle()
+//                                .foregroundStyle(.ultraThinMaterial)
+//                        }
+//                    )
+//
+//                Toggle("Show only operationnal", isOn: $filters.showIsOperational)
+//                    .onReceive(filters.$showIsOperational, perform: { _ in
+//                        chargersViewModel.filterCharger(with: filters)
+//                    })
+//            }
         }
         .padding()
     }

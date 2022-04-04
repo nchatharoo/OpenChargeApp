@@ -24,6 +24,7 @@ struct ChargerRow: View {
             }
             Spacer()
             Image("Caret")
+                .renderingMode(.template)
         }
         .foregroundColor(Color.primary)
         .padding(10)
