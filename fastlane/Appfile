@@ -1,0 +1,8 @@
+app_identifier("com.nchatharoo.OpenChargeApp") # The bundle identifier of your app
+apple_id("nchatharoo@icloud.com") # Your Apple email address
+
+itc_team_id("34083812") # App Store Connect Team ID
+team_id("P9CD4D4F5T") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile
