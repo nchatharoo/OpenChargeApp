@@ -14,7 +14,7 @@ struct ProcessingView: View {
                 .progressViewStyle(CircularProgressViewStyle(tint: .white))
                 .scaleEffect(2)
                 .padding()
-            Text("Processing...")
+            Text("Processing")
                 .foregroundColor(.white)
         }
         .padding(20)

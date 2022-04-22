@@ -18,3 +18,5 @@
 "Choose the desired power" = "Choose the desired power: ";
 "Retry" = "Retry";
 "Cancel" = "Cancel";
+"Processing" = "Looking for chargers";
+"Error" = "Error";
