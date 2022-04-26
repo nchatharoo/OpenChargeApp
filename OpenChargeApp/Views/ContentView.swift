@@ -78,7 +78,7 @@ struct ContentView: View {
             
             VStack {
                 if chargersViewModel.isProcessing { ProcessingView() }
-                
+
                 ZStack {
                     Rectangle()
                         .background(LinearGradient(gradient: Gradient(colors: [.white.opacity(0.2), .blue.opacity(0.1)]), startPoint: .top, endPoint: .bottom))

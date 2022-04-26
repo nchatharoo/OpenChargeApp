@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,7 @@
 		8E588E3327F7492200551A19 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E588E3227F7492200551A19 /* Launch Screen.storyboard */; };
 		8E5B0D7A27BE8FF100D0BA91 /* AnyTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5B0D7927BE8FF100D0BA91 /* AnyTransition.swift */; };
 		8E5B0D7F27BE906A00D0BA91 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5B0D7E27BE906A00D0BA91 /* Constants.swift */; };
+		8E5DD3482817BAAB00CA2163 /* 5695-circle-loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 8E5DD3472817BAAB00CA2163 /* 5695-circle-loading.json */; };
 		8E5FBF3427BBCD9500241226 /* CLLocationCoordinate2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5FBF3327BBCD9500241226 /* CLLocationCoordinate2D.swift */; };
 		8E5FBF3627BBCE4900241226 /* ProcessingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5FBF3527BBCE4800241226 /* ProcessingView.swift */; };
 		8E5FBF3A27BBCF7400241226 /* AuthorizationPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5FBF3927BBCF7400241226 /* AuthorizationPermission.swift */; };
@@ -30,6 +31,7 @@
 		8E69ACA126EB9FF000485CC2 /* LocationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69ACA026EB9FF000485CC2 /* LocationViewModelTests.swift */; };
 		8E69CB2F26E89E1A003B14FC /* LocationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69CB2E26E89E1A003B14FC /* LocationManagerTests.swift */; };
 		8E6BEDBE27957989009DDF94 /* ChargersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6BEDBD27957989009DDF94 /* ChargersViewModel.swift */; };
+		8E6FBE6F2812CB2E00977589 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 8E6FBE6E2812CB2E00977589 /* Lottie */; };
 		8E73D22F27C41781007818B8 /* ChargerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E73D22E27C41781007818B8 /* ChargerView.swift */; };
 		8E7AA43D27DB42F400CF0864 /* ChargerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7AA43C27DB42F400CF0864 /* ChargerViewModelTests.swift */; };
 		8E84701627FAF784006C1178 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E84701827FAF784006C1178 /* Localizable.strings */; };
@@ -71,6 +73,7 @@
 		8E588E3227F7492200551A19 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		8E5B0D7927BE8FF100D0BA91 /* AnyTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyTransition.swift; sourceTree = "<group>"; };
 		8E5B0D7E27BE906A00D0BA91 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		8E5DD3472817BAAB00CA2163 /* 5695-circle-loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "5695-circle-loading.json"; path = "../../../../../../Users/nadheer/Downloads/5695-circle-loading.json"; sourceTree = "<group>"; };
 		8E5FBF3327BBCD9500241226 /* CLLocationCoordinate2D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationCoordinate2D.swift; sourceTree = "<group>"; };
 		8E5FBF3527BBCE4800241226 /* ProcessingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingView.swift; sourceTree = "<group>"; };
 		8E5FBF3927BBCF7400241226 /* AuthorizationPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationPermission.swift; sourceTree = "<group>"; };
@@ -110,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E6FBE6F2812CB2E00977589 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,6 +166,7 @@
 		8E5FBF3727BBCE9500241226 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8E6FBE702812CC6A00977589 /* Lottie */,
 				8E5B0D7D27BE905100D0BA91 /* Helpers */,
 				8E9E73BD26E0B66400CFEC24 /* ContentView.swift */,
 				8E1D639127D8E6C80010F1FC /* MapView.swift */,
@@ -206,6 +211,14 @@
 				8E69ACA026EB9FF000485CC2 /* LocationViewModelTests.swift */,
 			);
 			path = Location;
+			sourceTree = "<group>";
+		};
+		8E6FBE702812CC6A00977589 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				8E5DD3472817BAAB00CA2163 /* 5695-circle-loading.json */,
+			);
+			path = Lottie;
 			sourceTree = "<group>";
 		};
 		8E73D23227C4186C007818B8 /* Charger */ = {
@@ -320,6 +333,9 @@
 			dependencies = (
 			);
 			name = OpenChargeApp;
+			packageProductDependencies = (
+				8E6FBE6E2812CB2E00977589 /* Lottie */,
+			);
 			productName = OpenChargeApp;
 			productReference = 8E9E73B826E0B66300CFEC24 /* OpenChargeApp.app */;
 			productType = "com.apple.product-type.application";
@@ -395,6 +411,9 @@
 				fr,
 			);
 			mainGroup = 8E9E73AF26E0B66300CFEC24;
+			packageReferences = (
+				8E6FBE6D2812CB2E00977589 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			productRefGroup = 8E9E73B926E0B66300CFEC24 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -414,6 +433,7 @@
 				8E588E3327F7492200551A19 /* Launch Screen.storyboard in Resources */,
 				8E84701627FAF784006C1178 /* Localizable.strings in Resources */,
 				8E9E73C326E0B66600CFEC24 /* Preview Assets.xcassets in Resources */,
+				8E5DD3482817BAAB00CA2163 /* 5695-circle-loading.json in Resources */,
 				8E9E73C026E0B66500CFEC24 /* Assets.xcassets in Resources */,
 				8E84701C27FB070A006C1178 /* InfoPlist.strings in Resources */,
 			);
@@ -809,6 +829,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8E6FBE6D2812CB2E00977589 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8E6FBE6E2812CB2E00977589 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E6FBE6D2812CB2E00977589 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8E9E73B026E0B66300CFEC24 /* Project object */;
 }
