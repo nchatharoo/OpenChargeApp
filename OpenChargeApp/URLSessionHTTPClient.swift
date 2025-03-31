@@ -26,7 +26,9 @@ public class URLSessionHTTPClient: HTTPClient {
             return
         }
         
-        session.dataTask(with: finalURL) { data, response, error in
+        let request = createRequest(with: finalURL)
+        
+        session.dataTask(with: request) { data, response, error in
             completion(Result {
                 if let error = error {
                     throw error
@@ -45,7 +47,9 @@ public class URLSessionHTTPClient: HTTPClient {
             throw URLError(.badURL)
         }
         
-        let (data, response) = try await session.data(from: finalURL)
+        let request = createRequest(with: finalURL)
+        
+        let (data, response) = try await session.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse else {
             throw UnexpectedValuesRepresentation()
@@ -60,6 +64,8 @@ public class URLSessionHTTPClient: HTTPClient {
             return nil
         }
         
+        // According to the API documentation, it's better to use the X-API-Key header,
+        // but we also keep the query parameter for compatibility
         let queryItems = URLQueryItem(name: "key", value: apiKey)
         let queryOutput = URLQueryItem(name: "output", value: "json")
         let queryLat = URLQueryItem(name: "latitude", value: String(coordinate.latitude))
@@ -71,5 +77,18 @@ public class URLSessionHTTPClient: HTTPClient {
         urlComponents.queryItems = [queryItems, queryOutput, queryLat, queryLong, queryMaxResults, queryCompact, queryVerbose]
         
         return urlComponents.url
+    }
+    
+    // Method to create a request with appropriate headers
+    private func createRequest(with url: URL) -> URLRequest {
+        var request = URLRequest(url: url)
+        
+        // Add X-API-Key header as recommended in the documentation
+        request.addValue(apiKey, forHTTPHeaderField: "X-API-Key")
+        
+        // Set a custom User-Agent as recommended
+        request.addValue("OpenChargeApp/1.0", forHTTPHeaderField: "User-Agent")
+        
+        return request
     }
 }

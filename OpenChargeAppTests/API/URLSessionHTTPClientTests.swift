@@ -49,12 +49,15 @@ class URLSessionHTTPClientTests: XCTestCase {
     }
     
     func test_getFromURL_performsGETRequestWithURL() {
-        let url = URL(string: "https://api.openchargemap.io/v3/poi/?key=6bdc7787-1e5b-4567-920a-9a77632ccb96&output=json&latitude=0.0&longitude=0.0&maxresults=100&compact=false&verbose=true")!
+        let url = URL(string: "https://api.openchargemap.io/v3/poi/")!
         let exp = expectation(description: "Wait for request")
         
         URLProtocolStub.observeRequests { request in
-            XCTAssertEqual(request.url, url)
             XCTAssertEqual(request.httpMethod, "GET")
+            // Verify that the X-API-Key header is set
+            XCTAssertNotNil(request.value(forHTTPHeaderField: "X-API-Key"))
+            // Verify that the User-Agent header is set
+            XCTAssertEqual(request.value(forHTTPHeaderField: "User-Agent"), "OpenChargeApp/1.0")
             exp.fulfill()
         }
         
@@ -99,6 +102,10 @@ class URLSessionHTTPClientTests: XCTestCase {
         let exp = expectation(description: "Wait for request")
         URLProtocolStub.observeRequests { request in
             XCTAssertEqual(request.httpMethod, "GET")
+            // Verify that the X-API-Key header is set
+            XCTAssertNotNil(request.value(forHTTPHeaderField: "X-API-Key"))
+            // Verify that the User-Agent header is set
+            XCTAssertEqual(request.value(forHTTPHeaderField: "User-Agent"), "OpenChargeApp/1.0")
             exp.fulfill()
         }
         

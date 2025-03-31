@@ -47,11 +47,40 @@ class HTTPClientSpy: HTTPClient {
         guard let finalURL = urlComponents.url else {
             return
         }
+        
+        // Create a mock request with headers
+        var request = URLRequest(url: finalURL)
+        request.addValue(apiKey, forHTTPHeaderField: "X-API-Key")
+        request.addValue("OpenChargeApp/1.0", forHTTPHeaderField: "User-Agent")
+        
         messages.append((finalURL, completion))
     }
     
     public func get(from url: URL, with coordinate: CLLocationCoordinate2D) async throws -> (Data, HTTPURLResponse) {
-        asyncRequests.append((url, coordinate))
+        guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+            throw URLError(.badURL)
+        }
+        
+        let queryItems = URLQueryItem(name: "key", value: apiKey)
+        let queryOutput = URLQueryItem(name: "output", value: "json")
+        let queryLat = URLQueryItem(name: "latitude", value: String(coordinate.latitude))
+        let queryLong = URLQueryItem(name: "longitude", value: String(coordinate.longitude))
+        let queryMaxResults = URLQueryItem(name: "maxresults", value: "10")
+        let queryCompact = URLQueryItem(name: "compact", value: "true")
+        let queryVerbose = URLQueryItem(name: "verbose", value: "false")
+        
+        urlComponents.queryItems = [queryItems, queryOutput, queryLat, queryLong, queryMaxResults, queryCompact, queryVerbose]
+        
+        guard let finalURL = urlComponents.url else {
+            throw URLError(.badURL)
+        }
+        
+        // Create a mock request with headers
+        var request = URLRequest(url: finalURL)
+        request.addValue(apiKey, forHTTPHeaderField: "X-API-Key")
+        request.addValue("OpenChargeApp/1.0", forHTTPHeaderField: "User-Agent")
+        
+        asyncRequests.append((finalURL, coordinate))
         
         switch asyncResult {
         case .success(let success):
