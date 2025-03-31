@@ -3,6 +3,7 @@
 //  OpenChargeApp
 //
 //  Created by Nadheer on 13/09/2021.
+//  Updated to latest Swift on 31/03/2025
 //
 
 import Foundation
@@ -18,23 +19,10 @@ public class URLSessionHTTPClient: HTTPClient {
         self.session = session
     }
     
+    // Legacy method for backward compatibility
     public func get(from url: URL, with coordinate: CLLocationCoordinate2D, completion: @escaping (HTTPClient.Result) -> Void) {
-        
-        guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
-            return
-        }
-        
-        let queryItems = URLQueryItem(name: "key", value: apiKey)
-        let queryOutput = URLQueryItem(name: "output", value: "json")
-        let queryLat = URLQueryItem(name: "latitude", value: String(coordinate.latitude))
-        let queryLong = URLQueryItem(name: "longitude", value: String(coordinate.longitude))
-        let queryMaxResults = URLQueryItem(name: "maxresults", value: "100")
-        let queryCompact = URLQueryItem(name: "compact", value: "false")
-        let queryVerbose = URLQueryItem(name: "verbose", value: "true")
-        
-        urlComponents.queryItems = [queryItems, queryOutput, queryLat, queryLong, queryMaxResults, queryCompact, queryVerbose]
-        
-        guard let finalURL = urlComponents.url else {
+        guard let finalURL = createFinalURL(from: url, with: coordinate) else {
+            completion(.failure(URLError(.badURL)))
             return
         }
         
@@ -49,5 +37,39 @@ public class URLSessionHTTPClient: HTTPClient {
                 }
             })
         }.resume()
+    }
+    
+    // Modern async/await implementation
+    public func get(from url: URL, with coordinate: CLLocationCoordinate2D) async throws -> (Data, HTTPURLResponse) {
+        guard let finalURL = createFinalURL(from: url, with: coordinate) else {
+            throw URLError(.badURL)
+        }
+        
+        let (data, response) = try await session.data(from: finalURL)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw UnexpectedValuesRepresentation()
+        }
+        
+        return (data, httpResponse)
+    }
+    
+    // Helper method to create the final URL with query parameters
+    private func createFinalURL(from url: URL, with coordinate: CLLocationCoordinate2D) -> URL? {
+        guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+            return nil
+        }
+        
+        let queryItems = URLQueryItem(name: "key", value: apiKey)
+        let queryOutput = URLQueryItem(name: "output", value: "json")
+        let queryLat = URLQueryItem(name: "latitude", value: String(coordinate.latitude))
+        let queryLong = URLQueryItem(name: "longitude", value: String(coordinate.longitude))
+        let queryMaxResults = URLQueryItem(name: "maxresults", value: "100")
+        let queryCompact = URLQueryItem(name: "compact", value: "false")
+        let queryVerbose = URLQueryItem(name: "verbose", value: "true")
+        
+        urlComponents.queryItems = [queryItems, queryOutput, queryLat, queryLong, queryMaxResults, queryCompact, queryVerbose]
+        
+        return urlComponents.url
     }
 }

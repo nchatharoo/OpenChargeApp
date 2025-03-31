@@ -3,13 +3,33 @@
 //  OpenChargeApp
 //
 //  Created by Nadheer on 24/02/2022.
+//  Updated to latest Swift on 31/03/2025
 //
 
 import Foundation
 import CoreLocation
+import SwiftUI
 
+@MainActor
 public class ChargerViewModel: ObservableObject {
     public let charger: Charger
+    
+    // Computed properties for SwiftUI
+    public var formattedDistance: String {
+        let distance = self.distance()
+        return "\(distance) miles"
+    }
+    
+    public var formattedAddress: String {
+        let components = [
+            addressLine(),
+            addressTown(),
+            charger.addressInfo?.stateOrProvince ?? "",
+            postcode()
+        ].filter { !$0.isEmpty }
+        
+        return components.joined(separator: ", ")
+    }
 
     public init(charger: Charger) {
         self.charger = charger
@@ -43,6 +63,13 @@ public class ChargerViewModel: ObservableObject {
             return nil
         }
         return URL(string: operatorInfoBookingURL)!
+    }
+    
+    func operatorInfoWebsiteURL() -> URL? {
+        guard let websiteURL = charger.operatorInfo?.websiteURL else {
+            return nil
+        }
+        return URL(string: websiteURL)
     }
 
     //MARK: addressInfo
@@ -83,7 +110,8 @@ public class ChargerViewModel: ObservableObject {
     }
     
     func coordinate() -> CLLocationCoordinate2D {
-        guard let latitude = charger.addressInfo?.latitude, let longitude = charger.addressInfo?.longitude else { return CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
+        guard let latitude = charger.addressInfo?.latitude, let longitude = charger.addressInfo?.longitude else { 
+            return CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
         }
         
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)

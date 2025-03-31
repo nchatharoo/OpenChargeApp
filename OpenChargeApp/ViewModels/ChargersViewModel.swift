@@ -3,6 +3,7 @@
 //  OpenChargeApp
 //
 //  Created by Nadheer on 17/01/2022.
+//  Updated to latest Swift on 31/03/2025
 //
 
 import Foundation
@@ -16,10 +17,11 @@ struct NetworkError: Error, Identifiable {
     var message = ""
 }
 
+@MainActor
 final public class ChargersViewModel: ObservableObject {
     let client: HTTPClient
     private let baseAPIURL = URL(string: "https://api.openchargemap.io/v3/poi/")!
-    public var cancellables: AnyCancellable? = nil
+    public var cancellables = Set<AnyCancellable>()
     @Published private var chargePoints = Charge()
     @Published public var filteredChargePoints = Charge()
 
@@ -43,10 +45,11 @@ final public class ChargersViewModel: ObservableObject {
         self.client = client
     }
     
+    // Legacy method using Combine
     public func loadChargePoints(with coordinate: CLLocationCoordinate2D) {
         isProcessing = true
         
-        cancellables = client.getPublisher(from: baseAPIURL, with: coordinate)
+        client.getPublisher(from: baseAPIURL, with: coordinate)
             .tryMap { (data: Data, response: HTTPURLResponse) in
                 data
             }
@@ -63,10 +66,28 @@ final public class ChargersViewModel: ObservableObject {
                 self.chargePoints = chargePoints
                 self.filteredChargePoints = chargePoints
             })
+            .store(in: &cancellables)
+    }
+    
+    // Modern async/await method
+    public func loadChargePointsAsync(with coordinate: CLLocationCoordinate2D) async {
+        isProcessing = true
+        
+        do {
+            let (data, _) = try await client.get(from: baseAPIURL, with: coordinate)
+            let decodedChargePoints = try jsonDecoder.decode(Charge.self, from: data)
+            
+            self.chargePoints = decodedChargePoints
+            self.filteredChargePoints = decodedChargePoints
+            self.isProcessing = false
+        } catch {
+            self.networkError = NetworkError(message: "Details: \(error.localizedDescription)")
+            self.isProcessing = false
+        }
     }
     
     func filterCharger(with filters: ChargerFilter) {
-        _ = $chargePoints
+        $chargePoints
             .map { charger in
                 var filtered = charger.filter({ filters.powerKW == 0 || $0.connections?.first?.powerKW ?? 0.0 < filters.powerKW })
                 
@@ -86,8 +107,15 @@ final public class ChargersViewModel: ObservableObject {
                 
                 return filtered
             }
-            .sink(receiveValue: { charger in
+            .sink(receiveValue: { [weak self] charger in
+                guard let self = self else { return }
                 self.filteredChargePoints = charger
             })
+            .store(in: &cancellables)
+    }
+    
+    // Helper method for testing
+    func getChargePoints() -> Charge {
+        return chargePoints
     }
 }
